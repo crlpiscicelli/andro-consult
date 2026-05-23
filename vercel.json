@@ -1,1 +1,6 @@
-
+{
+  "rewrites": [
+    { "source": "/", "destination": "/andro-consult.html" },
+    { "source": "/guida", "destination": "/andro-consult-guide.html" }
+  ]
+}
