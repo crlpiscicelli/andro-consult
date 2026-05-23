@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANDRO·CONSULT | GINOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ROOT — GINOS DESIGN SYSTEM
+   ============================================================ */
+:root {
+  --primary:      #2c5f8d;
+  --primary-dk:   #1e4a6e;
+  --primary-lt:   #e8f0f8;
+  --secondary:    #4a90d9;
+  --accent:       #e8554e;
+  --success:      #27ae60;
+  --warning:      #f39c12;
+  --danger:       #e74c3c;
+  --bg-a:         #eef2f7;
+  --bg-b:         #dce7f3;
+  --white:        #ffffff;
+  --surface:      #f8fafc;
+  --text:         #1a2940;
+  --text-2:       #4a5568;
+  --text-m:       #718096;
+  --border:       #c8d8e8;
+  --border-lt:    #e2eaf3;
+  --sh:           0 4px 24px rgba(44,95,141,.11);
+  --sh-lg:        0 8px 40px rgba(44,95,141,.18);
+  --sh-sm:        0 2px 10px rgba(44,95,141,.07);
+  --r:            16px;
+  --r-sm:         10px;
+  --r-xs:         6px;
+  --font-body:    'Source Sans 3','Segoe UI',system-ui,sans-serif;
+  --font-head:    'Lora',Georgia,serif;
+  --tr:           all .22s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:17px;scroll-behavior:smooth}
+body{font-family:var(--font-body);background:linear-gradient(135deg,var(--bg-a) 0%,var(--bg-b) 100%);background-attachment:fixed;color:var(--text);min-height:100vh;line-height:1.65}
+
+/* ---- TYPOGRAPHY ---- */
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.28}
+h1{font-size:1.75rem;font-weight:700}
+h2{font-size:1.35rem;font-weight:600;color:var(--primary)}
+h3{font-size:1.1rem;font-weight:600}
+h4{font-size:.96rem;font-weight:600;color:var(--text-2)}
+p{margin-bottom:.7rem}p:last-child{margin-bottom:0}
+a{color:var(--primary)}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:#fff;position:sticky;top:0;z-index:1000;box-shadow:0 4px 20px rgba(44,95,141,.35)}
+.hdr-inner{max-width:1180px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px}
+.hdr-badge{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);border-radius:8px;padding:5px 11px;font-size:.73rem;font-weight:700;letter-spacing:1.8px;color:#fff;text-transform:uppercase;white-space:nowrap}
+.hdr-title{flex:1}
+.hdr-title h1{font-size:1.25rem;color:#fff;margin:0}
+.hdr-title .sub{font-size:.76rem;opacity:.82;font-family:var(--font-body);letter-spacing:.3px}
+.hdr-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn-hdr{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.32);color:#fff;padding:6px 13px;border-radius:var(--r-xs);font-size:.8rem;font-weight:500;cursor:pointer;transition:var(--tr);text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-body)}
+.btn-hdr:hover{background:rgba(255,255,255,.28)}
+.btn-hdr.warn{background:rgba(232,85,78,.3);border-color:rgba(232,85,78,.55)}
+
+/* ============================================================
+   MAIN WRAP
+   ============================================================ */
+.main{max-width:1100px;margin:0 auto;padding:26px 18px 64px}
+
+/* ============================================================
+   PROGRESS STEPPER
+   ============================================================ */
+.stepper{display:flex;align-items:flex-start;background:#fff;border-radius:var(--r);padding:18px 24px;margin-bottom:26px;box-shadow:var(--sh-sm);overflow-x:auto;gap:0}
+.stp{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;min-width:70px;cursor:pointer;position:relative}
+.stp:not(:last-child)::after{content:'';position:absolute;top:17px;left:56%;width:88%;height:2px;background:var(--border-lt);z-index:0}
+.stp.done:not(:last-child)::after,.stp.active:not(:last-child)::after{background:linear-gradient(90deg,var(--secondary),var(--border-lt))}
+.stp-c{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--text-m);background:#fff;z-index:1;transition:var(--tr)}
+.stp.active .stp-c{background:linear-gradient(135deg,var(--primary),var(--secondary));border-color:transparent;color:#fff;box-shadow:0 4px 12px rgba(44,95,141,.35)}
+.stp.done .stp-c{background:var(--success);border-color:transparent;color:#fff}
+.stp-lbl{font-size:.7rem;font-weight:500;color:var(--text-m);text-align:center;line-height:1.3;max-width:76px}
+.stp.active .stp-lbl{color:var(--primary);font-weight:700}
+.stp.done .stp-lbl{color:var(--success)}
+
+/* ============================================================
+   PHASE SECTIONS
+   ============================================================ */
+.phase{display:none}.phase.active{display:block}
+.pcard{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;margin-bottom:20px}
+.phdr{background:linear-gradient(135deg,var(--primary),var(--secondary));padding:20px 30px;color:#fff;display:flex;align-items:center;gap:14px}
+.phdr .ico{font-size:1.9rem;opacity:.9}
+.phdr h2{color:#fff;margin:0;font-size:1.25rem}
+.phdr .desc{font-size:.8rem;opacity:.84;margin-top:3px;font-family:var(--font-body)}
+.pbody{padding:30px}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.fg{display:grid;gap:18px;margin-bottom:22px}
+.fg-2{grid-template-columns:repeat(2,1fr)}
+.fg-3{grid-template-columns:repeat(3,1fr)}
+.fg-4{grid-template-columns:repeat(4,1fr)}
+.fg-auto{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.full{grid-column:1/-1}
+.fld{display:flex;flex-direction:column;gap:6px}
+label{font-size:.84rem;font-weight:600;color:var(--text-2);display:inline-flex;align-items:center;gap:5px}
+input[type=text],input[type=number],input[type=date],select,textarea{border:1.5px solid var(--border);border-radius:var(--r-xs);padding:9px 13px;font-size:.93rem;font-family:var(--font-body);color:var(--text);background:var(--surface);transition:var(--tr);width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--secondary);background:#fff;box-shadow:0 0 0 3px rgba(74,144,217,.12)}
+textarea{resize:vertical;min-height:82px}
+.iu{position:relative}.iu input{padding-right:46px}
+.iu-lbl{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:.77rem;font-weight:600;color:var(--text-m);pointer-events:none}
+
+/* Radio Pills */
+.rg{display:flex;flex-wrap:wrap;gap:7px}
+.rpill{display:flex;align-items:center;gap:5px;padding:7px 15px;border:1.5px solid var(--border);border-radius:50px;cursor:pointer;transition:var(--tr);font-size:.86rem;font-weight:500;background:#fff;color:var(--text-2);user-select:none}
+.rpill:hover{border-color:var(--secondary);color:var(--primary)}
+.rpill input{display:none}
+.rpill.sel{background:var(--primary-lt);border-color:var(--primary);color:var(--primary);font-weight:700}
+
+/* ============================================================
+   FLAG / ALERT BOXES
+   ============================================================ */
+.flag{background:linear-gradient(135deg,#fff8e1,#ffedb0);border:2px solid var(--warning);border-radius:var(--r-sm);padding:14px 18px;display:flex;align-items:flex-start;gap:11px;margin:14px 0}
+.flag.danger{background:linear-gradient(135deg,#ffeaea,#ffd5d5);border-color:var(--danger)}
+.flag.info{background:linear-gradient(135deg,#e8f4ff,#cce7ff);border-color:var(--secondary)}
+.flag.ok{background:linear-gradient(135deg,#e8f8ee,#c8ecd7);border-color:var(--success)}
+.flag-ico{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.flag-txt{font-size:.88rem;line-height:1.55}
+.flag-txt strong{display:block;margin-bottom:3px;font-size:.93rem}
+
+/* ============================================================
+   SECTION TITLES
+   ============================================================ */
+.st{display:flex;align-items:center;gap:10px;margin:26px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--border-lt)}
+.st h3{color:var(--primary);margin:0}
+.badge{background:var(--primary-lt);color:var(--primary);padding:2px 10px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.4px}
+
+/* ============================================================
+   CALC BOX
+   ============================================================ */
+.calc-box{background:linear-gradient(135deg,#f0f6ff,#e4effe);border:2px solid #c8deff;border-radius:var(--r-sm);padding:16px 20px;margin-top:14px}
+.calc-ttl{font-size:.79rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--primary);margin-bottom:8px}
+.calc-row{display:flex;gap:24px;flex-wrap:wrap}
+.calc-item{}
+.calc-item .lbl{font-size:.78rem;color:var(--text-m);margin-bottom:2px}
+.calc-val{font-size:1.55rem;font-weight:700;color:var(--primary);font-family:var(--font-head)}
+.calc-val .unit{font-size:.95rem;font-weight:400;color:var(--text-m)}
+.ci{display:inline-block;margin-top:5px;padding:3px 12px;border-radius:50px;font-size:.79rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.ci.n{background:#d4edda;color:#155724}
+.ci.w{background:#fff3cd;color:#856404}
+.ci.h{background:#f8d7da;color:#721c24}
+
+/* ============================================================
+   TOOLTIP / INFO BTN
+   ============================================================ */
+.ib{width:17px;height:17px;border-radius:50%;background:var(--secondary);color:#fff;font-size:.67rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:var(--tr);flex-shrink:0;text-decoration:none;vertical-align:middle}
+.ib:hover{background:var(--primary);transform:scale(1.15)}
+[data-tip]{position:relative;cursor:help}
+[data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:#1a2940;color:#fff;padding:5px 11px;border-radius:5px;font-size:.76rem;white-space:normal;max-width:260px;text-align:center;opacity:0;pointer-events:none;transition:opacity .18s;z-index:200;line-height:1.4;width:max-content;max-width:260px}
+[data-tip]:hover::after{opacity:1}
+
+/* ============================================================
+   mFG GRID
+   ============================================================ */
+.mfg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.mfg-site{background:var(--surface);border:2px solid var(--border);border-radius:var(--r-sm);padding:14px;transition:var(--tr)}
+.mfg-site:hover{border-color:var(--secondary);box-shadow:var(--sh-sm)}
+.mfg-name{font-size:.83rem;font-weight:700;color:var(--primary);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.mfg-score{font-size:1.45rem;font-weight:800;color:var(--primary);font-family:var(--font-head)}
+.mfg-sl{width:100%;-webkit-appearance:none;height:5px;border-radius:3px;outline:none;margin:7px 0;cursor:pointer}
+.mfg-sl::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--primary);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 6px rgba(44,95,141,.35)}
+.mfg-lvls{display:flex;justify-content:space-between;font-size:.69rem;color:var(--text-m)}
+.mfg-total{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:var(--r-sm);padding:18px 26px;display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.mfg-total-lbl{font-size:.95rem;font-weight:600;opacity:.9}
+.mfg-total-val{font-size:2.4rem;font-weight:800;font-family:var(--font-head)}
+.mfg-total-sub{font-size:.82rem;opacity:.8;margin-top:3px}
+
+/* ============================================================
+   LUDWIG
+   ============================================================ */
+.lw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.lw-card{border:2.5px solid var(--border);border-radius:var(--r-sm);padding:14px 10px;cursor:pointer;transition:var(--tr);text-align:center;background:#fff}
+.lw-card:hover{border-color:var(--secondary);box-shadow:var(--sh-sm)}
+.lw-card.sel{border-color:var(--primary);background:var(--primary-lt)}
+.lw-grade{font-weight:800;font-size:1rem;color:var(--text);margin-top:8px}
+.lw-desc{font-size:.75rem;color:var(--text-m);margin-top:3px;line-height:1.3}
+
+/* ============================================================
+   GAGS TABLE
+   ============================================================ */
+.gags-tbl{width:100%;border-collapse:collapse}
+.gags-tbl th{background:var(--primary-lt);color:var(--primary);padding:9px 13px;text-align:left;font-size:.81rem;font-weight:700;letter-spacing:.4px}
+.gags-tbl td{padding:9px 13px;border-bottom:1px solid var(--border-lt);font-size:.86rem;vertical-align:middle}
+.gags-tbl tr:last-child td{border-bottom:none}
+.gags-tbl select{padding:5px 8px;font-size:.82rem}
+
+/* ============================================================
+   EXAM ROWS
+   ============================================================ */
+.ep{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin-bottom:14px}
+.ep-hdr{background:var(--primary-lt);padding:11px 16px;display:flex;align-items:center;justify-content:space-between}
+.ep-ttl{font-size:.86rem;font-weight:700;color:var(--primary);letter-spacing:.2px}
+.er{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border-lt)}
+.er:last-child{border-bottom:none}
+.er.hi{background:#fffbf0}
+.en{flex:1;font-size:.87rem;font-weight:600;color:var(--text)}
+.ev{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ev input{width:105px;text-align:right}
+.ev select{padding:7px 8px;font-size:.83rem;width:88px}
+.ef{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:.82rem;font-weight:700;flex-shrink:0}
+.ef.N{background:#d4edda;color:#155724}
+.ef.L{background:#fff3cd;color:#856404}
+.ef.H{background:#f8d7da;color:#721c24}
+.ef.E{background:var(--border-lt);color:var(--text-m)}
+.calc-inline{font-size:1.1rem;font-weight:700;color:var(--primary);min-width:75px}
+
+/* ============================================================
+   DD CHECKLIST
+   ============================================================ */
+.dd-item{background:#fff;border:2px solid var(--border);border-radius:var(--r-sm);padding:15px 18px;margin-bottom:11px;display:flex;align-items:flex-start;gap:14px;transition:var(--tr)}
+.dd-item.excluded{border-color:var(--success);background:#f0faf5}
+.dd-item.suspected{border-color:var(--danger);background:#fff5f5}
+.dd-item.toexclude{border-color:var(--warning);background:#fffbf0}
+.dd-ico{font-size:1.5rem;flex-shrink:0}
+.dd-inf{flex:1}
+.dd-nm{font-weight:700;font-size:.93rem}
+.dd-dt{font-size:.81rem;color:var(--text-m);margin-top:3px;line-height:1.45}
+.dd-ex{font-size:.81rem;color:var(--warning);font-weight:600;margin-top:5px}
+.dd-act{margin-top:7px}
+.dd-act select{padding:5px 9px;font-size:.81rem;border-radius:var(--r-xs)}
+
+/* ============================================================
+   DIAGNOSIS & RISK
+   ============================================================ */
+.diag-card{background:linear-gradient(135deg,#f0f6ff,#e4effe);border:2px solid var(--secondary);border-radius:var(--r);padding:22px 26px;margin-bottom:18px}
+.diag-title{font-family:var(--font-head);font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:7px}
+.ph-badge{display:inline-block;background:var(--primary);color:#fff;padding:4px 16px;border-radius:50px;font-size:.85rem;font-weight:700;letter-spacing:.4px;margin-right:6px}
+.crit-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.crit-ok{padding:4px 13px;border-radius:50px;font-size:.81rem;font-weight:700;background:#d4edda;color:#155724;border:1.5px solid #28a745}
+.crit-no{padding:4px 13px;border-radius:50px;font-size:.81rem;font-weight:700;background:#f8d7da;color:#721c24;border:1.5px solid #dc3545}
+.risk-row{display:flex;align-items:center;gap:8px;margin-top:10px}
+.risk-lbl{font-size:.84rem;font-weight:600;color:var(--text-2)}
+.risk-bdg{padding:4px 16px;border-radius:50px;font-size:.84rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.risk-bdg.low{background:#d4edda;color:#155724}
+.risk-bdg.medium{background:#fff3cd;color:#856404}
+.risk-bdg.high{background:#f8d7da;color:#721c24}
+
+/* ============================================================
+   THERAPY BLOCKS
+   ============================================================ */
+.th-block{background:#fff;border:2px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin-bottom:12px}
+.th-hdr{background:var(--primary-lt);padding:11px 16px;display:flex;align-items:center;gap:9px}
+.th-hdr h4{color:var(--primary);margin:0;font-size:.93rem}
+.th-sub{font-size:.76rem;color:var(--text-m);margin-left:auto}
+.th-body{padding:14px 16px;font-size:.89rem;line-height:1.6}
+.th-body p{margin-bottom:.7rem}
+
+/* ============================================================
+   CONTRACEPTION TABLE
+   ============================================================ */
+.ct{width:100%;border-collapse:collapse;margin-top:8px}
+.ct th{background:var(--primary-lt);color:var(--primary);padding:8px 13px;text-align:left;font-size:.81rem;font-weight:700}
+.ct td{padding:9px 13px;border-bottom:1px solid var(--border-lt);font-size:.86rem;vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+
+/* ============================================================
+   FOLLOW-UP TIMELINE
+   ============================================================ */
+.fu-wrap{position:relative;padding-left:26px;margin-top:4px}
+.fu-wrap::before{content:'';position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--secondary),var(--border-lt))}
+.fu-item{position:relative;margin-bottom:12px;background:#fff;border:1.5px solid var(--border);border-radius:var(--r-xs);padding:11px 14px}
+.fu-item::before{content:'';position:absolute;left:-21px;top:14px;width:11px;height:11px;border-radius:50%;background:var(--secondary);border:2px solid #fff;box-shadow:0 0 0 2px var(--secondary)}
+.fu-t{font-size:.76rem;font-weight:700;color:var(--secondary);text-transform:uppercase;letter-spacing:.4px}
+.fu-a{font-size:.87rem;color:var(--text);margin-top:3px}
+
+/* ============================================================
+   OUTPUT DOCS
+   ============================================================ */
+.out-tabs{display:flex;gap:3px;padding:14px 18px 0;background:var(--surface);border:2px solid var(--border);border-bottom:none;border-radius:var(--r) var(--r) 0 0;flex-wrap:wrap}
+.out-tab{padding:9px 16px;border-radius:var(--r-xs) var(--r-xs) 0 0;border:1.5px solid transparent;background:transparent;font-size:.81rem;font-weight:600;cursor:pointer;transition:var(--tr);color:var(--text-m);font-family:var(--font-body)}
+.out-tab:hover{color:var(--primary);background:var(--primary-lt)}
+.out-tab.active{background:#fff;color:var(--primary);border-color:var(--border);border-bottom-color:#fff}
+.out-tab.done{color:var(--success)}
+.out-doc{display:none}
+.out-doc.active{display:block}
+.doc-toolbar{display:flex;align-items:center;gap:10px;padding:11px 18px;background:var(--surface);border:2px solid var(--border);border-bottom:none;flex-wrap:wrap}
+.doc-status{font-size:.8rem;color:var(--text-m);flex:1;font-style:italic}
+.doc-status.ok{color:var(--success);font-style:normal;font-weight:600}
+.doc-status.err{color:var(--danger);font-style:normal;font-weight:600}
+.doc-status.working{color:var(--secondary)}
+.doc-empty{display:flex;align-items:center;justify-content:center;min-height:180px;color:var(--text-m);font-size:.92rem;text-align:center;padding:30px}
+.out-content{background:#fff;border:2px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:22px 26px;min-height:220px;font-size:.9rem;line-height:1.72;color:var(--text)}
+.ai-spin-wrap{display:flex;align-items:center;gap:14px;padding:20px;color:var(--primary)}
+.ai-spin{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--secondary);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+.ai-spin-txt{font-size:.9rem;font-style:italic;color:var(--text-m)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:var(--r-xs);font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:var(--tr);font-family:var(--font-body);text-decoration:none}
+.btn-pri{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;box-shadow:0 4px 14px rgba(44,95,141,.28)}
+.btn-pri:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(44,95,141,.38)}
+.btn-sec{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+.btn-sec:hover{background:var(--primary-lt)}
+.btn-ok{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff}
+.btn-sm{padding:6px 14px;font-size:.81rem}
+.btn-lg{padding:13px 30px;font-size:.97rem}
+.btn-grp{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--border-lt)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.52);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:2000;padding:18px}
+.moverlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--r);box-shadow:var(--sh-lg);max-width:780px;width:100%;max-height:88vh;overflow-y:auto;animation:mIn .22s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.mhdr{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:18px 26px;display:flex;align-items:center;justify-content:space-between}
+.mhdr h3{color:#fff;font-size:1.05rem;margin:0}
+.mclose{background:rgba(255,255,255,.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.mclose:hover{background:rgba(255,255,255,.35)}
+.mbody{padding:26px}
+.mbody h4{color:var(--primary);margin-bottom:8px}
+.mbody p{font-size:.91rem;line-height:1.6;margin-bottom:10px}
+.mbody ul{margin:6px 0 10px 18px;font-size:.91rem;line-height:1.6}
+.mbody li{margin-bottom:3px}
+
+/* ============================================================
+   PCO FLAG / SCORE BOX
+   ============================================================ */
+.score-box{background:var(--primary-lt);border-left:4px solid var(--primary);border-radius:0 var(--r-xs) var(--r-xs) 0;padding:11px 16px;margin-top:10px;font-size:.88rem}
+
+/* ============================================================
+   CONFIG BANNER
+   ============================================================ */
+.cfg-banner{background:linear-gradient(135deg,#fff8e1,#fff0b3);border:2px solid var(--warning);border-radius:var(--r-sm);padding:13px 18px;display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.cfg-banner input{flex:1;min-width:220px;border:1.5px solid var(--border);border-radius:var(--r-xs);padding:7px 12px;font-size:.86rem;font-family:monospace}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{background:#f8f9fa;border-top:3px solid var(--primary);padding:18px 22px;font-size:.8rem;color:var(--text-m)}
+.footer-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-inner a{color:var(--primary);font-weight:600;text-decoration:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:768px){
+  html{font-size:15px}
+  .main{padding:14px 10px 40px}
+  .pbody{padding:18px 14px}
+  .fg-2,.fg-3,.fg-4{grid-template-columns:1fr}
+  .mfg-grid{grid-template-columns:1fr}
+  .lw-grid{grid-template-columns:repeat(2,1fr)}
+  .hdr-inner{padding:10px 14px}
+  .stp-lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <span class="hdr-badge">GINOS</span>
+    <div class="hdr-title">
+      <h1>ANDRO·CONSULT</h1>
+      <div class="sub">CDSS per Iperandrogenismo e PCOS · Dr. Carlo Piscicelli</div>
+    </div>
+    <div class="hdr-actions">
+      <button class="btn-hdr" onclick="openM('m-json')">💾 Sessione</button>
+      <button class="btn-hdr" onclick="openM('m-cfg')">⚙️ Config API</button>
+      <a href="andro-consult-guide.html" target="_blank" class="btn-hdr">📖 Guida &amp; LG</a>
+      <button class="btn-hdr warn" onclick="doReset()">🔄 Reset</button>
+    </div>
+  </div>
+</header>
+
+<!-- ========== MAIN ========== -->
+<main class="main">
+
+  <!-- Config banner -->
+  <div class="cfg-banner" id="cfg-banner" style="display:none">
+    <span>⚙️</span>
+    <div style="flex:1"><strong style="font-size:.86rem">Configura endpoint API</strong><br>
+    <span style="font-size:.78rem;color:var(--text-m)">Inserisci il tuo proxy Vercel per abilitare la generazione AI dei documenti</span></div>
+    <input type="text" id="api-banner" placeholder="https://tuo-proxy.vercel.app/api/claude">
+    <button class="btn btn-pri btn-sm" onclick="saveEP()">Salva</button>
+  </div>
+
+  <!-- STEPPER -->
+  <div class="stepper" id="stepper">
+    <div class="stp active" id="stp-1" onclick="goTo(1)"><div class="stp-c">1</div><div class="stp-lbl">Anamnesi</div></div>
+    <div class="stp" id="stp-2" onclick="goTo(2)"><div class="stp-c">2</div><div class="stp-lbl">Esame Obiettivo</div></div>
+    <div class="stp" id="stp-3" onclick="goTo(3)"><div class="stp-c">3</div><div class="stp-lbl">Esami Lab</div></div>
+    <div class="stp" id="stp-4" onclick="goTo(4)"><div class="stp-c">4</div><div class="stp-lbl">Ecografia</div></div>
+    <div class="stp" id="stp-5" onclick="goTo(5)"><div class="stp-c">5</div><div class="stp-lbl">Diagnosi Diff.</div></div>
+    <div class="stp" id="stp-6" onclick="goTo(6)"><div class="stp-c">6</div><div class="stp-lbl">Sintesi &amp; Terapia</div></div>
+  </div>
+
+  <!-- ========================================================
+       FASE 1 — ANAMNESI
+       ======================================================== -->
+  <section class="phase active" id="phase-1">
+    <div class="pcard">
+      <div class="phdr"><span class="ico">👩‍⚕️</span>
+        <div><h2>Anamnesi</h2><div class="desc">Dati demografici · Sintomatologia · Storia clinica</div></div>
+      </div>
+      <div class="pbody">
+
+        <div class="st"><h3>Dati demografici</h3></div>
+        <div class="fg fg-auto">
+          <div class="fld">
+            <label>Età (anni)</label>
+            <input type="number" id="eta" min="10" max="60" placeholder="es. 28" oninput="onEta()">
+          </div>
+          <div class="fld">
+            <label>Peso <button class="ib" onclick="openInfo('bmi')">i</button></label>
+            <div class="iu"><input type="number" id="peso" placeholder="es. 65" oninput="calcBMI()"><span class="iu-lbl">kg</span></div>
+          </div>
+          <div class="fld">
+            <label>Altezza</label>
+            <div class="iu"><input type="number" id="altezza" placeholder="es. 165" oninput="calcBMI()"><span class="iu-lbl">cm</span></div>
+          </div>
+          <div class="fld">
+            <label>Circonferenza vita <button class="ib" onclick="openInfo('wc')">i</button></label>
+            <div class="iu"><input type="number" id="wc" placeholder="es. 82" oninput="calcWC()"><span class="iu-lbl">cm</span></div>
+          </div>
+          <div class="fld">
+            <label>Etnia <button class="ib" onclick="openInfo('etnia')">i</button></label>
+            <select id="etnia" onchange="updMFGThr()">
+              <option value="">Seleziona…</option>
+              <option value="europea">Europea / Caucasica</option>
+              <option value="asiatica">Asiatica</option>
+              <option value="africana">Africana / Afro-americana</option>
+              <option value="mediorientale">Medio-orientale / Ispanica</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Desiderio riproduttivo</label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'desiderio','si')"><input type="radio" name="desiderio" value="si">Sì</label>
+              <label class="rpill" onclick="selR(this,'desiderio','no')"><input type="radio" name="desiderio" value="no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="bmi-box" class="calc-box" style="display:none">
+          <div class="calc-ttl">Calcolo automatico</div>
+          <div class="calc-row">
+            <div class="calc-item"><div class="lbl">BMI</div><div class="calc-val" id="bmi-v">—</div><span class="ci" id="bmi-ci"></span></div>
+            <div class="calc-item"><div class="lbl">Circonferenza vita</div><div class="calc-val" id="wc-v" style="font-size:1.2rem">—</div><span class="ci" id="wc-ci"></span></div>
+          </div>
+        </div>
+
+        <div id="flag-ado" class="flag info" style="display:none">
+          <span class="flag-ico">🔵</span>
+          <div class="flag-txt"><strong>Modalità Adolescente attivata (età &lt;18 anni)</strong>
+          Criteri diagnostici più restrittivi per PCOS: oligo-amenorrea deve persistere ≥2 anni dal menarca; morfologia ovarica PCO da sola non è sufficiente. L'algoritmo si adatterà automaticamente.</div>
+        </div>
+
+        <div class="st"><h3>Ciclo mestruale <span class="badge">Criterio Rotterdam 1</span></h3></div>
+        <div class="fg fg-auto">
+          <div class="fld">
+            <label>Carattere del ciclo <button class="ib" onclick="openInfo('ciclo')">i</button></label>
+            <select id="ciclo" onchange="onCiclo()">
+              <option value="">Seleziona…</option>
+              <option value="regolare">Regolare (25–35 gg)</option>
+              <option value="polimenorrea">Polimenorrea (&lt;25 gg)</option>
+              <option value="oligomenorrea">Oligomenorrea (&gt;35 gg)</option>
+              <option value="amenorrea">Amenorrea (&gt;90 gg / &lt;9 cicli/anno)</option>
+              <option value="assente">Assente / Chirurgica</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Durata media (gg)</label>
+            <input type="number" id="ciclo-gg" placeholder="es. 45">
+          </div>
+          <div class="fld">
+            <label>Età menarca</label>
+            <div class="iu"><input type="number" id="menarca" placeholder="es. 12" oninput="calcAnniMenarca()"><span class="iu-lbl">anni</span></div>
+          </div>
+          <div class="fld" id="f-anni-menarca" style="display:none">
+            <label>Anni dal menarca</label>
+            <input type="number" id="anni-menarca" readonly style="background:#f0f4f8">
+          </div>
+        </div>
+        <div id="ciclo-flag" style="display:none" class="flag">
+          <span class="flag-ico">⚠️</span>
+          <div class="flag-txt"><strong id="ciclo-flag-t"></strong><span id="ciclo-flag-s"></span></div>
+        </div>
+
+        <div class="st"><h3>Sintomi androgenici <span class="badge">Criterio Rotterdam 2</span></h3></div>
+        <div class="fg fg-2">
+          <div class="fld">
+            <label>Irsutismo soggettivo <button class="ib" onclick="openInfo('irsutismo')">i</button></label>
+            <select id="irsutismo">
+              <option value="">Seleziona…</option>
+              <option value="assente">Assente</option>
+              <option value="lieve">Lieve</option>
+              <option value="moderato">Moderato</option>
+              <option value="severo">Severo</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Acne <button class="ib" onclick="openInfo('acne')">i</button></label>
+            <select id="acne">
+              <option value="">Seleziona…</option>
+              <option value="assente">Assente</option>
+              <option value="lieve">Lieve (comedoni/papule)</option>
+              <option value="moderata">Moderata</option>
+              <option value="severa">Severa / nodulo-cistica</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Alopecia androgenetica <button class="ib" onclick="openInfo('alopecia')">i</button></label>
+            <select id="alopecia">
+              <option value="">Seleziona…</option>
+              <option value="assente">Assente</option>
+              <option value="lieve">Lieve</option>
+              <option value="moderata">Moderata</option>
+              <option value="severa">Severa</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Seborrea</label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'seborrea','si')"><input type="radio" name="seborrea" value="si">Sì</label>
+              <label class="rpill" onclick="selR(this,'seborrea','no')"><input type="radio" name="seborrea" value="no">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="st"><h3>Familiarità e storia clinica</h3></div>
+        <div class="fg fg-2">
+          <div class="fld">
+            <label>Familiarità PCOS / Irsutismo</label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'fam-pcos','si')"><input type="radio" name="fam-pcos" value="si">Sì</label>
+              <label class="rpill" onclick="selR(this,'fam-pcos','no')"><input type="radio" name="fam-pcos" value="no">No</label>
+              <label class="rpill" onclick="selR(this,'fam-pcos','nd')"><input type="radio" name="fam-pcos" value="nd">Non noto</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label>Familiarità DM2 / Obesità</label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'fam-dm','si')"><input type="radio" name="fam-dm" value="si">Sì</label>
+              <label class="rpill" onclick="selR(this,'fam-dm','no')"><input type="radio" name="fam-dm" value="no">No</label>
+              <label class="rpill" onclick="selR(this,'fam-dm','nd')"><input type="radio" name="fam-dm" value="nd">Non noto</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label>Farmaci in uso</label>
+            <input type="text" id="farmaci" placeholder="es. metformina, OC, nessuno">
+          </div>
+          <div class="fld">
+            <label>Patologie note</label>
+            <input type="text" id="patologie" placeholder="es. ipotiroidismo, DM, nessuna">
+          </div>
+        </div>
+        <div class="fld" style="margin-top:6px">
+          <label>Note anamnestiche</label>
+          <textarea id="note-anamnesi" placeholder="Annotazioni libere, storia clinica rilevante…"></textarea>
+        </div>
+
+        <div class="btn-grp">
+          <button class="btn btn-pri" onclick="go(2)">Continua → Esame Obiettivo</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASE 2 — ESAME OBIETTIVO
+       ======================================================== -->
+  <section class="phase" id="phase-2">
+    <div class="pcard">
+      <div class="phdr"><span class="ico">🔍</span>
+        <div><h2>Esame Obiettivo</h2><div class="desc">Score clinici androgenici · Parametri vitali · Screening Cushing</div></div>
+      </div>
+      <div class="pbody">
+
+        <!-- mFG -->
+        <div class="st"><h3>Score di Ferriman-Gallwey modificato (mFG) <button class="ib" onclick="openInfo('mfg')">i</button> <span class="badge">Criterio Rotterdam 2</span></h3></div>
+        <div id="mfg-etnia-note" class="flag info" style="display:none;margin-bottom:14px">
+          <span class="flag-ico">ℹ️</span><div class="flag-txt" id="mfg-etnia-txt"></div>
+        </div>
+        <div class="mfg-grid" id="mfg-grid"></div>
+        <div class="mfg-total">
+          <div><div class="mfg-total-lbl">Score mFG Totale</div><div class="mfg-total-sub" id="mfg-interp">—</div></div>
+          <div style="text-align:right"><div class="mfg-total-val" id="mfg-tot">0</div><div style="font-size:.82rem;opacity:.8">/36 pt</div></div>
+        </div>
+
+        <!-- Ludwig -->
+        <div class="st" style="margin-top:28px"><h3>Alopecia androgenetica — Scala di Ludwig <button class="ib" onclick="openInfo('ludwig')">i</button></h3></div>
+        <div class="lw-grid">
+          <div class="lw-card" id="lw-0" onclick="selLw(0)">
+            <svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="36" cy="36" rx="32" ry="36" fill="#f5e6c8" stroke="#c9a96e" stroke-width="1.5"/>
+              <ellipse cx="36" cy="24" rx="27" ry="18" fill="#6B4226"/>
+              <ellipse cx="36" cy="52" rx="26" ry="13" fill="#6B4226"/>
+              <ellipse cx="36" cy="36" rx="14" ry="14" fill="#7a4a28" opacity=".9"/>
+            </svg>
+            <div class="lw-grade">Assente</div><div class="lw-desc">Capigliatura normale</div>
+          </div>
+          <div class="lw-card" id="lw-1" onclick="selLw(1)">
+            <svg viewBox="0 0 72 72" width="72" height="72">
+              <ellipse cx="36" cy="36" rx="32" ry="36" fill="#f5e6c8" stroke="#c9a96e" stroke-width="1.5"/>
+              <ellipse cx="36" cy="24" rx="27" ry="18" fill="#6B4226"/>
+              <ellipse cx="36" cy="52" rx="26" ry="13" fill="#6B4226"/>
+              <ellipse cx="36" cy="30" rx="11" ry="10" fill="#f5e6c8" opacity=".75"/>
+            </svg>
+            <div class="lw-grade">Grado I</div><div class="lw-desc">Diradamento lieve vertex</div>
+          </div>
+          <div class="lw-card" id="lw-2" onclick="selLw(2)">
+            <svg viewBox="0 0 72 72" width="72" height="72">
+              <ellipse cx="36" cy="36" rx="32" ry="36" fill="#f5e6c8" stroke="#c9a96e" stroke-width="1.5"/>
+              <ellipse cx="36" cy="24" rx="27" ry="18" fill="#6B4226"/>
+              <ellipse cx="36" cy="54" rx="24" ry="11" fill="#6B4226"/>
+              <ellipse cx="36" cy="31" rx="18" ry="16" fill="#f5e6c8" opacity=".82"/>
+            </svg>
+            <div class="lw-grade">Grado II</div><div class="lw-desc">Diradamento moderato fronto-parietale</div>
+          </div>
+          <div class="lw-card" id="lw-3" onclick="selLw(3)">
+            <svg viewBox="0 0 72 72" width="72" height="72">
+              <ellipse cx="36" cy="36" rx="32" ry="36" fill="#f5e6c8" stroke="#c9a96e" stroke-width="1.5"/>
+              <ellipse cx="36" cy="57" rx="20" ry="9" fill="#6B4226" opacity=".8"/>
+              <ellipse cx="7" cy="36" rx="5" ry="13" fill="#6B4226" opacity=".7"/>
+              <ellipse cx="65" cy="36" rx="5" ry="13" fill="#6B4226" opacity=".7"/>
+              <ellipse cx="36" cy="31" rx="26" ry="22" fill="#f5e6c8" opacity=".88"/>
+            </svg>
+            <div class="lw-grade">Grado III</div><div class="lw-desc">Severo — banda periferica residua</div>
+          </div>
+        </div>
+        <input type="hidden" id="lw-val" value="">
+
+        <!-- GAGS -->
+        <div class="st" style="margin-top:28px"><h3>Score GAGS — Acne <button class="ib" onclick="openInfo('gags')">i</button></h3></div>
+        <table class="gags-tbl">
+          <thead><tr><th>Regione</th><th>Fattore</th><th>Densità (0–3)</th><th>Tipo lesione (0–4)</th><th>Punti</th></tr></thead>
+          <tbody id="gags-tbody"></tbody>
+          <tfoot><tr>
+            <td colspan="4" style="text-align:right;font-weight:700;color:var(--primary);padding:9px 13px">Score GAGS totale:</td>
+            <td style="padding:9px 13px"><strong id="gags-tot" style="font-size:1.2rem;color:var(--primary)">0</strong></td>
+          </tr></tfoot>
+        </table>
+        <div id="gags-interp" class="score-box" style="display:none"></div>
+
+        <!-- Altri segni EO -->
+        <div class="st" style="margin-top:28px"><h3>Altri segni all'esame obiettivo</h3></div>
+        <div class="fg fg-2">
+          <div class="fld">
+            <label>Acanthosis nigricans <button class="ib" onclick="openInfo('acanthosis')">i</button></label>
+            <select id="acanthosis">
+              <option value="">Seleziona…</option>
+              <option value="assente">Assente</option>
+              <option value="nuca">Presente — nuca</option>
+              <option value="ascelle">Presente — ascelle</option>
+              <option value="inguine">Presente — inguine/pliche</option>
+              <option value="multipla">Presente — sedi multiple</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label>Virilismo <button class="ib" onclick="openInfo('virilismo')">i</button></label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'virilismo','assente')"><input type="radio" name="virilismo" value="assente">Assente</label>
+              <label class="rpill" onclick="selR(this,'virilismo','presente');showVirilismo()"><input type="radio" name="virilismo" value="presente">Presente</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label>Pressione arteriosa sistolica</label>
+            <div class="iu"><input type="number" id="pa-s" placeholder="es. 120" style="padding-right:52px"><span class="iu-lbl">mmHg</span></div>
+          </div>
+          <div class="fld">
+            <label>Pressione arteriosa diastolica</label>
+            <div class="iu"><input type="number" id="pa-d" placeholder="es. 80" style="padding-right:52px"><span class="iu-lbl">mmHg</span></div>
+          </div>
+        </div>
+
+        <div id="virilismo-flag" class="flag danger" style="display:none">
+          <span class="flag-ico">🚨</span>
+          <div class="flag-txt"><strong>RED FLAG — Segni di virilismo</strong>
+          Clitoromegalia, voce bassa, ipotrofia mammaria o aumento massa muscolare impongono esclusione urgente di tumore ovarico/surrenalico secernente androgeni. Richiedere testosterone urgente e imaging.</div>
+        </div>
+
+        <!-- Cushing screening -->
+        <div class="st" style="margin-top:20px"><h3>Screening clinico ipercortisolismo (Cushing) <button class="ib" onclick="openInfo('cushing')">i</button></h3></div>
+        <div class="fg fg-3">
+          <div class="fld"><label>Strie rubre addominali</label>
+            <div class="rg"><label class="rpill" onclick="selR(this,'strie','si');chkCushing()"><input type="radio" name="strie" value="si">Sì</label><label class="rpill" onclick="selR(this,'strie','no');chkCushing()"><input type="radio" name="strie" value="no">No</label></div>
+          </div>
+          <div class="fld"><label>Facies lunare / gibbo</label>
+            <div class="rg"><label class="rpill" onclick="selR(this,'facies','si');chkCushing()"><input type="radio" name="facies" value="si">Sì</label><label class="rpill" onclick="selR(this,'facies','no');chkCushing()"><input type="radio" name="facies" value="no">No</label></div>
+          </div>
+          <div class="fld"><label>Miopatia / ecchimosi facili</label>
+            <div class="rg"><label class="rpill" onclick="selR(this,'miopatia','si');chkCushing()"><input type="radio" name="miopatia" value="si">Sì</label><label class="rpill" onclick="selR(this,'miopatia','no');chkCushing()"><input type="radio" name="miopatia" value="no">No</label></div>
+          </div>
+        </div>
+        <div id="cushing-flag" class="flag" style="display:none">
+          <span class="flag-ico">⚠️</span>
+          <div class="flag-txt"><strong>Sospetto ipercortisolismo</strong> Aggiungere al panel: cortisolo libero urinario 24h e/o test di soppressione con desametasone 1 mg overnight.</div>
+        </div>
+
+        <div class="btn-grp">
+          <button class="btn btn-sec" onclick="go(1)">← Indietro</button>
+          <button class="btn btn-pri" onclick="go(3)">Continua → Esami di Laboratorio</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASE 3 — ESAMI DI LABORATORIO
+       ======================================================== -->
+  <section class="phase" id="phase-3">
+    <div class="pcard">
+      <div class="phdr"><span class="ico">🧪</span>
+        <div><h2>Esami di Laboratorio</h2><div class="desc">Panel I e II livello · Calcoli automatici · Interpretazione semaforo</div></div>
+      </div>
+      <div class="pbody">
+
+        <div class="flag info" style="margin-bottom:22px">
+          <span class="flag-ico">💡</span>
+          <div class="flag-txt"><strong>Panel suggerito</strong> Inserisci i risultati già disponibili. Il sistema genererà automaticamente la richiesta esami personalizzata nella sezione Documenti. I campi con <span style="background:#d4edda;color:#155724;padding:1px 7px;border-radius:50px;font-size:.8rem;font-weight:700">N</span> <span style="background:#fff3cd;color:#856404;padding:1px 7px;border-radius:50px;font-size:.8rem;font-weight:700">~</span> <span style="background:#f8d7da;color:#721c24;padding:1px 7px;border-radius:50px;font-size:.8rem;font-weight:700">↑</span> mostrano l'interpretazione in tempo reale.</div>
+        </div>
+
+        <!-- Panel I livello -->
+        <div class="ep">
+          <div class="ep-hdr"><span class="ep-ttl">🔬 Panel di I livello — Profilo androgenico e metabolico</span></div>
+          <div style="padding:0 4px">
+
+            <div class="er">
+              <div class="en"><span data-tip="Principale androgeno circolante. Metodica di riferimento: LC-MS/MS">Testosterone totale</span> <button class="ib" onclick="openInfo('testosterone')">i</button></div>
+              <div class="ev">
+                <input type="number" id="l-testo" placeholder="valore" step="0.1" oninput="onTesto()">
+                <select id="l-testo-u" onchange="calcFAI()" style="width:85px;padding:8px 6px">
+                  <option value="ngdL">ng/dL</option><option value="nmolL">nmol/L</option>
+                </select>
+                <span class="ef E" id="f-testo">?</span>
+              </div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="SHBG — Sex Hormone Binding Globulin. Ridotta in insulino-resistenza e iperandrogenismo">SHBG</span> <button class="ib" onclick="openInfo('shbg')">i</button></div>
+              <div class="ev">
+                <input type="number" id="l-shbg" placeholder="nmol/L" step="0.1" oninput="calcFAI()">
+                <span style="font-size:.8rem;color:var(--text-m)">nmol/L</span>
+                <span class="ef E" id="f-shbg">?</span>
+              </div>
+            </div>
+
+            <div class="er hi">
+              <div class="en"><span data-tip="Free Androgen Index = (T nmol/L × 100) / SHBG. Stima del testosterone biodisponibile"><strong>FAI</strong> (calcolato)</span> <button class="ib" onclick="openInfo('fai')">i</button></div>
+              <div class="ev"><span class="calc-inline" id="fai-v">—</span><span class="ef E" id="f-fai">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="LH elevato e ratio LH/FSH >2 sono caratteristici della PCOS classica">LH</span> <button class="ib" onclick="openInfo('lhfsh')">i</button></div>
+              <div class="ev"><input type="number" id="l-lh" placeholder="UI/L" step="0.1" oninput="calcLHFSH()"><span style="font-size:.8rem;color:var(--text-m)">UI/L</span><span class="ef E" id="f-lh">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en">FSH</div>
+              <div class="ev"><input type="number" id="l-fsh" placeholder="UI/L" step="0.1" oninput="calcLHFSH()"><span style="font-size:.8rem;color:var(--text-m)">UI/L</span></div>
+            </div>
+
+            <div class="er hi">
+              <div class="en"><span data-tip="Ratio LH/FSH >2 caratteristica (non necessaria) della PCOS classica"><strong>Ratio LH/FSH</strong> (calcolata)</span></div>
+              <div class="ev"><span class="calc-inline" id="lhfsh-v">—</span><span class="ef E" id="f-lhfsh">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="Esclude iperprolattinemia. Valori >25 ng/mL richiedono approfondimento">Prolattina</span> <button class="ib" onclick="openInfo('prolattina')">i</button></div>
+              <div class="ev"><input type="number" id="l-prl" placeholder="ng/mL" step="0.1" oninput="onPRL()"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span><span class="ef E" id="f-prl">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="Esclude ipotiroidismo. Causa comune di oligo-amenorrea e iperandrogenismo relativo">TSH</span> <button class="ib" onclick="openInfo('tsh')">i</button></div>
+              <div class="ev"><input type="number" id="l-tsh" placeholder="μUI/mL" step="0.01" oninput="onTSH()"><span style="font-size:.8rem;color:var(--text-m)">μUI/mL</span><span class="ef E" id="f-tsh">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="Glicemia a digiuno. ≥100 mg/dL = pre-diabete; ≥126 = diabete">Glicemia a digiuno</span> <button class="ib" onclick="openInfo('glicemia')">i</button></div>
+              <div class="ev"><input type="number" id="l-glic" placeholder="mg/dL" step="1" oninput="calcHOMA()"><span style="font-size:.8rem;color:var(--text-m)">mg/dL</span><span class="ef E" id="f-glic">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="Insulinemia basale a digiuno per calcolo HOMA-IR">Insulinemia basale</span> <button class="ib" onclick="openInfo('insulina')">i</button></div>
+              <div class="ev"><input type="number" id="l-ins" placeholder="μUI/mL" step="0.1" oninput="calcHOMA()"><span style="font-size:.8rem;color:var(--text-m)">μUI/mL</span></div>
+            </div>
+
+            <div class="er hi">
+              <div class="en"><span data-tip="HOMA-IR = (glicemia mg/dL × insulina μUI/mL) / 405"><strong>HOMA-IR</strong> (calcolato)</span> <button class="ib" onclick="openInfo('homa')">i</button></div>
+              <div class="ev"><span class="calc-inline" id="homa-v">—</span><span class="ef E" id="f-homa">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en">Profilo lipidico (Colest. tot / HDL / LDL / TG)</div>
+              <div class="ev" style="gap:6px;flex-wrap:wrap">
+                <input type="number" id="l-chol" placeholder="Tot" style="width:72px">
+                <input type="number" id="l-hdl" placeholder="HDL" style="width:66px">
+                <input type="number" id="l-ldl" placeholder="LDL" style="width:66px">
+                <input type="number" id="l-tg" placeholder="TG" style="width:66px">
+                <span style="font-size:.79rem;color:var(--text-m)">mg/dL</span>
+              </div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="DHEA solfato, androgeno surrenalico. Utile per differenziare origine surrenalica vs ovarica">DHEA-S (opzionale)</span> <button class="ib" onclick="openInfo('dheas')">i</button></div>
+              <div class="ev"><input type="number" id="l-dheas" placeholder="μg/dL" step="1"><span style="font-size:.8rem;color:var(--text-m)">μg/dL</span><span class="ef E" id="f-dheas">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="AMH elevato (>5 ng/mL) è marker di PCOS. Possibile surrogato della morfologia ovarica">AMH (opzionale)</span> <button class="ib" onclick="openInfo('amh')">i</button></div>
+              <div class="ev"><input type="number" id="l-amh" placeholder="ng/mL" step="0.1"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Panel II livello -->
+        <div class="st" style="margin-top:24px"><h3>Panel di II Livello <span class="badge">Condizionale</span></h3></div>
+        <div class="flag info" style="margin-bottom:14px">
+          <span class="flag-ico">💡</span>
+          <div class="flag-txt">Esami di approfondimento suggeriti in base ai dati clinici e ai risultati del I livello. Inserisci se già disponibili.</div>
+        </div>
+
+        <div class="ep">
+          <div class="ep-hdr"><span class="ep-ttl">🔬 Panel di II livello</span></div>
+          <div style="padding:0 4px">
+
+            <div class="er">
+              <div class="en"><span data-tip="Screening CAH non classica. Dosare in fase follicolare gg 2-5. Se >2 ng/mL: test ACTH">17-OHP (fase follicolare)</span> <button class="ib" onclick="openInfo('17ohp')">i</button></div>
+              <div class="ev"><input type="number" id="l-17ohp" placeholder="ng/mL" step="0.01" oninput="on17OHP()"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span><span class="ef E" id="f-17ohp">?</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="Androgeno intermedio, elevato in CAH e PCOS">Androstenedione</span></div>
+              <div class="ev"><input type="number" id="l-androst" placeholder="ng/mL" step="0.1"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="Cortisolo libero urinario 24h: screening Cushing. Normale <100-150 μg/24h (dipende dal lab)">Cortisolo libero urinario 24h</span> <button class="ib" onclick="openInfo('cortisolo')">i</button></div>
+              <div class="ev"><input type="number" id="l-cort" placeholder="μg/24h" step="1"><span style="font-size:.8rem;color:var(--text-m)">μg/24h</span></div>
+            </div>
+
+            <div class="er">
+              <div class="en"><span data-tip="OGTT 75g: diagnosi IGT/DM2. Indicato se HOMA-IR >2.5 o fattori di rischio aggiuntivi">OGTT 75g (T0 / T120)</span> <button class="ib" onclick="openInfo('ogtt')">i</button></div>
+              <div class="ev">
+                <input type="number" id="l-ogtt0" placeholder="T0 mg/dL" style="width:105px">
+                <input type="number" id="l-ogtt120" placeholder="T120 mg/dL" style="width:115px">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="btn-grp">
+          <button class="btn btn-sec" onclick="go(2)">← Indietro</button>
+          <button class="btn btn-pri" onclick="go(4)">Continua → Ecografia Pelvica</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASE 4 — ECOGRAFIA
+       ======================================================== -->
+  <section class="phase" id="phase-4">
+    <div class="pcard">
+      <div class="phdr"><span class="ico">🔊</span>
+        <div><h2>Ecografia Pelvica</h2><div class="desc">Morfologia ovarica PCO · Criteri ESHRE/NHMRC 2023 (FNPO ≥20 o Vol ≥10 ml)</div></div>
+      </div>
+      <div class="pbody">
+
+        <div class="flag info" style="margin-bottom:20px">
+          <span class="flag-ico">ℹ️</span>
+          <div class="flag-txt"><strong>Criteri ecografici aggiornati 2023</strong>
+          Morfologia ovarica PCO: <strong>FNPO ≥20 follicoli 2–9 mm per ovaio</strong> e/o <strong>volume ovarico ≥10 ml</strong> in assenza di follicolo dominante, cisti o corpo luteo. Valida solo con sonda transvaginale ad alta frequenza (≥8 MHz). Con sonda transaddominale, usare solo volume.</div>
+        </div>
+
+        <div class="fg fg-2">
+          <div class="fld">
+            <label>Ecografia eseguita</label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'eco-eseguita','si');showEco(true)"><input type="radio" name="eco-eseguita" value="si">Sì</label>
+              <label class="rpill" onclick="selR(this,'eco-eseguita','no');showEco(false)"><input type="radio" name="eco-eseguita" value="no">No (da richiedere)</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label>Via di esame <button class="ib" onclick="openInfo('ecografia')">i</button></label>
+            <div class="rg">
+              <label class="rpill" onclick="selR(this,'eco-via','tv')"><input type="radio" name="eco-via" value="tv">Transvaginale</label>
+              <label class="rpill" onclick="selR(this,'eco-via','ta')"><input type="radio" name="eco-via" value="ta">Transaddominale</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="eco-form" style="display:none">
+          <div class="st" style="margin-top:20px"><h3>Ovaio Destro</h3></div>
+          <div class="fg fg-4">
+            <div class="fld"><label>FNPO <button class="ib" onclick="openInfo('fnpo')">i</button></label><input type="number" id="eco-dx-f" placeholder="n° follicoli" min="0" oninput="chkPCO()"></div>
+            <div class="fld"><label>Volume</label><div class="iu"><input type="number" id="eco-dx-v" placeholder="ml" step="0.1" oninput="chkPCO()" style="padding-right:36px"><span class="iu-lbl">ml</span></div></div>
+            <div class="fld"><label>Diam. max</label><div class="iu"><input type="number" id="eco-dx-d" placeholder="mm" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
+            <div class="fld"><label>Follicolo dominante</label>
+              <div class="rg"><label class="rpill" onclick="selR(this,'fo-dx','si');chkPCO()"><input type="radio" name="fo-dx" value="si">Sì</label><label class="rpill" onclick="selR(this,'fo-dx','no');chkPCO()"><input type="radio" name="fo-dx" value="no">No</label></div>
+            </div>
+          </div>
+
+          <div class="st" style="margin-top:16px"><h3>Ovaio Sinistro</h3></div>
+          <div class="fg fg-4">
+            <div class="fld"><label>FNPO</label><input type="number" id="eco-sx-f" placeholder="n° follicoli" min="0" oninput="chkPCO()"></div>
+            <div class="fld"><label>Volume</label><div class="iu"><input type="number" id="eco-sx-v" placeholder="ml" step="0.1" oninput="chkPCO()" style="padding-right:36px"><span class="iu-lbl">ml</span></div></div>
+            <div class="fld"><label>Diam. max</label><div class="iu"><input type="number" id="eco-sx-d" placeholder="mm" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
+            <div class="fld"><label>Follicolo dominante</label>
+              <div class="rg"><label class="rpill" onclick="selR(this,'fo-sx','si');chkPCO()"><input type="radio" name="fo-sx" value="si">Sì</label><label class="rpill" onclick="selR(this,'fo-sx','no');chkPCO()"><input type="radio" name="fo-sx" value="no">No</label></div>
+            </div>
+          </div>
+
+          <div class="fg fg-3" style="margin-top:14px">
+            <div class="fld"><label>Endometrio</label><div class="iu"><input type="number" id="eco-endo" placeholder="mm" step="0.1" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
+            <div class="fld"><label>Utero</label>
+              <select id="eco-utero"><option value="">Seleziona…</option><option value="normale">Normale</option><option value="miomi">Miomatosi</option><option value="adenomiosi">Adenomiosi</option></select>
+            </div>
+            <div class="fld"><label>Note ecografiche</label><input type="text" id="eco-note" placeholder="note libere…"></div>
+          </div>
+
+          <div id="pco-flag" class="flag" style="display:none;margin-top:14px">
+            <span class="flag-ico" id="pco-ico"></span>
+            <div class="flag-txt"><strong id="pco-t"></strong> <span id="pco-s"></span></div>
+          </div>
+        </div>
+
+        <div class="btn-grp">
+          <button class="btn btn-sec" onclick="go(3)">← Indietro</button>
+          <button class="btn btn-pri" onclick="go(5)">Continua → Diagnosi Differenziale</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASE 5 — DD STRUTTURATA
+       ======================================================== -->
+  <section class="phase" id="phase-5">
+    <div class="pcard">
+      <div class="phdr"><span class="ico">🔎</span>
+        <div><h2>Diagnosi Differenziale Strutturata</h2><div class="desc">Esclusione attiva delle condizioni che mimano o si sovrappongono alla PCOS</div></div>
+      </div>
+      <div class="pbody">
+
+        <div class="flag info" style="margin-bottom:18px">
+          <span class="flag-ico">ℹ️</span>
+          <div class="flag-txt">La diagnosi PCOS richiede esclusione attiva. I flag colorati sono generati automaticamente dai dati delle fasi precedenti. Aggiorna lo stato dopo aver valutato i dati disponibili.</div>
+        </div>
+
+        <div id="dd-container"></div>
+
+        <div class="btn-grp">
+          <button class="btn btn-sec" onclick="go(4)">← Indietro</button>
+          <button class="btn btn-pri" onclick="runAlgo();go(6)">Calcola Diagnosi → Sintesi &amp; Terapia</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FASE 6 — SINTESI & TERAPIA
+       ======================================================== -->
+  <section class="phase" id="phase-6">
+    <div class="pcard">
+      <div class="phdr"><span class="ico">📋</span>
+        <div><h2>Sintesi Diagnostica &amp; Piano Terapeutico</h2><div class="desc">Fenotipizzazione Rotterdam · Rischio metabolico/CV · Terapia · Contraccezione · Follow-up · Documenti AI</div></div>
+      </div>
+      <div class="pbody">
+
+        <!-- DIAGNOSI -->
+        <div class="diag-card" id="diag-card"></div>
+
+        <!-- RISCHIO METABOLICO -->
+        <div class="st"><h3>Stratificazione Rischio Metabolico e Cardiovascolare <button class="ib" onclick="openInfo('rischio')">i</button></h3></div>
+        <div id="risk-panel" style="margin-bottom:18px"></div>
+
+        <!-- TERAPIA -->
+        <div class="st"><h3>Piano Terapeutico</h3></div>
+        <div id="therapy-container"></div>
+
+        <!-- CONTRACCEZIONE -->
+        <div class="st" style="margin-top:22px"><h3>Orientamento Contraccettivo <button class="ib" onclick="openInfo('contraccezione')">i</button></h3></div>
+        <div id="contra-panel"></div>
+
+        <!-- FOLLOW-UP -->
+        <div class="st" style="margin-top:22px"><h3>Piano di Follow-up</h3></div>
+        <div class="fu-wrap" id="fu-container"></div>
+
+        <!-- SESSION SAVE -->
+        <div class="st" style="margin-top:22px"><h3>Salvataggio Sessione</h3></div>
+        <div style="display:flex;gap:11px;flex-wrap:wrap;align-items:center;padding:14px 16px;background:var(--surface);border-radius:var(--r-sm);border:1.5px solid var(--border)">
+          <button class="btn btn-sec" onclick="saveSession()">💾 Scarica JSON</button>
+          <button class="btn btn-sec" onclick="document.getElementById('inp-json').click()">📂 Carica sessione</button>
+          <input type="file" id="inp-json" accept=".json" style="display:none" onchange="loadSession(event)">
+          <span style="font-size:.81rem;color:var(--text-m)">Salva tutti i dati per il controllo esami o il follow-up</span>
+        </div>
+
+        <!-- OUTPUT DOCUMENTI -->
+        <div class="st" style="margin-top:28px"><h3>📄 Generazione Documenti AI</h3></div>
+        <div class="flag info" style="margin-bottom:14px">
+          <span class="flag-ico">🤖</span>
+          <div class="flag-txt"><strong>Genera ogni documento singolarmente</strong> oppure usa <em>Genera tutti</em>. Ogni documento può essere rigenerato in qualsiasi momento senza influenzare gli altri. Assicurati di aver configurato l'endpoint API (⚙️).</div>
+        </div>
+
+        <!-- Bottone Genera tutti -->
+        <button class="btn btn-pri btn-lg" id="btn-genera-tutti" onclick="generateDocs()" style="width:100%;justify-content:center;margin-bottom:6px">
+          🤖 Genera tutti i documenti
+        </button>
+
+        <div id="out-section" style="margin-top:16px">
+          <!-- Tab bar -->
+          <div class="out-tabs">
+            <button class="out-tab active" id="tab-paz"  onclick="showTab('out-paz',this)">📝 Lettera Paziente</button>
+            <button class="out-tab"        id="tab-coll" onclick="showTab('out-coll',this)">🏥 Lettera Collega</button>
+            <button class="out-tab"        id="tab-esami" onclick="showTab('out-esami',this)">🧪 Richiesta Esami</button>
+            <button class="out-tab"        id="tab-terp" onclick="showTab('out-terp',this)">💊 Piano Terapeutico</button>
+          </div>
+
+          <!-- Lettera Paziente -->
+          <div id="out-paz" class="out-doc active">
+            <div class="doc-toolbar">
+              <button class="btn btn-pri btn-sm" onclick="generateOne('paz')">🤖 Genera</button>
+              <span class="doc-status" id="st-paz">—</span>
+              <button class="btn btn-sec btn-sm" onclick="stampDoc('cnt-paz','Lettera per la Paziente')">🖨️ Stampa</button>
+            </div>
+            <div class="out-content" id="cnt-paz"><div class="doc-empty">Clicca <strong>Genera</strong> per creare questo documento.</div></div>
+          </div>
+
+          <!-- Lettera Collega -->
+          <div id="out-coll" class="out-doc">
+            <div class="doc-toolbar">
+              <button class="btn btn-pri btn-sm" onclick="generateOne('coll')">🤖 Genera</button>
+              <span class="doc-status" id="st-coll">—</span>
+              <button class="btn btn-sec btn-sm" onclick="stampDoc('cnt-coll','Lettera di Consulenza')">🖨️ Stampa</button>
+            </div>
+            <div class="out-content" id="cnt-coll"><div class="doc-empty">Clicca <strong>Genera</strong> per creare questo documento.</div></div>
+          </div>
+
+          <!-- Richiesta Esami -->
+          <div id="out-esami" class="out-doc">
+            <div class="doc-toolbar">
+              <button class="btn btn-pri btn-sm" onclick="generateOne('esami')">🤖 Genera</button>
+              <span class="doc-status" id="st-esami">—</span>
+              <button class="btn btn-sec btn-sm" onclick="stampDoc('cnt-esami','Richiesta Esami')">🖨️ Stampa</button>
+            </div>
+            <div class="out-content" id="cnt-esami"><div class="doc-empty">Clicca <strong>Genera</strong> per creare questo documento.</div></div>
+          </div>
+
+          <!-- Piano Terapeutico -->
+          <div id="out-terp" class="out-doc">
+            <div class="doc-toolbar">
+              <button class="btn btn-pri btn-sm" onclick="generateOne('terp')">🤖 Genera</button>
+              <span class="doc-status" id="st-terp">—</span>
+              <button class="btn btn-sec btn-sm" onclick="stampDoc('cnt-terp','Piano Terapeutico')">🖨️ Stampa</button>
+            </div>
+            <div class="out-content" id="cnt-terp"><div class="doc-empty">Clicca <strong>Genera</strong> per creare questo documento.</div></div>
+          </div>
+
+        </div>
+
+        <div class="btn-grp">
+          <button class="btn btn-sec" onclick="go(5)">← Indietro</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><strong>ANDRO·CONSULT</strong> · CDSS per Iperandrogenismo e PCOS<br>
+    <span>Sviluppato da <strong>Dr. Carlo Piscicelli</strong> · Suite <strong>GINOS</strong> · ginos-cdss.it</span></div>
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <a href="andro-consult-guide.html" target="_blank">📖 Guida &amp; Linee Guida</a>
+      <span style="color:var(--border)">|</span>
+      <span style="font-size:.78rem">Strumento di supporto decisionale clinico. Non sostituisce il giudizio del medico.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ========================================================
+     MODALI
+     ======================================================== -->
+
+<!-- Modal Config -->
+<div class="moverlay" id="m-cfg">
+  <div class="modal" style="max-width:500px">
+    <div class="mhdr"><h3>⚙️ Configurazione Endpoint API</h3><button class="mclose" onclick="closeM('m-cfg')">✕</button></div>
+    <div class="mbody">
+      <h4>Proxy Vercel (API Anthropic)</h4>
+      <p>Inserisci l'URL del proxy serverless che gestisce le chiamate all'API Claude. Compatibile con il proxy di rUTI·CONSULT.</p>
+      <input type="text" id="api-ep" placeholder="https://tuo-proxy.vercel.app/api/claude" style="width:100%;margin:10px 0;font-family:monospace;font-size:.85rem">
+      <p style="font-size:.81rem;color:var(--text-m)">L'endpoint è salvato nel browser (localStorage) e non viene mai incluso nel codice sorgente.</p>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button class="btn btn-pri" onclick="saveEP()">Salva</button>
+        <button class="btn btn-sec" onclick="closeM('m-cfg')">Annulla</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Sessione JSON -->
+<div class="moverlay" id="m-json">
+  <div class="modal" style="max-width:480px">
+    <div class="mhdr"><h3>💾 Gestione Sessione</h3><button class="mclose" onclick="closeM('m-json')">✕</button></div>
+    <div class="mbody">
+      <h4>Salva sessione corrente</h4>
+      <p>Esporta tutti i dati inseriti in un file JSON per riprendere la consultazione (controllo esami, follow-up).</p>
+      <button class="btn btn-pri" onclick="saveSession();closeM('m-json')">💾 Scarica file JSON</button>
+      <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--border-lt)">
+        <h4>Carica sessione precedente</h4>
+        <p>Ripopola il modulo con una sessione salvata. I dati correnti verranno sostituiti.</p>
+        <button class="btn btn-sec" onclick="document.getElementById('inp-json2').click()">📂 Seleziona file JSON</button>
+        <input type="file" id="inp-json2" accept=".json" style="display:none" onchange="loadSession(event);closeM('m-json')">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Info (dinamica) -->
+<div class="moverlay" id="m-info">
+  <div class="modal">
+    <div class="mhdr"><h3 id="info-t">Informazione</h3><button class="mclose" onclick="closeM('m-info')">✕</button></div>
+    <div class="mbody" id="info-b"></div>
+  </div>
+</div>
+
+<!-- ========================================================
+     JAVASCRIPT
+     ======================================================== -->
+<script>
+/* ======================================================
+   STATO GLOBALE
+   ====================================================== */
+let curPhase = 1;
+let apiEP = localStorage.getItem('andro_api_ep') || '';
+let mfgSc = [0,0,0,0,0,0,0,0,0];
+let lwSc = null;
+let gagsSc = {};
+let ddSt = {};
+let diag = {};
+
+/* ======================================================
+   INIT
+   ====================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  buildMFG(); buildGAGS(); buildDD();
+  if (apiEP) document.getElementById('api-ep').value = apiEP;
+  else document.getElementById('cfg-banner').style.display = 'flex';
+});
+
+/* ======================================================
+   NAVIGATION
+   ====================================================== */
+function goTo(n) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.stp').forEach((s,i) => {
+    s.classList.remove('active','done');
+    if (i+1 < n) s.classList.add('done');
+    if (i+1 === n) s.classList.add('active');
+  });
+  document.getElementById('phase-'+n).classList.add('active');
+  curPhase = n;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function go(n) { if (n===6) computeDiag(); goTo(n); }
+
+/* ======================================================
+   RADIO PILLS
+   ====================================================== */
+function selR(el, name, val) {
+  document.querySelectorAll(`.rpill input[name="${name}"]`).forEach(r => r.parentElement.classList.remove('sel'));
+  el.classList.add('sel');
+  el.querySelector('input').checked = true;
+}
+function gR(name) { const e = document.querySelector(`input[name="${name}"]:checked`); return e ? e.value : null; }
+
+/* ======================================================
+   BMI / WC
+   ====================================================== */
+function calcBMI() {
+  const p = +v('peso'), a = +v('altezza')/100;
+  if (p>0 && a>0) {
+    const b = (p/(a*a)).toFixed(1);
+    let cls='n',txt='Normopeso';
+    if (b<18.5){cls='w';txt='Sottopeso';}
+    else if (b>=25&&b<30){cls='w';txt='Sovrappeso';}
+    else if (b>=30){cls='h';txt='Obesa';}
+    set('bmi-v',`${b} <span class="unit">kg/m²</span>`);
+    setAC('bmi-ci',cls,txt);
+    document.getElementById('bmi-box').style.display='block';
+  }
+}
+function calcWC() {
+  const w = +v('wc');
+  if (w>0) {
+    let cls='n',txt='Nella norma';
+    if (w>=80&&w<88){cls='w';txt='Aumentata (≥80 cm)';}
+    else if (w>=88){cls='h';txt='Molto aumentata (≥88 cm)';}
+    set('wc-v',`${w} <span class="unit">cm</span>`);
+    setAC('wc-ci',cls,txt);
+    document.getElementById('bmi-box').style.display='block';
+  }
+}
+function onEta() {
+  const eta = +v('eta');
+  document.getElementById('flag-ado').style.display = (eta>0&&eta<18)?'flex':'none';
+  calcAnniMenarca();
+}
+function calcAnniMenarca() {
+  const eta=+v('eta'), men=+v('menarca');
+  if (eta>0&&men>0) {
+    document.getElementById('anni-menarca').value = eta-men;
+    document.getElementById('f-anni-menarca').style.display='flex';
+  }
+}
+
+/* ======================================================
+   CICLO
+   ====================================================== */
+function onCiclo() {
+  const val = v('ciclo');
+  const f = document.getElementById('ciclo-flag');
+  if (val==='oligomenorrea'||val==='amenorrea') {
+    f.style.display='flex';
+    f.className = val==='amenorrea'?'flag danger':'flag';
+    set('ciclo-flag-t', val==='oligomenorrea'?'Oligomenorrea — Criterio Rotterdam 1 positivo':'Amenorrea — Criterio Rotterdam 1 positivo');
+    set('ciclo-flag-s', val==='oligomenorrea'?'Ciclo >35 gg o <9 cicli/anno. Oligo-anovulazione documentata.':'Assenza mestruazioni >90 gg. Escludere gravidanza, POI, amenorrea ipotalamica.');
+  } else { f.style.display='none'; }
+}
+
+/* ======================================================
+   mFG
+   ====================================================== */
+const mfgSites = [
+  {n:'Labbro superiore',d:'0=assente · 1=pochi peli sparsi · 2=piccolo baffo · 3=baffo incompleto · 4=baffo completo'},
+  {n:'Mento',d:'0=assente · 1=pochi peli · 2=disperso · 3=copertura leggera · 4=completo'},
+  {n:'Torace',d:'0=assente · 1=perimamillare · 2=in più · 3=con zone intermedie · 4=coperto'},
+  {n:'Addome superiore',d:'0=assente · 1=pochi peli · 2=striscia mediana · 3-4=copertura crescente'},
+  {n:'Addome inferiore',d:'0=assente · 1=pochi peli · 2=striscia mediana · 3=metà area · 4=completo'},
+  {n:'Coscia interna',d:'0=assente · 1=disperso · 2=maggiore · 3=parziale · 4=completo'},
+  {n:'Coscia esterna',d:'0=assente · 1=pochi · 2=disperso · 3=parziale · 4=completo'},
+  {n:'Braccio superiore',d:'0=assente · 1=disperso · 2=copertura parziale · 3-4=completo'},
+  {n:'Braccio inferiore',d:'0=assente · 1-2=crescente · 3=posteriore · 4=completo'}
+];
+
+function buildMFG() {
+  document.getElementById('mfg-grid').innerHTML = mfgSites.map((s,i) => `
+    <div class="mfg-site">
+      <div class="mfg-name"><span data-tip="${s.d}">${s.n}</span><span class="mfg-score" id="ms-${i}">0</span></div>
+      <input type="range" class="mfg-sl" min="0" max="4" value="0" id="msl-${i}" oninput="updMFG(${i},this.value)"
+        style="background:linear-gradient(90deg,var(--primary) 0%,var(--border) 0%)">
+      <div class="mfg-lvls"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div>
+    </div>`).join('');
+}
+
+function updMFG(i, val) {
+  mfgSc[i] = +val;
+  set('ms-'+i, val);
+  const pct = (val/4)*100;
+  document.getElementById('msl-'+i).style.background=`linear-gradient(90deg,var(--primary) 0%,var(--primary) ${pct}%,var(--border) ${pct}%)`;
+  const tot = mfgSc.reduce((a,b)=>a+b,0);
+  set('mfg-tot', tot);
+  const thr = getMFGThr(v('etnia'));
+  const hi = tot>=thr;
+  set('mfg-interp', hi?`⚠️ Iperandrogenismo clinico (soglia etnia: ≥${thr})`:`✓ Nella norma per questa etnia (soglia ≥${thr})`);
+}
+
+function getMFGThr(e) { return {europea:6,asiatica:3,africana:6,mediorientale:4}[e]||6; }
+
+function updMFGThr() {
+  const e=v('etnia'); const t=getMFGThr(e);
+  const el=document.getElementById('mfg-etnia-note');
+  if (e) { el.style.display='flex'; set('mfg-etnia-txt',`<strong>Soglia mFG per etnia ${e}:</strong> ≥${t} punti per iperandrogenismo clinico (9 siti, range 0–36)`); }
+  else el.style.display='none';
+  const tot=mfgSc.reduce((a,b)=>a+b,0); if(tot>0) updMFG(0,mfgSc[0]);
+}
+
+/* ======================================================
+   LUDWIG
+   ====================================================== */
+function selLw(g) {
+  document.querySelectorAll('.lw-card').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('lw-'+g).classList.add('sel');
+  document.getElementById('lw-val').value=g;
+  lwSc=g;
+}
+
+/* ======================================================
+   GAGS
+   ====================================================== */
+const gagsR = [
+  {n:'Fronte',f:2},{n:'Guance',f:2},{n:'Naso',f:1},{n:'Mento',f:1},{n:'Tronco ant.',f:3}
+];
+const gagsDens = ['0 — Assente','1 — Comedoni','2 — Papule','3 — Pustole'];
+const gagsSev  = ['0 — Assente','1 — Lieve (<5)','2 — Mod (5-10)','3 — Sev (>10)','4 — Cisti'];
+
+function buildGAGS() {
+  document.getElementById('gags-tbody').innerHTML = gagsR.map((r,i) => {
+    gagsSc[i]={d:0,s:0};
+    return `<tr>
+      <td><strong>${r.n}</strong></td><td style="color:var(--text-m)">${r.f}</td>
+      <td><select onchange="updGAGS(${i},'d',this.value)">${gagsDens.map((d,j)=>`<option value="${j}">${d}</option>`).join('')}</select></td>
+      <td><select onchange="updGAGS(${i},'s',this.value)">${gagsSev.map((d,j)=>`<option value="${j}">${d}</option>`).join('')}</select></td>
+      <td><strong id="gr-${i}" style="color:var(--primary)">0</strong></td></tr>`;
+  }).join('');
+}
+
+function updGAGS(i,f,val) {
+  gagsSc[i][f]=+val;
+  const row = gagsR[i].f*gagsSc[i].d*gagsSc[i].s;
+  set('gr-'+i, row);
+  const tot = gagsR.reduce((s,r,j)=>s+r.f*gagsSc[j].d*gagsSc[j].s,0);
+  set('gags-tot', tot);
+  const gi = document.getElementById('gags-interp');
+  if (tot>0) {
+    gi.style.display='block';
+    let t=''; if(tot<=18)t=`GAGS ${tot} — Lieve`; else if(tot<=30)t=`GAGS ${tot} — Moderata`; else if(tot<=38)t=`GAGS ${tot} — Severa`; else t=`GAGS ${tot} — Molto severa`;
+    gi.textContent=t;
+  } else gi.style.display='none';
+}
+
+/* ======================================================
+   VIRILISMO / CUSHING
+   ====================================================== */
+function showVirilismo() { document.getElementById('virilismo-flag').style.display='flex'; }
+function chkCushing() {
+  const ok = ['strie','facies','miopatia'].some(n=>gR(n)==='si');
+  document.getElementById('cushing-flag').style.display = ok?'flex':'none';
+}
+
+/* ======================================================
+   LAB CALCULATORS
+   ====================================================== */
+function onTesto() { calcFAI(); flagTesto(); }
+function flagTesto() {
+  const t=+v('l-testo'), u=v('l-testo-u');
+  const ng = u==='nmolL'?t*28.8:t;
+  setFlag('f-testo', ng>150?'H':ng>80?'H':ng>45?'L':'N');
+}
+
+function calcFAI() {
+  const t=+v('l-testo'), sh=+v('l-shbg'), u=v('l-testo-u');
+  if (t>0&&sh>0) {
+    const tn = u==='nmolL'?t:t*0.03467;
+    const fai = ((tn*100)/sh).toFixed(2);
+    set('fai-v', fai);
+    setFlag('f-fai', fai>5?'H':fai>3.5?'L':'N');
+    setFlag('f-shbg', sh<30?'L':sh>120?'L':'N');
+  }
+}
+
+function calcLHFSH() {
+  const lh=+v('l-lh'), fsh=+v('l-fsh');
+  if (lh>0&&fsh>0) {
+    const r=(lh/fsh).toFixed(1);
+    set('lhfsh-v', r);
+    setFlag('f-lhfsh', r>=2?'H':'N');
+    setFlag('f-lh', lh>15?'H':lh>10?'L':'N');
+  }
+}
+
+function onPRL() { const p=+v('l-prl'); if(p>0) setFlag('f-prl',p>50?'H':p>25?'L':'N'); }
+function onTSH() { const t=+v('l-tsh'); if(t>0) setFlag('f-tsh',t>4.5?'H':t<0.4?'H':'N'); }
+function on17OHP() { const t=+v('l-17ohp'); if(t>0) setFlag('f-17ohp',t>=10?'H':t>=2?'L':'N'); }
+
+function calcHOMA() {
+  const g=+v('l-glic'), ins=+v('l-ins');
+  if (g>0&&ins>0) {
+    const h=((g*ins)/405).toFixed(2);
+    set('homa-v', h);
+    setFlag('f-homa', h>=2.5?'H':h>=2?'L':'N');
+    setFlag('f-glic', g>=126?'H':g>=100?'L':'N');
+  }
+}
+
+function setFlag(id, cls) {
+  const e=document.getElementById(id);
+  if(!e)return;
+  const map={N:'N',L:'~',H:'↑'};
+  e.className='ef '+cls; e.textContent=map[cls]||cls;
+}
+
+/* ======================================================
+   ECOGRAFIA
+   ====================================================== */
+function showEco(b) { document.getElementById('eco-form').style.display=b?'block':'none'; }
+
+function chkPCO() {
+  const df=+v('eco-dx-f'), sf=+v('eco-sx-f');
+  const dv=+v('eco-dx-v'), sv=+v('eco-sx-v');
+  const foDx=gR('fo-dx')!=='si', foSx=gR('fo-sx')!=='si';
+  const pcoF=(df>=20&&foDx)||(sf>=20&&foSx);
+  const pcoV=(dv>=10&&foDx)||(sv>=10&&foSx);
+  const isPCO=pcoF||pcoV;
+  const fl=document.getElementById('pco-flag');
+  if (df>0||sf>0||dv>0||sv>0) {
+    fl.style.display='flex';
+    fl.className=isPCO?'flag':'flag ok';
+    set('pco-ico',isPCO?'⚠️':'✓');
+    set('pco-t',isPCO?'Morfologia ovarica PCO — Criterio Rotterdam 3 positivo':'Morfologia ovarica nella norma — Criterio Rotterdam 3 non soddisfatto');
+    set('pco-s',isPCO?`${pcoF?`FNPO≥20 (Dx:${df}, Sx:${sf}).`:''} ${pcoV?`Vol≥10ml (Dx:${dv}, Sx:${sv} ml).`:'`'}`:'FNPO<20 e volume<10 ml in entrambi gli ovaie.');
+  } else fl.style.display='none';
+}
+
+/* ======================================================
+   DD STRUTTURATA
+   ====================================================== */
+const ddList = [
+  {id:'cah',n:'Iperplasia Surrenalica Congenita non classica (CAH-NC)',
+   d:'Deficit 21-idrossilasi. Causa più comune di iperandrogenismo surrenalico. Fenotipo clinicamente indistinguibile da PCOS.',
+   e:'17-OHP in fase follicolare (gg 2-5). Se >2 ng/mL: test ACTH 250 μg. Consulenza endocrinologica se positivo.',
+   auto:()=>{const t=+v('l-17ohp');return t>=10?'suspected':t>=2?'toexclude':'toexclude';}},
+  {id:'prl',n:'Iperprolattinemia',
+   d:'PRL elevata causa oligo-amenorrea indipendente da PCOS. Cause: prolattinoma, farmaci (antipsicotici, metoclopramide), ipotiroidismo, stress.',
+   e:'Prolattina sierica. Se >25 ng/mL: ripetere a digiuno, escludere macroprolattina. Se confermata: RMN ipofisi.',
+   auto:()=>{const p=+v('l-prl');return p>50?'suspected':p>25?'toexclude':p>0?'excluded':'toexclude';}},
+  {id:'tsh',n:'Ipotiroidismo',
+   d:'TSH elevato riduce SHBG (↑testosterone libero) e altera asse GnRH. Causa comune e correggibile di oligo-amenorrea.',
+   e:'TSH. Se >4.5 μUI/mL: FT4 + Ab-TPO. Trattamento sostitutivo con levotiroxina se indicato.',
+   auto:()=>{const t=+v('l-tsh');return t>4.5?'suspected':t>0?'excluded':'toexclude';}},
+  {id:'cushing',n:'Sindrome di Cushing',
+   d:'Ipercortisolismo causa iperandrogenismo secondario, oligo-amenorrea, insulino-resistenza. Frequenza <1% degli iperandrogenismi.',
+   e:'Cortisolo libero urinario 24h e/o test soppressione con desametasone 1 mg overnight. Consulenza endocrinologica.',
+   auto:()=>{const s=['strie','facies','miopatia'].some(n=>gR(n)==='si'); const c=+v('l-cort'); return c>150?'suspected':s?'toexclude':'toexclude';}},
+  {id:'tumore',n:'Tumore secernente androgeni (ovarico/surrenalico)',
+   d:'Raro ma da escludere obbligatoriamente. Sospettare con testosterone >150 ng/dL, virilismo o DHEA-S molto elevato.',
+   e:'Testosterone urgente (se >150 ng/dL), DHEA-S, ecografia ovarica, TC surreni se DHEA-S elevato.',
+   auto:()=>{const t=+v('l-testo'),u=v('l-testo-u'),ng=u==='nmolL'?t*28.8:t,vir=gR('virilismo')==='presente';return(vir||ng>150)?'suspected':ng>80?'toexclude':'toexclude';}},
+  {id:'iah',n:'Iperandrogenismo idiopatico / Ipertricosi',
+   d:'Eccesso di pelo in assenza di iperandrogenismo biochimico e ciclo regolare. Non è PCOS. Base familiare o aumentata sensibilità periferica agli androgeni.',
+   e:'Diagnosi di esclusione: androgeni nella norma, ciclo regolare, morfologia ovarica normale.',
+   auto:()=>'toexclude'}
+];
+
+function buildDD() {
+  document.getElementById('dd-container').innerHTML = ddList.map(dd => {
+    ddSt[dd.id]='toexclude';
+    return `<div class="dd-item toexclude" id="ddi-${dd.id}">
+      <span class="dd-ico" id="ddico-${dd.id}">⚠️</span>
+      <div class="dd-inf">
+        <div class="dd-nm">${dd.n} <button class="ib" onclick="openInfo('dd_${dd.id}')">i</button></div>
+        <div class="dd-dt">${dd.d}</div>
+        <div class="dd-ex" id="dde-${dd.id}">📋 ${dd.e}</div>
+        <div class="dd-act">
+          <select id="dds-${dd.id}" onchange="updDD('${dd.id}',this.value)">
+            <option value="toexclude">⚠️ Da escludere</option>
+            <option value="excluded">✅ Esclusa</option>
+            <option value="suspected">🔴 Sospettata</option>
+          </select>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updDD(id, val) {
+  ddSt[id]=val;
+  const it=document.getElementById('ddi-'+id), ic=document.getElementById('ddico-'+id);
+  it.className='dd-item '+val;
+  ic.textContent=val==='excluded'?'✅':val==='suspected'?'🔴':'⚠️';
+}
+
+function refreshDD() {
+  ddList.forEach(dd => {
+    const auto=dd.auto();
+    const sel=document.getElementById('dds-'+dd.id);
+    if (ddSt[dd.id]==='toexclude'&&auto!=='toexclude') { sel.value=auto; updDD(dd.id,auto); }
+  });
+}
+
+/* ======================================================
+   ALGORITMO DIAGNOSTICO ROTTERDAM
+   ====================================================== */
+function runAlgo() { refreshDD(); }
+
+function computeDiag() {
+  refreshDD();
+  const eta=+v('eta'), isAdo=eta>0&&eta<18;
+  // Criterio 1
+  const cic=v('ciclo'); const c1=cic==='oligomenorrea'||cic==='amenorrea';
+  // Criterio 2
+  const thr=getMFGThr(v('etnia')), mfgTot=mfgSc.reduce((a,b)=>a+b,0), clinA=mfgTot>=thr;
+  const t=+v('l-testo'),u=v('l-testo-u'),ng=u==='nmolL'?t*28.8:t;
+  const fai=+document.getElementById('fai-v').textContent;
+  const biochemA=ng>45||fai>5;
+  const c2=clinA||biochemA;
+  // Criterio 3
+  const df=+v('eco-dx-f'),sf=+v('eco-sx-f'),dvo=+v('eco-dx-v'),svo=+v('eco-sx-v');
+  const eco=gR('eco-eseguita')==='si';
+  const foDx=gR('fo-dx')!=='si',foSx=gR('fo-sx')!=='si';
+  const c3=eco&&((df>=20&&foDx)||(sf>=20&&foSx)||(dvo>=10&&foDx)||(svo>=10&&foSx));
+  // Esclusioni
+  const excl=['prl','tsh','cushing','tumore'].some(id=>ddSt[id]==='suspected');
+  // Fenotipo
+  let ph=null,dx='';
+  const cnt=(c1?1:0)+(c2?1:0)+(c3?1:0);
+  if (!excl&&cnt>=2) {
+    if(c1&&c2&&c3)ph='A'; else if(c1&&c2)ph='B'; else if(c2&&c3)ph='C'; else if(c1&&c3)ph='D';
+    dx=isAdo?'PCOS possibile (criteri adolescenza — rivalutare a 18 anni)':`PCOS — Fenotipo ${ph} (Criteri di Rotterdam 2003/2023)`;
+  } else if(excl) { dx='Iperandrogenismo — diagnosi differenziale in corso'; }
+  else { dx=cnt===1?'Non soddisfatti criteri PCOS (1/3 criteri Rotterdam)':'Valutazione incompleta — completare prima di concludere'; }
+  // Rischio metabolico
+  const bmi=+v('peso')/Math.pow(+v('altezza')/100,2);
+  const homa=parseFloat(document.getElementById('homa-v').textContent)||0;
+  const wc=+v('wc');
+  let risk='low';
+  if ((bmi>=30||wc>=88||homa>=2.5)&&(ph==='A'||ph==='B')) risk='high';
+  else if (bmi>=25||wc>=80||homa>=2.0||ph==='A'||ph==='B') risk='medium';
+
+  diag={ph,dx,c1,c2,c3,clinA,biochemA,mfgTot,risk,excl,isAdo,eta,ng,fai,homa,bmi,wc};
+  renderDiag(); renderTherapy(); renderContra(); renderFU();
+}
+
+/* ======================================================
+   RENDER DIAGNOSI
+   ====================================================== */
+function renderDiag() {
+  const {ph,dx,c1,c2,c3,risk}=diag;
+  const rLbl={low:'Basso',medium:'Moderato',high:'Elevato'};
+  document.getElementById('diag-card').innerHTML=`
+    <div class="diag-title">${dx}</div>
+    ${ph?`<div style="margin:8px 0"><span class="ph-badge">Fenotipo ${ph}</span></div>`:''}
+    <div class="crit-row">
+      <span class="${c1?'crit-ok':'crit-no'}">✓ Oligo/anovulazione</span>
+      <span class="${c2?'crit-ok':'crit-no'}">✓ Iperandrogenismo</span>
+      <span class="${c3?'crit-ok':'crit-no'}">✓ Morfologia PCO</span>
+    </div>
+    <div class="risk-row"><span class="risk-lbl">Rischio metabolico/CV:</span><span class="risk-bdg ${risk}">${rLbl[risk]}</span></div>`;
+
+  const rTxt={
+    low:{ico:'✅',cls:'ok',t:'Rischio metabolico/CV basso',s:'BMI e HOMA-IR nella norma. Screening periodico annuale secondo ESHRE 2023.'},
+    medium:{ico:'⚠️',cls:'',t:'Rischio metabolico/CV moderato',s:'Uno o più fattori di rischio presenti. Intervento sullo stile di vita e follow-up metabolico a 6 mesi.'},
+    high:{ico:'🚨',cls:'danger',t:'Rischio metabolico/CV elevato',s:'Combinazione di fattori ad alto rischio. Considerare consulenza diabetologica/cardiologica, metformina e intervento intensivo sullo stile di vita.'}
+  }[risk];
+  document.getElementById('risk-panel').innerHTML=`<div class="flag ${rTxt.cls}"><span class="flag-ico">${rTxt.ico}</span><div class="flag-txt"><strong>${rTxt.t}</strong>${rTxt.s}</div></div>`;
+}
+
+/* ======================================================
+   RENDER TERAPIA
+   ====================================================== */
+function renderTherapy() {
+  const {ph,risk,homa,bmi,ng}=diag;
+  const des=gR('desiderio')==='si';
+  const blocks=[
+    {t:'🥗 Intervento sullo stile di vita',sub:'Prima linea — tutte le pazienti',
+     c:`<p><strong>Esercizio fisico:</strong> 150 min/settimana di attività aerobica moderata (camminata veloce, nuoto, ciclismo) + 2-3 sessioni di resistenza. Migliora sensibilità insulinica, riduce androgeni e favorisce ovulazione.</p>
+        ${bmi>=25?'<p><strong>Dieta ipocalorica:</strong> Deficit 500-1000 kcal/die per riduzione del 5-10% del peso. Preferire dieta a basso indice glicemico, ricca di fibre. Anche una perdita del 5% migliora la regolarità mestruale.</p>':'<p><strong>Dieta:</strong> Stile alimentare a basso indice glicemico, ricco di fibre, verdure e proteine magre. Non necessaria restrizione calorica, ma qualità nutrizionale ottimale.</p>'}
+        <p><strong>Integratori:</strong> Mio-inositolo 2-4 g/die (con D-chiro-inositolo 40:1) per supporto alla sensibilità insulinica e alla regolarità mestruale. Vitamina D se carente.</p>`
+    }
+  ];
+
+  let farmTxt='';
+  if (!des) {
+    if (ph==='A'||ph==='B') {
+      farmTxt=`<p><strong>COC con progestinico anti-androgenico:</strong> Prima scelta per irsutismo e acne. Preferire ciproterone acetato 2 mg, drospirenone 3 mg o clormadinone 2 mg. Efficacia valutabile dopo 3-6 cicli.</p>`;
+      if (homa>=2.5||risk==='high') farmTxt+=`<p><strong>Metformina:</strong> Indicata in insulino-resistenza documentata (HOMA-IR ≥2.5), pre-diabete o DM2. Dose iniziale 500 mg/die con il pasto, incrementare fino a 1500-2000 mg/die.</p>`;
+    } else {
+      farmTxt=`<p><strong>COC:</strong> Considerare se presente iperandrogenismo clinico o necessità contraccettiva. Qualsiasi COC è accettabile nel fenotipo ${ph||'C/D'}. Preferire formulazioni a basso rischio in caso di profilo metabolico sfavorevole.</p>`;
+    }
+  } else {
+    farmTxt=`<p><strong>Desiderio riproduttivo presente:</strong> Non indicata la contraccezione ormonale. Ottimizzare peso e stile di vita. Considerare mio-inositolo. Per l'induzione dell'ovulazione (se indicata): <strong>letrozolo 2.5-5 mg/die (gg 3-7)</strong> è la terapia di prima linea per PCOS (ESHRE/ASRM 2023), superiore al clomifene.</p>`;
+    if (homa>=2.5) farmTxt+=`<p><strong>Metformina:</strong> Considerare in associazione a letrozolo per migliorare la risposta ovulatoria in pazienti con insulino-resistenza.</p>`;
+  }
+
+  if (farmTxt) blocks.push({t:'💊 Terapia farmacologica',sub:ph?`Adattata al Fenotipo ${ph}`:'Condizionale',c:farmTxt});
+
+  blocks.push({t:'🔬 Anti-androgeni (seconda linea)',sub:'Se irsutismo/acne severi non responsivi',
+    c:`<p><strong>Spironolattone</strong> 50-200 mg/die: irsutismo severo non responsivo a COC, o COC controindicato. Associare sempre contraccezione efficace (teratogeno). Monitorare kaliemia.</p>
+       <p><strong>Finasteride</strong> 2.5-5 mg/die: alopecia androgenetica severa. Controindicata in gravidanza.</p>
+       <p><strong>Eflornitina crema</strong> (Vaniqa): irsutismo facciale, effetto locale senza azione sistemica.</p>`
+  });
+
+  document.getElementById('therapy-container').innerHTML = blocks.map(b=>`
+    <div class="th-block"><div class="th-hdr"><h4>${b.t}</h4><span class="th-sub">${b.sub}</span></div>
+    <div class="th-body">${b.c}</div></div>`).join('');
+}
+
+/* ======================================================
+   RENDER CONTRACCEZIONE
+   ====================================================== */
+function renderContra() {
+  const {ph,risk,bmi}=diag;
+  const des=gR('desiderio')==='si';
+  if (des) {
+    document.getElementById('contra-panel').innerHTML=`<div class="flag ok"><span class="flag-ico">ℹ️</span><div class="flag-txt"><strong>Contraccezione non indicata</strong>Paziente con desiderio riproduttivo. Impostare percorso per il concepimento.</div></div>`;
+    return;
+  }
+  let rows='';
+  if (ph==='A'||ph==='B') {
+    rows=`<tr><td><strong>1ª scelta</strong></td><td>COC anti-androgenico<br><small style="color:var(--text-m)">EE 20-30 μg + ciproterone 2 mg / drospirenone 3 mg / clormadinone 2 mg</small></td><td>Max efficacia su irsutismo e acne. Attenzione al rischio trombotico con CPA.</td></tr>
+    ${bmi>=30?'<tr><td><strong>Alternativa</strong></td><td>IUS-LNG (Mirena 52 mg)<br><small style="color:var(--text-m)">Azione locale, minima sistemica</small></td><td>Ottima in caso di controindicazione al COC o profilo metabolico sfavorevole.</td></tr>':''}
+    <tr><td><strong>2ª linea</strong></td><td>Progestinico solo (POP)<br><small style="color:var(--text-m)">Desogestrel 75 μg</small></td><td>Se COC controindicato. Minore efficacia sull'iperandrogenismo.</td></tr>`;
+  } else {
+    rows=`<tr><td><strong>Qualsiasi COC</strong></td><td>Formulazione a scelta<br><small style="color:var(--text-m)">Non richiesto progestinico anti-androgenico specifico</small></td><td>Fenotipo ${ph||'C/D'}: iperandrogenismo assente/lieve. Scegliere per profilo paziente.</td></tr>
+    <tr><td><strong>IUS-LNG</strong></td><td>Levonorgestrel IUS</td><td>Buona alternativa con azione locale prevalente.</td></tr>`;
+  }
+  document.getElementById('contra-panel').innerHTML=`<table class="ct"><thead><tr><th>Opzione</th><th>Prodotto</th><th>Note</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+/* ======================================================
+   RENDER FOLLOW-UP
+   ====================================================== */
+function renderFU() {
+  const {ph,risk,homa,isAdo}=diag;
+  const des=gR('desiderio')==='si';
+  const items=[
+    {t:'4–6 settimane',a:'Prima valutazione risposta terapia. Tollerabilità COC/metformina. Aderenza alle modifiche stile di vita.'},
+    {t:'3 mesi',a:'Controllo clinico: valutazione sintomi androgenici (acne, irsutismo), ciclo, PA, peso. Ripetere BMI e circumferenza vita.'},
+    {t:'6 mesi',a:`Ripetizione profilo ormonale: testosterone totale, SHBG, FAI, LH/FSH.${homa>=2.0?' Ripetere HOMA-IR (glicemia + insulinemia).':''} Valutazione clinica completa.`},
+    ...(homa>=2.5||risk==='high'?[{t:'6–12 mesi',a:'OGTT 75g (se non eseguito o borderline). Profilo lipidico completo. Aggiornamento rischio cardiovascolare.'}]:[]),
+    {t:'12 mesi',a:'Rivalutazione ecografica pelvica (FNPO, volumi ovarici). Screening DM2 (OGTT). Valutazione metabolica annuale secondo ESHRE 2023.'},
+    ...(isAdo?[{t:'A 18 anni',a:'Rivalutazione diagnostica completa con criteri adulti. La diagnosi di PCOS in adolescenza è provvisoria — rivalutare a maturazione completa dell\'asse HPO.'}]:[]),
+    ...(des?[{t:'A breve',a:'Consulenza procreativa: valutare induzione ovulazione (letrozolo). Monitoraggio ecografico e ormonale del ciclo. PMA se indicato.'}]:[])
+  ];
+  document.getElementById('fu-container').innerHTML=items.map(i=>`<div class="fu-item"><div class="fu-t">⏱ ${i.t}</div><div class="fu-a">${i.a}</div></div>`).join('');
+}
+
+/* ======================================================
+   GENERAZIONE DOCUMENTI AI
+   ====================================================== */
+
+const DOC_DEFS = {
+  paz: {
+    cnt:'cnt-paz', tab:'tab-paz', st:'st-paz',
+    lbl:'Lettera Paziente',
+    tipo:'lettera per la paziente',
+    stile:'tono empatico, linguaggio semplice ma esaustivo, usa "lei". Struttura: apertura cordiale, spiegazione diagnosi in termini comprensibili, significato per la salute, terapia proposta spiegata chiaramente, indicazioni pratiche quotidiane, prossimi passi, messaggio finale incoraggiante. Firma in fondo.'
+  },
+  coll: {
+    cnt:'cnt-coll', tab:'tab-coll', st:'st-coll',
+    lbl:'Lettera Collega',
+    tipo:'lettera di consulenza per il medico curante o collega specialista',
+    stile:'tecnico e strutturato con sezioni: Motivo della consulenza, Anamnesi ed EO rilevante, Dati laboratorio, Ecografia pelvica, Diagnosi differenziale, Diagnosi (fenotipo PCOS secondo Rotterdam 2003/2023), Piano terapeutico, Follow-up proposto. Cita linee guida pertinenti.'
+  },
+  esami: {
+    cnt:'cnt-esami', tab:'tab-esami', st:'st-esami',
+    lbl:'Richiesta Esami',
+    tipo:'richiesta di esami diagnostici',
+    stile:'formato lista chiara separata in I Livello e II Livello (condizionale). Per ogni esame: nome, motivazione clinica sintetica, eventuali istruzioni per il paziente o per il laboratorio.'
+  },
+  terp: {
+    cnt:'cnt-terp', tab:'tab-terp', st:'st-terp',
+    lbl:'Piano Terapeutico',
+    tipo:'piano terapeutico dettagliato',
+    stile:'strutturato in: 1) Modifica stile di vita (esercizio fisico, dieta, integratori con dosi), 2) Terapia farmacologica (nomi, dosi, posologia, durata, monitoraggio), 3) Piano di follow-up con scadenze, 4) Indicazioni pratiche per la paziente.'
+  }
+};
+
+async function generateOne(key) {
+  if (!apiEP) { alert('Configura prima l\'endpoint API (⚙️ Config API)'); openM('m-cfg'); return; }
+  const d = DOC_DEFS[key];
+  const btn = document.querySelector(`button[onclick="generateOne('${key}')"]`);
+  // Passa al tab corrispondente
+  const tabEl = document.getElementById(d.tab);
+  if (tabEl) { showTabById(d.tab); }
+  // Stato loading
+  setStatus(d.st, 'working', '⏳ Generazione in corso…');
+  if (btn) { btn.disabled=true; btn.textContent='⏳'; }
+  setLoading(d.cnt);
+  const ctx = buildCtx();
+  try {
+    const txt = await callClaude(ctx, d.tipo, d.stile);
+    document.getElementById(d.cnt).innerHTML = `<div style="white-space:pre-wrap;font-family:var(--font-body);line-height:1.72">${txt}</div>`;
+    setStatus(d.st, 'ok', '✓ Generato');
+    if (tabEl) tabEl.classList.add('done');
+  } catch(e) {
+    document.getElementById(d.cnt).innerHTML = `<div class="flag danger"><span class="flag-ico">❌</span><div class="flag-txt"><strong>Errore</strong> ${e.message}</div></div>`;
+    setStatus(d.st, 'err', '✗ Errore');
+  }
+  if (btn) { btn.disabled=false; btn.textContent='🔄 Rigenera'; }
+}
+
+async function generateDocs() {
+  if (!apiEP) { alert('Configura prima l\'endpoint API (⚙️ Config API)'); openM('m-cfg'); return; }
+  const btn = document.getElementById('btn-genera-tutti');
+  btn.disabled=true; btn.textContent='⏳ Generazione in corso…';
+  const ctx = buildCtx();
+  for (const key of ['paz','coll','esami','terp']) {
+    const d = DOC_DEFS[key];
+    setStatus(d.st, 'working', '⏳ In corso…');
+    setLoading(d.cnt);
+    try {
+      const txt = await callClaude(ctx, d.tipo, d.stile);
+      document.getElementById(d.cnt).innerHTML = `<div style="white-space:pre-wrap;font-family:var(--font-body);line-height:1.72">${txt}</div>`;
+      setStatus(d.st, 'ok', '✓ Generato');
+      const tabEl = document.getElementById(d.tab);
+      if (tabEl) tabEl.classList.add('done');
+    } catch(e) {
+      document.getElementById(d.cnt).innerHTML = `<div class="flag danger"><span class="flag-ico">❌</span><div class="flag-txt"><strong>Errore</strong> ${e.message}</div></div>`;
+      setStatus(d.st, 'err', '✗ Errore');
+    }
+  }
+  btn.disabled=false; btn.textContent='🔄 Rigenera tutti';
+}
+
+function setStatus(stId, cls, txt) {
+  const el = document.getElementById(stId);
+  if (!el) return;
+  el.className = 'doc-status ' + cls;
+  el.textContent = txt;
+}
+
+function setLoading(cnt) {
+  document.getElementById(cnt).innerHTML = `<div class="ai-spin-wrap"><div class="ai-spin"></div><div class="ai-spin-txt">Generazione AI in corso…</div></div>`;
+}
+
+function showTabById(tabId) {
+  // Trova il tab button e simula click
+  const btn = document.getElementById(tabId);
+  if (!btn) return;
+  // Trova l'out-doc associato
+  const docId = tabId.replace('tab-','out-');
+  document.querySelectorAll('.out-doc').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.out-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(docId)?.classList.add('active');
+  btn.classList.add('active');
+}
+
+async function callClaude(ctx,tipo,stile) {
+  const prompt=`Sei ANDRO·CONSULT, consulente esperto in iperandrogenismo e PCOS.
+Sulla base dei dati clinici forniti, genera: ${tipo}.
+STILE RICHIESTO: ${stile}
+
+DATI CLINICI:
+${ctx}
+
+Firma il documento con:
+Dr. Carlo Piscicelli — Specialista in Ostetricia e Ginecologia
+Data: ${new Date().toLocaleDateString('it-IT')}
+
+Rispondi SOLO con il documento richiesto, senza premesse né commenti aggiuntivi.`;
+
+  const r=await fetch(apiEP,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:prompt}]})
+  });
+  if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+  const d=await r.json();
+  return d.content?.map(c=>c.text||'').join('')||'Risposta non disponibile';
+}
+
+function buildCtx() {
+  const {ph,dx,c1,c2,c3,mfgTot,risk,isAdo}=diag;
+  const rL={low:'BASSO',medium:'MODERATO',high:'ELEVATO'};
+  const ddSum=ddList.map(d=>`${d.n}: ${ddSt[d.id]||'da escludere'}`).join('; ');
+  return `
+PAZIENTE:
+- Età: ${v('eta')} anni${isAdo?' [ADOLESCENTE]':''}
+- BMI: ${document.getElementById('bmi-v').textContent.replace(/<[^>]+>/g,'')||'ND'} kg/m²
+- Circonferenza vita: ${v('wc')||'ND'} cm
+- Etnia: ${v('etnia')||'ND'}
+- Desiderio riproduttivo: ${gR('desiderio')==='si'?'Sì':'No'}
+- Farmaci: ${v('farmaci')||'nessuno'}
+- Patologie: ${v('patologie')||'nessuna'}
+
+CICLO MESTRUALE:
+- Carattere: ${v('ciclo')||'ND'}
+- Durata media: ${v('ciclo-gg')||'ND'} gg
+
+SINTOMI ANDROGENICI:
+- Irsutismo soggettivo: ${v('irsutismo')||'ND'}
+- Acne: ${v('acne')||'ND'}
+- Alopecia: ${v('alopecia')||'ND'}
+- Acanthosis nigricans: ${v('acanthosis')||'ND'}
+
+ESAME OBIETTIVO:
+- Score mFG: ${mfgTot}/36 (${diag.clinA?'IPERANDROGENISMO CLINICO':'nella norma'})
+- Ludwig (alopecia): ${lwSc!==null?'Grado '+lwSc:'ND'}
+- Virilismo: ${gR('virilismo')||'ND'}
+
+ESAMI DI LABORATORIO:
+- Testosterone totale: ${v('l-testo')||'ND'} ${v('l-testo-u')||''}
+- SHBG: ${v('l-shbg')||'ND'} nmol/L
+- FAI (calcolato): ${document.getElementById('fai-v').textContent}
+- LH: ${v('l-lh')||'ND'} UI/L  |  FSH: ${v('l-fsh')||'ND'} UI/L  |  Ratio: ${document.getElementById('lhfsh-v').textContent}
+- Prolattina: ${v('l-prl')||'ND'} ng/mL
+- TSH: ${v('l-tsh')||'ND'} μUI/mL
+- Glicemia: ${v('l-glic')||'ND'} mg/dL  |  Insulinemia: ${v('l-ins')||'ND'} μUI/mL
+- HOMA-IR: ${document.getElementById('homa-v').textContent}
+- Colesterolo tot/HDL/LDL/TG: ${v('l-chol')||'ND'}/${v('l-hdl')||'ND'}/${v('l-ldl')||'ND'}/${v('l-tg')||'ND'} mg/dL
+- DHEA-S: ${v('l-dheas')||'ND'}  |  AMH: ${v('l-amh')||'ND'}
+- 17-OHP: ${v('l-17ohp')||'ND'} ng/mL
+- Cortisolo libero urinario: ${v('l-cort')||'ND'} μg/24h
+
+ECOGRAFIA PELVICA:
+- Eseguita: ${gR('eco-eseguita')||'ND'}  |  Via: ${gR('eco-via')||'ND'}
+- Ovaio dx: FNPO ${v('eco-dx-f')||'ND'}, Vol ${v('eco-dx-v')||'ND'} ml
+- Ovaio sx: FNPO ${v('eco-sx-f')||'ND'}, Vol ${v('eco-sx-v')||'ND'} ml
+- Endometrio: ${v('eco-endo')||'ND'} mm
+
+DIAGNOSI DIFFERENZIALE: ${ddSum}
+
+DIAGNOSI:
+${dx}
+${ph?`Fenotipo PCOS: ${ph}`:''}
+- Criterio 1 (oligo/anovulazione): ${c1?'POSITIVO':'NEGATIVO'}
+- Criterio 2 (iperandrogenismo): ${c2?'POSITIVO':'NEGATIVO'}
+- Criterio 3 (morfologia PCO): ${c3?'POSITIVO':'NEGATIVO'}
+- Rischio metabolico/CV: ${rL[risk]||'ND'}
+
+RIFERIMENTI: International PCOS Guideline 2023 (ESHRE/NHMRC/AE-PCOS Society); Criteri Rotterdam 2003/2023.
+  `.trim();
+}
+
+/* ======================================================
+   STAMPA / PDF
+   ====================================================== */
+function stampDoc(cntId, titolo) {
+  const html=document.getElementById(cntId).innerHTML;
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
+    <title>ANDRO·CONSULT — ${titolo}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>body{font-family:'Source Sans 3',sans-serif;font-size:12pt;line-height:1.65;max-width:700px;margin:36px auto;color:#1a2940}
+    h1{font-family:'Lora',serif;color:#2c5f8d;font-size:15pt;border-bottom:2px solid #2c5f8d;padding-bottom:7px}
+    .hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+    .logo{font-weight:700;font-size:10pt;color:#2c5f8d;letter-spacing:2px}
+    .ftr{margin-top:36px;padding-top:11px;border-top:1px solid #ccc;font-size:9pt;color:#888;display:flex;justify-content:space-between}
+    @media print{body{margin:16px}}</style></head><body>
+    <div class="hdr">
+      <div><div class="logo">GINOS · ANDRO·CONSULT</div><h1>${titolo}</h1></div>
+      <div style="text-align:right;font-size:10pt;color:#555">Data: ${new Date().toLocaleDateString('it-IT')}<br>Dr. Carlo Piscicelli<br>Specialista in Ostetricia e Ginecologia</div>
+    </div>
+    ${html}
+    <div class="ftr"><span>ANDRO·CONSULT · Suite GINOS · ginos-cdss.it</span><span>Generato con supporto AI · Uso clinico</span></div>
+    </body></html>`);
+  w.document.close();
+  setTimeout(()=>w.print(),600);
+}
+
+/* ======================================================
+   OUTPUT TABS
+   ====================================================== */
+function showTab(id, btn) {
+  document.querySelectorAll('.out-doc').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.out-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+  btn.classList.add('active');
+  // Ri-applica done sui tab già generati
+  Object.values(DOC_DEFS).forEach(d=>{
+    const tabEl=document.getElementById(d.tab);
+    if(tabEl&&document.getElementById(d.st)?.classList.contains('ok')) tabEl.classList.add('done');
+  });
+}
+
+/* ======================================================
+   SESSION JSON
+   ====================================================== */
+function getSession() {
+  return {
+    v:'1.1',at:new Date().toISOString(),tool:'ANDRO·CONSULT',
+    eta:v('eta'),peso:v('peso'),altezza:v('altezza'),wc:v('wc'),
+    etnia:v('etnia'),desiderio:gR('desiderio'),
+    ciclo:v('ciclo'),cicloGg:v('ciclo-gg'),menarca:v('menarca'),
+    irsutismo:v('irsutismo'),acne:v('acne'),alopecia:v('alopecia'),
+    seborrea:gR('seborrea'),famPcos:gR('fam-pcos'),famDm:gR('fam-dm'),
+    farmaci:v('farmaci'),patologie:v('patologie'),noteAnamnesi:v('note-anamnesi'),
+    mfgSc,lwSc,gagsSc,
+    acanthosis:v('acanthosis'),virilismo:gR('virilismo'),
+    paS:v('pa-s'),paD:v('pa-d'),
+    strie:gR('strie'),facies:gR('facies'),miopatia:gR('miopatia'),
+    lTesto:v('l-testo'),lTestoU:v('l-testo-u'),lShbg:v('l-shbg'),
+    lLh:v('l-lh'),lFsh:v('l-fsh'),lPrl:v('l-prl'),lTsh:v('l-tsh'),
+    lGlic:v('l-glic'),lIns:v('l-ins'),
+    lChol:v('l-chol'),lHdl:v('l-hdl'),lLdl:v('l-ldl'),lTg:v('l-tg'),
+    lDheas:v('l-dheas'),lAmh:v('l-amh'),l17ohp:v('l-17ohp'),
+    lAndrost:v('l-androst'),lCort:v('l-cort'),
+    lOgtt0:v('l-ogtt0'),lOgtt120:v('l-ogtt120'),
+    ecoEseguita:gR('eco-eseguita'),ecoVia:gR('eco-via'),
+    ecoDxF:v('eco-dx-f'),ecoDxV:v('eco-dx-v'),ecoDxD:v('eco-dx-d'),foDx:gR('fo-dx'),
+    ecoSxF:v('eco-sx-f'),ecoSxV:v('eco-sx-v'),ecoSxD:v('eco-sx-d'),foSx:gR('fo-sx'),
+    ecoEndo:v('eco-endo'),ecoUtero:v('eco-utero'),ecoNote:v('eco-note'),
+    ddSt,diag
+  };
+}
+
+function saveSession() {
+  const blob=new Blob([JSON.stringify(getSession(),null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=`andro-consult_${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url);
+  toast('Sessione salvata ✓');
+}
+
+function loadSession(e) {
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{try{restore(JSON.parse(ev.target.result));toast('Sessione caricata ✓');}catch{alert('File JSON non valido.');}};
+  r.readAsText(f);
+}
+
+function restore(d) {
+  const sv=(id,val)=>{const el=document.getElementById(id);if(el&&val!=null&&val!='')el.value=val;};
+  sv('eta',d.eta);sv('peso',d.peso);sv('altezza',d.altezza);sv('wc',d.wc);
+  sv('etnia',d.etnia);sv('ciclo',d.ciclo);sv('ciclo-gg',d.cicloGg);sv('menarca',d.menarca);
+  sv('irsutismo',d.irsutismo);sv('acne',d.acne);sv('alopecia',d.alopecia);
+  sv('farmaci',d.farmaci);sv('patologie',d.patologie);sv('note-anamnesi',d.noteAnamnesi);
+  sv('acanthosis',d.acanthosis);sv('pa-s',d.paS);sv('pa-d',d.paD);
+  sv('l-testo',d.lTesto);sv('l-testo-u',d.lTestoU);sv('l-shbg',d.lShbg);
+  sv('l-lh',d.lLh);sv('l-fsh',d.lFsh);sv('l-prl',d.lPrl);sv('l-tsh',d.lTsh);
+  sv('l-glic',d.lGlic);sv('l-ins',d.lIns);
+  sv('l-chol',d.lChol);sv('l-hdl',d.lHdl);sv('l-ldl',d.lLdl);sv('l-tg',d.lTg);
+  sv('l-dheas',d.lDheas);sv('l-amh',d.lAmh);sv('l-17ohp',d.l17ohp);
+  sv('l-androst',d.lAndrost);sv('l-cort',d.lCort);
+  sv('l-ogtt0',d.lOgtt0);sv('l-ogtt120',d.lOgtt120);
+  sv('eco-dx-f',d.ecoDxF);sv('eco-dx-v',d.ecoDxV);sv('eco-dx-d',d.ecoDxD);
+  sv('eco-sx-f',d.ecoSxF);sv('eco-sx-v',d.ecoSxV);sv('eco-sx-d',d.ecoSxD);
+  sv('eco-endo',d.ecoEndo);sv('eco-utero',d.ecoUtero);sv('eco-note',d.ecoNote);
+
+  if (d.mfgSc) { mfgSc=d.mfgSc; d.mfgSc.forEach((val,i)=>{const s=document.getElementById('msl-'+i);if(s){s.value=val;updMFG(i,val);}});}
+  if (d.lwSc!==null&&d.lwSc!==undefined) selLw(d.lwSc);
+  if (d.gagsSc) {
+    gagsSc=d.gagsSc;
+    Object.entries(gagsSc).forEach(([i,g])=>{
+      const td=document.querySelectorAll(`#gags-tbody tr`)[i];
+      if(td){const sels=td.querySelectorAll('select');if(sels[0])sels[0].value=g.d;if(sels[1])sels[1].value=g.s;updGAGS(i,'d',g.d);updGAGS(i,'s',g.s);}
+    });
+  }
+  if (d.ddSt) { ddSt=d.ddSt; Object.entries(ddSt).forEach(([id,val])=>{const s=document.getElementById('dds-'+id);if(s){s.value=val;updDD(id,val);}});}
+  if (d.ecoEseguita==='si') showEco(true);
+  // Restore radio pills
+  const radioMap={desiderio:d.desiderio,seborrea:d.seborrea,'fam-pcos':d.famPcos,'fam-dm':d.famDm,
+    virilismo:d.virilismo,strie:d.strie,facies:d.facies,miopatia:d.miopatia,
+    'eco-eseguita':d.ecoEseguita,'eco-via':d.ecoVia,'fo-dx':d.foDx,'fo-sx':d.foSx};
+  Object.entries(radioMap).forEach(([name,val])=>{
+    if(val){const inp=document.querySelector(`input[name="${name}"][value="${val}"]`);if(inp){inp.checked=true;inp.parentElement.classList.add('sel');}}
+  });
+  calcBMI();calcWC();calcFAI();calcHOMA();onPRL();onTSH();on17OHP();calcLHFSH();
+  onCiclo();onEta();
+  if (d.diag&&d.diag.ph) { diag=d.diag; renderDiag();renderTherapy();renderContra();renderFU(); }
+}
+
+/* ======================================================
+   MODALI
+   ====================================================== */
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.moverlay').forEach(o=>o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');}));
+
+/* ======================================================
+   INFO MODALI (contenuto)
+   ====================================================== */
+const INFO = {
+  bmi:{t:'Indice di Massa Corporea (BMI)',c:`<h4>Formula</h4><p>Peso (kg) / Altezza² (m²). Strumento di screening, non misura diretta di adiposità.</p><h4>Classificazione WHO</h4><ul><li>&lt;18.5 — Sottopeso</li><li>18.5–24.9 — Normopeso</li><li>25–29.9 — Sovrappeso</li><li>≥30 — Obesa</li></ul><h4>Nella PCOS</h4><p>Anche una riduzione del 5-10% del peso migliora significativamente l'iperandrogenismo, la regolarità mestruale e la fertilità.</p><p><em>Fonte: International PCOS Guideline 2023, ESHRE/NHMRC.</em></p>`},
+  wc:{t:'Circonferenza Vita',c:`<h4>Soglie (donne europee)</h4><ul><li>&lt;80 cm — Normale</li><li>80–87 cm — Rischio aumentato</li><li>≥88 cm — Rischio molto aumentato</li></ul><h4>Significato clinico</h4><p>Migliore indicatore di adiposità viscerale rispetto al BMI. Predice rischio metabolico e cardiovascolare indipendentemente dal BMI totale.</p><p><em>Fonte: IDF Metabolic Syndrome Criteria; ESHRE 2023.</em></p>`},
+  etnia:{t:'Etnia e soglie mFG',c:`<p>Le soglie per definire l'iperandrogenismo clinico con lo score mFG variano significativamente per etnia a causa di differenze nella densità dei follicoli piliferi androgeno-sensibili:</p><ul><li>Europee/Caucasiche: ≥6</li><li>Medio-orientali/Ispaniche: ≥4-6</li><li>Africane/Afro-americane: ≥6</li><li>Asiatiche: ≥3-4</li></ul><p><em>Fonte: AE-PCOS Society 2022; Azziz R et al. JCEM 2004.</em></p>`},
+  ciclo:{t:'Ciclo mestruale e Criterio Rotterdam 1',c:`<h4>Criterio Rotterdam 1 — Oligo/anovulazione</h4><p>È soddisfatto in presenza di: oligomenorrea (&gt;35 gg tra i cicli o &lt;9 cicli/anno) o amenorrea (&gt;90 gg). La presenza di mestruazioni regolari non esclude la PCOS (fenotipo C: ciclo ovulatorio con iperandrogenismo e morfologia PCO).</p><h4>Attenzione adolescenti</h4><p>Nei primi 2 anni dal menarca, l'irregolarità mestruale è fisiologica. Usare criteri più restrittivi (&lt;8 cicli/anno dopo 2 anni dal menarca).</p><p><em>Fonte: Rotterdam Criteria 2003; ESHRE/NHMRC 2023.</em></p>`},
+  irsutismo:{t:'Irsutismo nella PCOS',c:`<p>L'irsutismo (crescita di pelo terminale in sedi androgeno-sensibili) è la manifestazione più comune di iperandrogenismo clinico. La valutazione soggettiva va integrata con lo score mFG (Fase 2). Insorgenza rapida o progressiva di irsutismo severo deve far escludere tumore secernente.</p><p><em>Fonte: AE-PCOS Society; ESHRE 2023.</em></p>`},
+  acne:{t:'Acne nella PCOS',c:`<p>Acne in età adulta (post-adolescenziale), spesso a distribuzione mandibolare/mentale, suggerisce iperandrogenismo. Lo score GAGS (Fase 2) ne quantifica la severità. L'acne da sola non è criterio diagnostico PCOS ma contribuisce alla diagnosi di iperandrogenismo clinico.</p><p><em>Fonte: ESHRE 2023; Dréno B, Ann Dermatol Venereol 2010.</em></p>`},
+  alopecia:{t:'Alopecia Androgenetica Femminile',c:`<h4>Pattern femminile (Ludwig)</h4><p>Rarefazione capillare con distribuzione fronto-parietale mantenendo la linea frontale. Diverso dal pattern maschile. Si valuta con la scala di Ludwig (Fase 2). Contribuisce alla diagnosi di iperandrogenismo clinico quando presente con altri segni.</p><p><em>Fonte: Ludwig E. Br J Dermatol 1977; AE-PCOS Society 2022.</em></p>`},
+  mfg:{t:'Score di Ferriman-Gallwey modificato (mFG)',c:`<h4>9 siti valutati, grading 0-4 per sito (range totale 0-36)</h4><ul><li>Labbro superiore</li><li>Mento</li><li>Torace</li><li>Addome superiore</li><li>Addome inferiore/pubico</li><li>Coscia interna superiore</li><li>Coscia esterna</li><li>Braccio superiore (interno)</li><li>Braccio inferiore (avambraccio)</li></ul><h4>Soglie diagnostiche</h4><p>Europee/Caucasiche: ≥6; Asiatiche: ≥3; Medio-orientali: ≥4. Una singola soglia universale non è applicabile.</p><p><em>Fonte: Ferriman D, Gallwey JD. JCEM 1961; Hatch R et al. AJOG 1981; AE-PCOS Society 2022.</em></p>`},
+  ludwig:{t:'Scala di Ludwig — Alopecia Androgenetica Femminile',c:`<ul><li><strong>Assente:</strong> Capigliatura normale, nessun diradamento evidente</li><li><strong>Grado I:</strong> Lieve diradamento al vertex, con linea frontale conservata</li><li><strong>Grado II:</strong> Diradamento moderato fronto-parietale, visibile a distanza</li><li><strong>Grado III:</strong> Diradamento severo, chiazza frontale ampia con banda periferica residua</li></ul><p><em>Fonte: Ludwig E. Br J Dermatol 1977.</em></p>`},
+  gags:{t:'Global Acne Grading System (GAGS)',c:`<h4>Formula per regione</h4><p>Punteggio = fattore regionale × densità (0-3) × tipo lesione (0-4)</p><h4>Fattori regionali</h4><ul><li>Fronte: 2 · Guance: 2 · Naso: 1 · Mento: 1 · Tronco anteriore: 3</li></ul><h4>Interpretazione totale</h4><ul><li>1-18: Lieve · 19-30: Moderata · 31-38: Severa · >38: Molto severa</li></ul><p><em>Fonte: Doshi A, Zaheer A, Stiller MJ. Int J Dermatol 1997.</em></p>`},
+  acanthosis:{t:'Acanthosis Nigricans',c:`<p>Iperpigmentazione cutanea a placche con vellutamento nella nuca, ascelle, inguine e pliche cutanee. È il <strong>segno clinico di insulino-resistenza</strong> più specifico. La sua presenza rende molto probabile l'IR significativa e suggerisce il dosaggio di HOMA-IR e/o OGTT.</p><p><em>Fonte: Stuart CA et al. Arch Dermatol 1989; ESHRE 2023.</em></p>`},
+  virilismo:{t:'Virilismo — Red Flag',c:`<p>Il virilismo comprende: clitoromegalia, voce più grave, aumento massa muscolare, ipotrofia mammaria, calvizie frontale tipo maschile. Differente dall'irsutismo (solo presenza di pelo).</p><h4>Significato clinico</h4><p>La comparsa rapida o progressiva di virilismo richiede esclusione urgente di tumore ovarico o surrenalico secernente androgeni. Testosterone &gt;150 ng/dL + virilismo = emergenza diagnostica.</p><p><em>Fonte: Azziz R et al. JCEM 2004; ESE/ESPE 2022.</em></p>`},
+  cushing:{t:'Sindrome di Cushing — Screening',c:`<p>L'ipercortisolismo può causare iperandrogenismo secondario, oligo-amenorrea, IR, obesità centrale clinicamente indistinguibili dalla PCOS. Frequenza: ~0.5-1% degli iperandrogenismi.</p><h4>Screening clinico</h4><p>Tre o più segni tra: strie rubre >1 cm, ecchimosi facili, miopatia prossimale, facies lunare, gibbo del dorso. Test di screening: cortisolo libero urinario 24h o test di soppressione con desametasone 1 mg overnight.</p><p><em>Fonte: Nieman LK et al. JCEM 2008 CPG.</em></p>`},
+  testosterone:{t:'Testosterone Totale',c:`<h4>Metodica di riferimento</h4><p>LC-MS/MS (cromatografia liquida – spettrometria di massa), superiore ai metodi immunometrici specie per valori bassi nella donna.</p><h4>Valori di riferimento (donna adulta)</h4><ul><li>Normale: 15–70 ng/dL (0.5–2.4 nmol/L)</li><li>Borderline elevato: 70–80 ng/dL</li><li>Elevato (iperandrogenismo): &gt;80 ng/dL</li><li>RED FLAG (sospetto tumore): &gt;150 ng/dL</li></ul><h4>Conversione</h4><p>1 ng/dL = 0.03467 nmol/L · 1 nmol/L = 28.8 ng/dL</p><p><em>Fonte: AE-PCOS Society 2022; Endocrine Society CPG 2018.</em></p>`},
+  shbg:{t:'SHBG — Sex Hormone Binding Globulin',c:`<p>Proteina di trasporto degli steroidi sessuali. <strong>Ridotta in insulino-resistenza</strong> (insulina ne sopprime la produzione epatica), aumento di peso, ipotiroidismo.</p><h4>Valori di riferimento (donna)</h4><ul><li>Normale: 35–130 nmol/L (variabile per laboratorio)</li><li>Ridotta (&lt;35 nmol/L): suggerisce IR e iperandrogenismo relativo</li></ul><h4>Rilevanza nella PCOS</h4><p>SHBG ridotta amplifica gli effetti dell'iperandrogenismo aumentando il testosterone biodisponibile. Il FAI (calcolato su SHBG) è il miglior marcatore biochimico pratico.</p><p><em>Fonte: AE-PCOS Society 2022; ESHRE 2023.</em></p>`},
+  fai:{t:'Free Androgen Index (FAI)',c:`<h4>Formula</h4><p style="font-family:monospace;background:#f0f4f8;padding:7px 12px;border-radius:5px">FAI = (Testosterone [nmol/L] × 100) / SHBG [nmol/L]</p><h4>Valori di riferimento</h4><ul><li>&lt;3.5 — Normale</li><li>3.5–5 — Borderline</li><li>&gt;5 — Iperandrogenismo biochimico</li></ul><p>Indicatore indiretto del testosterone libero biodisponibile. Riflette sia l'eventuale eccesso di testosterone sia la riduzione di SHBG (tipica di IR).</p><p><em>Fonte: AE-PCOS Society 2022; Endocrine Society 2018.</em></p>`},
+  lhfsh:{t:'LH, FSH e Ratio LH/FSH',c:`<p>In PCOS classica: LH elevato (pulsatilità GnRH aumentata) con FSH relativamente normale. Ratio LH/FSH &gt;2 è caratteristica ma non criterio diagnostico (presente nel 40-60% delle pazienti PCOS).</p><h4>Interpretazione</h4><ul><li>Ratio &gt;2 (o 3): suggerisce PCOS classica</li><li>FSH elevato (&gt;10 UI/L): esclude PCOS, sospettare POI</li><li>Dosare in fase follicolare precoce (gg 2-5)</li></ul><p><em>Fonte: Rotterdam Consensus 2003; ESHRE 2023.</em></p>`},
+  prolattina:{t:'Prolattina',c:`<p>PRL elevata causa oligo-amenorrea per inibizione del GnRH, indipendente da PCOS. Va sempre esclusa nella diagnosi differenziale.</p><h4>Soglie (non gravida, non allattante)</h4><ul><li>&lt;25 ng/mL (500 mUI/L): normale</li><li>25-100 ng/mL: lievemente elevata (stress, farmaci)</li><li>&gt;100-200 ng/mL: sospetto micro/macroprolattinoma → RMN ipofisi</li></ul><h4>Cause comuni di iperprolattinemia</h4><p>Farmaci (antipsicotici, metoclopramide, domperidone, SSRI), prolattinoma, ipotiroidismo, stress, prelievo post-coitale.</p><p><em>Fonte: Melmed S et al. Endocr Rev 2011; ESHRE 2023.</em></p>`},
+  tsh:{t:'TSH — Ormone Tireostimolante',c:`<h4>Valori di riferimento</h4><ul><li>0.4–4.5 μUI/mL — Normale (range laboratorio-specifico)</li><li>&gt;4.5 μUI/mL — Ipotiroidismo (manifesto o subclinico)</li><li>&lt;0.4 μUI/mL — Ipertiroidismo</li></ul><h4>Nella PCOS</h4><p>L'ipotiroidismo riduce la SHBG epatica (↑testosterone libero), può causare oligo-amenorrea e peggiorare l'acne. È causa frequente e facilmente correggibile. Va sempre escluso nella diagnosi differenziale.</p><p><em>Fonte: Garber JR et al. Thyroid 2012; ESHRE 2023.</em></p>`},
+  glicemia:{t:'Glicemia a Digiuno',c:`<h4>Classificazione ADA 2024</h4><ul><li>&lt;100 mg/dL — Normale</li><li>100–125 mg/dL — Pre-diabete (alterata glicemia a digiuno)</li><li>≥126 mg/dL — Diabete mellito tipo 2</li></ul><h4>Nella PCOS</h4><p>Raccomandato screening glicemico a ogni prima visita PCOS + follow-up annuale (ogni 3 anni se normo-metabolica; annuale se fattori di rischio). Preferire OGTT 75g per diagnosi completa.</p><p><em>Fonte: ADA Standards of Care 2024; ESHRE 2023.</em></p>`},
+  insulina:{t:'Insulinemia Basale e HOMA-IR',c:`<p>L'insulinemia basale a digiuno, associata alla glicemia, permette il calcolo dello <strong>HOMA-IR</strong>: marcatore pratico di insulino-resistenza.</p><h4>Valori di riferimento insulina</h4><ul><li>&lt;10-15 μUI/mL a digiuno: normale</li><li>&gt;20 μUI/mL: suggerisce IR significativa</li></ul><p>I valori variano per metodica laboratoristica. Privilegiare HOMA-IR calcolato come integrazione.</p><p><em>Fonte: Matthews DR et al. Diabetologia 1985.</em></p>`},
+  homa:{t:'HOMA-IR',c:`<h4>Formula</h4><p style="font-family:monospace;background:#f0f4f8;padding:7px 12px;border-radius:5px">HOMA-IR = (Glicemia [mg/dL] × Insulina [μUI/mL]) / 405</p><h4>Interpretazione</h4><ul><li>&lt;2.0 — Sensibilità insulinica normale</li><li>2.0–2.5 — Borderline (monitorare)</li><li>&gt;2.5 — Insulino-resistenza significativa → considerare metformina</li><li>&gt;3.5 — IR marcata</li></ul><h4>Rilevanza PCOS</h4><p>Fino al 70-80% delle donne PCOS ha IR. HOMA-IR ≥2.5 è indicazione a metformina e/o inositolo, indipendentemente dal BMI.</p><p><em>Fonte: Matthews DR et al. Diabetologia 1985; ESHRE 2023.</em></p>`},
+  dheas:{t:'DHEA-S (Deidroepiandrosterone solfato)',c:`<p>Androgeno prodotto quasi esclusivamente dal surrene. Utile per differenziare l'origine dell'iperandrogenismo: surrenalica vs ovarica.</p><h4>Valori di riferimento (donna adulta)</h4><ul><li>Normale: 35–430 μg/dL (dipende dall'età)</li><li>Molto elevato (&gt;700 μg/dL): sospetto tumore surrenalico → TC surreni urgente</li></ul><p><em>Fonte: ESE/ESPE 2022; Azziz R et al. JCEM 2004.</em></p>`},
+  amh:{t:'AMH — Ormone Anti-Mülleriano',c:`<p>Prodotto dalle cellule della granulosa dei follicoli antrali e preantrali. Proporzionale al numero di follicoli.</p><h4>Nella PCOS</h4><ul><li>AMH tipicamente elevato in PCOS: &gt;4-5 ng/mL (spesso 2-3 volte la norma)</li><li>Proposto come alternativa o complemento alla conta follicolare ecografica (FNPO)</li><li>Non ancora criterio diagnostico formale per PCOS (in revisione nelle prossime LG)</li></ul><p><em>Fonte: Dewailly D et al. Hum Reprod Update 2014; ESHRE 2023.</em></p>`},
+  '17ohp':{t:'17-OHP (17-Idrossiprogesterone)',c:`<h4>Utilizzo</h4><p>Screening per iperplasia surrenalica congenita non classica (CAH-NC) da deficit 21-idrossilasi. <strong>Dosare in fase follicolare precoce (gg 2-5).</strong></p><h4>Interpretazione</h4><ul><li>&lt;2 ng/mL — Normale (esclude CAH-NC nella maggioranza dei casi)</li><li>2–10 ng/mL — Borderline → test di stimolo con ACTH 250 μg</li><li>&gt;10 ng/mL — CAH-NC probabile → consulenza endocrinologica + genetica (CYP21A2)</li></ul><p><em>Fonte: Speiser PW et al. Endocr Rev 2010; ESHRE 2023.</em></p>`},
+  cortisolo:{t:'Cortisolo Libero Urinario — Screening Cushing',c:`<h4>Test di I livello per Cushing</h4><p>Raccolta urine 24h. Valore normale generalmente &lt;100-150 μg/24h (dipende dal laboratorio). Sensibilità ~80-90% per Cushing manifesto.</p><h4>Alternativa</h4><p>Test di soppressione con desametasone 1 mg overnight: somministrare 1 mg dexametasone ore 23, dosare cortisolo sierico alle 8 AM. Soppressione normale: &lt;1.8 μg/dL.</p><p><em>Fonte: Nieman LK et al. JCEM 2008.</em></p>`},
+  ogtt:{t:'OGTT 75g — Curva da Carico Glucosio',c:`<h4>Indicazioni nella PCOS</h4><ul><li>HOMA-IR &gt;2.5</li><li>BMI &gt;25 + fattori di rischio aggiuntivi</li><li>Familiarità DM2</li><li>Pre-diabete da glicemia a digiuno</li></ul><h4>Interpretazione (ADA 2024)</h4><ul><li>T120 &lt;140 mg/dL — Normale</li><li>T120 140–199 mg/dL — IGT (pre-diabete)</li><li>T120 ≥200 mg/dL — DM2</li></ul><p><em>Fonte: ADA Standards of Care 2024; ESHRE 2023 (screening DM2 raccomandato in ogni donna PCOS).</em></p>`},
+  ecografia:{t:'Ecografia Pelvica nella PCOS',c:`<h4>Criteri morfologici ESHRE/NHMRC 2023</h4><p>PCO morphology = presenza in almeno un ovaio di:</p><ul><li><strong>FNPO ≥20</strong> follicoli di 2-9 mm per ovaio (intero ovaio)</li><li>O <strong>Volume ≥10 ml</strong> (formula ellissoide: 0.523 × L × W × H)</li></ul><p>In assenza di follicolo dominante, cisti o corpo luteo.</p><h4>Evoluzione criteri</h4><p>I vecchi criteri ESHRE/ASRM 2003 prevedevano soglia di 12 follicoli. La revisione 2023 ha alzato a 20 follicoli per tener conto della migliore risoluzione delle sonde attuali (≥8 MHz).</p><h4>Limitazioni</h4><p>Con sonda transaddominale, usare solo volume ovarico (FNPO non affidabile). In adolescenti, PCO morphology da sola non è sufficiente per diagnosi.</p><p><em>Fonte: ESHRE/NHMRC 2023; Dewailly D et al. Hum Reprod Update 2019.</em></p>`},
+  fnpo:{t:'FNPO — Follicle Number Per Ovary',c:`<p>Conta del numero totale di follicoli di 2-9 mm nell'intero volume ovarico, ottenuta con tecnica 2D o 3D su sonda transvaginale ad alta frequenza (≥8 MHz). Si sommano i follicoli di entrambi i piani di scansione.</p><h4>Soglia 2023</h4><p>≥20 follicoli per ovaio (in assenza di follicolo dominante) = criterio PCO morphology soddisfatto. Preferire conta 3D (più riproducibile) quando disponibile.</p><p><em>Fonte: ESHRE/NHMRC 2023 Guideline.</em></p>`},
+  rischio:{t:'Rischio Metabolico e Cardiovascolare — PCOS',c:`<h4>Rischi a lungo termine (ESHRE 2023)</h4><ul><li>DM2: rischio aumentato di 2.8–4.8× rispetto a donne senza PCOS</li><li>Sindrome metabolica: 33–47% delle pazienti PCOS</li><li>Ipertensione arteriosa, dislipidemia aterogenica</li><li>Rischio CV aumentato a lungo termine, specialmente fenotipo A/B</li></ul><h4>Fattori aggravanti</h4><ul><li>Obesità e obesità viscerale (WC ≥80 cm)</li><li>HOMA-IR ≥2.5</li><li>Fenotipo A o B</li><li>Familiarità DM2 o malattia CV</li></ul><h4>Screening raccomandato</h4><p>OGTT 75g ogni 1-3 anni; profilo lipidico annuale; PA e BMI ad ogni visita.</p><p><em>Fonte: International PCOS Guideline 2023.</em></p>`},
+  contraccezione:{t:'Contraccezione nella PCOS',c:`<h4>COC nella PCOS</h4><p>I COC sono il trattamento farmacologico di prima linea nelle donne PCOS non desideranti gravidanza: aumentano la SHBG (↓testosterone libero), migliorano acne e irsutismo, normalizzano il ciclo.</p><h4>Scelta del progestinico</h4><ul><li><strong>Ciproterone acetato (CPA):</strong> massima potenza anti-androgenica. Maggiore rischio trombotico (WHO cat. 3).</li><li><strong>Drospirenone:</strong> derivato spironolattone, anti-androgenico, anti-mineralcorticoide lieve.</li><li><strong>Clormadinone:</strong> anti-androgenico, profilo metabolico neutro.</li></ul><h4>Controindicazioni COC</h4><p>TEV pregressa, emicrania con aura, PA non controllata, età >35 + fumo, malattie CV, epatopatia attiva.</p><p><em>Fonte: WHO MEC 2015; ESHRE 2023.</em></p>`}
+};
+
+function openInfo(key) {
+  if (key.startsWith('dd_')) {
+    const id=key.replace('dd_',''), dd=ddList.find(d=>d.id===id);
+    if(dd){set('info-t',dd.n);set('info-b',`<p>${dd.d}</p><h4>Work-up diagnostico</h4><p>${dd.e}</p>`);openM('m-info');}
+    return;
+  }
+  const c=INFO[key];
+  if(c){set('info-t',c.t);set('info-b',c.c);openM('m-info');}
+}
+
+/* ======================================================
+   CONFIG / ENDPOINT
+   ====================================================== */
+function saveEP() {
+  const val=(document.getElementById('api-ep')?.value||document.getElementById('api-banner')?.value||'').trim();
+  if(val){apiEP=val;localStorage.setItem('andro_api_ep',val);document.getElementById('cfg-banner').style.display='none';closeM('m-cfg');toast('Endpoint API salvato ✓');}
+}
+
+/* ======================================================
+   RESET
+   ====================================================== */
+function doReset() {
+  if(!confirm('Resettare tutti i dati della sessione?'))return;
+  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(e=>e.value='');
+  document.querySelectorAll('select').forEach(e=>e.selectedIndex=0);
+  document.querySelectorAll('.rpill').forEach(e=>e.classList.remove('sel'));
+  mfgSc=[0,0,0,0,0,0,0,0,0];lwSc=null;gagsSc={};ddSt={};diag={};
+  buildMFG();buildGAGS();buildDD();
+  ['flag-ado','ciclo-flag','flag-ado','virilismo-flag','cushing-flag','pco-flag','bmi-box','eco-form'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none';});
+  document.getElementById('out-section').style.display='none';
+  goTo(1);
+}
+
+/* ======================================================
+   UTILS
+   ====================================================== */
+function v(id){const e=document.getElementById(id);return e?e.value:'';}
+function set(id,html){const e=document.getElementById(id);if(e)e.innerHTML=html;}
+function setAC(id,cls,txt){const e=document.getElementById(id);if(e){e.className='ci '+cls;e.textContent=txt;}}
+function toast(msg){const t=document.createElement('div');t.style.cssText='position:fixed;bottom:22px;right:22px;background:var(--primary);color:#fff;padding:11px 20px;border-radius:8px;font-size:.86rem;font-weight:600;z-index:9999;box-shadow:0 4px 18px rgba(0,0,0,.2)';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2400);}
+</script>
+</body>
+</html>

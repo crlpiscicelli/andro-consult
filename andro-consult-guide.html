@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guida & Linee Guida — ANDRO·CONSULT | GINOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#2c5f8d;--secondary:#4a90d9;--accent:#e8554e;
+  --bg-a:#eef2f7;--bg-b:#dce7f3;--white:#fff;--surface:#f8fafc;
+  --text:#1a2940;--text-2:#4a5568;--text-m:#718096;
+  --border:#c8d8e8;--border-lt:#e2eaf3;--primary-lt:#e8f0f8;
+  --sh:0 4px 24px rgba(44,95,141,.10);
+  --r:16px;--r-sm:10px;--r-xs:6px;
+  --font-body:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+  --font-head:'Lora',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:17px;scroll-behavior:smooth}
+body{font-family:var(--font-body);background:linear-gradient(135deg,var(--bg-a),var(--bg-b));background-attachment:fixed;color:var(--text);min-height:100vh;line-height:1.7}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.28}
+h2{font-size:1.3rem;font-weight:600;color:var(--primary);margin:0}
+h3{font-size:1.05rem;font-weight:600;color:var(--primary)}
+h4{font-size:.92rem;font-weight:600;color:var(--text-2)}
+p{margin-bottom:.8rem}p:last-child{margin-bottom:0}
+a{color:var(--primary)}
+
+/* Header */
+.hdr{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:0;box-shadow:0 4px 20px rgba(44,95,141,.3)}
+.hdr-in{max-width:1100px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px}
+.badge{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.38);border-radius:8px;padding:5px 11px;font-size:.72rem;font-weight:700;letter-spacing:1.8px;color:#fff;text-transform:uppercase}
+.hdr-t h1{font-size:1.2rem;color:#fff;margin:0}
+.hdr-t .sub{font-size:.75rem;opacity:.82}
+.hdr-acts{margin-left:auto;display:flex;gap:8px}
+.btn-hdr{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.32);color:#fff;padding:6px 13px;border-radius:var(--r-xs);font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-body)}
+.btn-hdr:hover{background:rgba(255,255,255,.28)}
+
+/* Layout */
+.wrap{max-width:1100px;margin:0 auto;padding:32px 20px 64px;display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:start}
+@media(max-width:768px){.wrap{grid-template-columns:1fr}.toc-wrap{display:none}}
+
+/* TOC sidebar */
+.toc-wrap{position:sticky;top:24px}
+.toc{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px}
+.toc-ttl{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-m);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border-lt)}
+.toc a{display:block;font-size:.86rem;color:var(--text-2);text-decoration:none;padding:5px 0;border-bottom:1px solid var(--border-lt);transition:color .15s}
+.toc a:hover{color:var(--primary)}
+.toc a:last-child{border-bottom:none}
+.toc a.sub{padding-left:14px;font-size:.81rem;color:var(--text-m)}
+
+/* Content */
+.content{display:flex;flex-direction:column;gap:24px}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.card-hdr{background:linear-gradient(135deg,var(--primary),var(--secondary));padding:18px 26px;color:#fff;display:flex;align-items:center;gap:12px}
+.card-hdr .ico{font-size:1.7rem;opacity:.9}
+.card-hdr h2{color:#fff}
+.card-hdr .desc{font-size:.78rem;opacity:.84;margin-top:2px;font-family:var(--font-body)}
+.card-body{padding:26px}
+
+/* Info box */
+.ibox{background:linear-gradient(135deg,#e8f4ff,#cce7ff);border:2px solid var(--secondary);border-radius:var(--r-sm);padding:14px 18px;display:flex;gap:11px;margin-bottom:18px}
+.ibox-ico{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.ibox-txt{font-size:.88rem;line-height:1.55}
+.ibox-txt strong{display:block;margin-bottom:3px}
+
+/* Step guide */
+.step-list{display:flex;flex-direction:column;gap:14px}
+.step-item{display:flex;gap:14px;align-items:flex-start}
+.step-num{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;font-family:var(--font-head)}
+.step-cnt h4{margin-bottom:4px;font-size:.95rem}
+.step-cnt p{font-size:.88rem;color:var(--text-2);margin:0}
+
+/* LG Table */
+.lg-tbl{width:100%;border-collapse:collapse}
+.lg-tbl th{background:var(--primary-lt);color:var(--primary);padding:10px 14px;text-align:left;font-size:.82rem;font-weight:700;letter-spacing:.4px}
+.lg-tbl td{padding:10px 14px;border-bottom:1px solid var(--border-lt);font-size:.86rem;vertical-align:top;line-height:1.5}
+.lg-tbl tr:last-child td{border-bottom:none}
+.lg-tbl tr:hover td{background:var(--surface)}
+.lg-tbl a{font-size:.8rem;color:var(--secondary)}
+.lg-badge{display:inline-block;padding:2px 9px;border-radius:50px;font-size:.73rem;font-weight:700}
+.lg-badge.gold{background:#fff3cd;color:#856404}
+.lg-badge.ref{background:#d4edda;color:#155724}
+.lg-badge.supp{background:#e2e8f0;color:#4a5568}
+
+/* Algorithm box */
+.algo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.algo-crit{background:var(--surface);border:2px solid var(--border);border-radius:var(--r-sm);padding:16px}
+.algo-crit.active{border-color:var(--primary);background:var(--primary-lt)}
+.algo-num{font-size:1.6rem;font-weight:800;color:var(--primary);font-family:var(--font-head)}
+.algo-lbl{font-size:.88rem;font-weight:700;color:var(--text);margin:6px 0 4px}
+.algo-sub{font-size:.8rem;color:var(--text-m);line-height:1.4}
+
+.phenotype-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.ph-card{border-radius:var(--r-sm);padding:14px;text-align:center;border:2px solid}
+.ph-card.A{border-color:#e74c3c;background:#fff5f5}
+.ph-card.B{border-color:#f39c12;background:#fffbf0}
+.ph-card.C{border-color:#27ae60;background:#f0faf5}
+.ph-card.D{border-color:#3498db;background:#e8f4ff}
+.ph-lbl{font-size:1.4rem;font-weight:800;font-family:var(--font-head)}
+.ph-lbl.A{color:#e74c3c}.ph-lbl.B{color:#f39c12}.ph-lbl.C{color:#27ae60}.ph-lbl.D{color:#3498db}
+.ph-crit{font-size:.8rem;color:var(--text-m);margin-top:4px}
+.ph-risk{font-size:.79rem;font-weight:700;margin-top:6px}
+
+/* Score table */
+.sc-tbl{width:100%;border-collapse:collapse;margin-top:10px}
+.sc-tbl th{background:var(--primary-lt);color:var(--primary);padding:8px 12px;text-align:left;font-size:.8rem;font-weight:700}
+.sc-tbl td{padding:8px 12px;border-bottom:1px solid var(--border-lt);font-size:.84rem}
+.sc-tbl tr:last-child td{border-bottom:none}
+
+/* Disclaimer */
+.disclaimer{background:linear-gradient(135deg,#fff8e1,#ffeaa0);border:2px solid #f39c12;border-radius:var(--r-sm);padding:16px 20px;font-size:.87rem;line-height:1.55}
+.disclaimer strong{display:block;margin-bottom:5px;font-size:.93rem}
+
+/* Footer */
+.site-footer{background:#f8f9fa;border-top:3px solid var(--primary);padding:18px 22px;font-size:.8rem;color:var(--text-m);text-align:center}
+.site-footer a{color:var(--primary);font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <span class="badge">GINOS</span>
+    <div class="hdr-t" style="flex:1">
+      <h1>Guida &amp; Linee Guida — ANDRO·CONSULT</h1>
+      <div class="sub">Dr. Carlo Piscicelli · Suite GINOS · ginos-cdss.it</div>
+    </div>
+    <div class="hdr-acts">
+      <a href="andro-consult.html" class="btn-hdr">← Torna all'App</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- SIDEBAR TOC -->
+  <div class="toc-wrap">
+    <div class="toc">
+      <div class="toc-ttl">Indice</div>
+      <a href="#scopo">🎯 Scopo del tool</a>
+      <a href="#istruzioni">📋 Istruzioni d'uso</a>
+      <a class="sub" href="#fase1">Fase 1 — Anamnesi</a>
+      <a class="sub" href="#fase2">Fase 2 — EO &amp; Score</a>
+      <a class="sub" href="#fase3">Fase 3 — Laboratorio</a>
+      <a class="sub" href="#fase4">Fase 4 — Ecografia</a>
+      <a class="sub" href="#fase5">Fase 5 — DD</a>
+      <a class="sub" href="#fase6">Fase 6 — Sintesi</a>
+      <a href="#algoritmo">🔬 Algoritmo Rotterdam</a>
+      <a href="#fenotipi">🧬 Fenotipi PCOS</a>
+      <a href="#scores">📊 Score clinici</a>
+      <a href="#lg">📚 Linee Guida</a>
+      <a href="#disclaimer">⚠️ Disclaimer</a>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- SCOPO -->
+    <div class="card" id="scopo">
+      <div class="card-hdr"><span class="ico">🎯</span>
+        <div><h2>Scopo del Tool</h2><div class="desc">Cosa fa ANDRO·CONSULT e a chi è destinato</div></div>
+      </div>
+      <div class="card-body">
+        <div class="ibox">
+          <span class="ibox-ico">ℹ️</span>
+          <div class="ibox-txt"><strong>Sistema di Supporto Decisionale Clinico (CDSS)</strong>
+          ANDRO·CONSULT è uno strumento di supporto al clinico per la valutazione strutturata dell'iperandrogenismo femminile e della Sindrome dell'Ovaio Policistico (PCOS). Non sostituisce il giudizio clinico del medico.</div>
+        </div>
+        <p>ANDRO·CONSULT guida il clinico attraverso un percorso diagnostico in 6 fasi basato sull'<strong>International PCOS Guideline 2023</strong> (ESHRE/NHMRC/AE-PCOS Society) e i <strong>Criteri di Rotterdam 2003/2023</strong>, assistendo in:</p>
+        <ul style="margin:10px 0 12px 18px;font-size:.92rem;line-height:1.7">
+          <li>Raccolta strutturata dei dati clinici, laboratoristici ed ecografici</li>
+          <li>Calcolo automatico dei principali score clinici (mFG, GAGS, Ludwig, BMI, HOMA-IR, FAI)</li>
+          <li>Fenotipizzazione PCOS secondo i criteri di Rotterdam (fenotipi A-D)</li>
+          <li>Diagnosi differenziale strutturata con auto-flag basati sui dati inseriti</li>
+          <li>Stratificazione del rischio metabolico e cardiovascolare</li>
+          <li>Supporto alla scelta terapeutica (stile di vita, farmaci, contraccezione)</li>
+          <li>Generazione AI di 4 documenti clinici personalizzati (lettera paziente, consulenza, esami, terapia)</li>
+          <li>Salvataggio sessione JSON per follow-up e controllo esami</li>
+        </ul>
+        <p><strong>Destinatari:</strong> Specialisti in Ostetricia e Ginecologia, Ginecologi, Endocrinologi, Medici di Medicina Generale.</p>
+      </div>
+    </div>
+
+    <!-- ISTRUZIONI -->
+    <div class="card" id="istruzioni">
+      <div class="card-hdr"><span class="ico">📋</span>
+        <div><h2>Istruzioni d'Uso</h2><div class="desc">Guida passo-passo alle 6 fasi del percorso</div></div>
+      </div>
+      <div class="card-body">
+
+        <div class="ibox">
+          <span class="ibox-ico">⚙️</span>
+          <div class="ibox-txt"><strong>Prima configurazione — Endpoint API</strong>
+          Per la generazione AI dei documenti clinici è necessario configurare l'URL del proxy Vercel (⚙️ Config API in header). Il proxy gestisce in sicurezza le chiamate all'API Claude senza esporre la chiave API nel frontend. Compatibile con il proxy serverless di rUTI·CONSULT.</div>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item" id="fase1">
+            <div class="step-num">1</div>
+            <div class="step-cnt">
+              <h4>Anamnesi</h4>
+              <p>Inserire: età (attiva automaticamente la <em>Modalità Adolescente</em> se &lt;18 anni con criteri più restrittivi), peso, altezza (→ BMI auto), circonferenza vita, etnia (influenza le soglie mFG), desiderio riproduttivo, carattere del ciclo mestruale (criterio Rotterdam 1), sintomi androgenici soggettivi, familiarità PCOS/DM2, farmaci e patologie note.</p>
+            </div>
+          </div>
+          <div class="step-item" id="fase2">
+            <div class="step-num">2</div>
+            <div class="step-cnt">
+              <h4>Esame Obiettivo — Score clinici</h4>
+              <p><strong>mFG Score:</strong> Spostare i cursori per i 9 siti corporei (0-4 ciascuno). Il totale si aggiorna in tempo reale con indicazione della soglia etnia-specifica per iperandrogenismo clinico. | <strong>Ludwig:</strong> Cliccare il grado corrispondente dall'immagine schematica. | <strong>GAGS:</strong> Selezionare densità (0-3) e tipo di lesione (0-4) per ogni regione. | Completare con acanthosis nigricans, PA e screening clinico per Cushing.</p>
+            </div>
+          </div>
+          <div class="step-item" id="fase3">
+            <div class="step-num">3</div>
+            <div class="step-cnt">
+              <h4>Esami di Laboratorio</h4>
+              <p>Panel I livello: inserire i valori disponibili. FAI, Ratio LH/FSH e HOMA-IR vengono calcolati automaticamente. I semafori colorati (N/~/↑) interpretano ogni parametro in tempo reale. Panel II livello (condizionale): inserire 17-OHP, androstenedione, cortisolo e OGTT se disponibili. I flag delle diagnosi differenziali nella Fase 5 vengono aggiornati automaticamente dai valori inseriti.</p>
+            </div>
+          </div>
+          <div class="step-item" id="fase4">
+            <div class="step-num">4</div>
+            <div class="step-cnt">
+              <h4>Ecografia Pelvica</h4>
+              <p>Inserire FNPO (≥20 = criterio PCO morphology) e volume ovarico (≥10 ml = criterio PCO morphology) per entrambi gli ovaie, specificando la presenza o assenza di follicolo dominante (se presente, il criterio PCO non è applicabile). Il sistema genera automaticamente il flag per il Criterio Rotterdam 3.</p>
+            </div>
+          </div>
+          <div class="step-item" id="fase5">
+            <div class="step-num">5</div>
+            <div class="step-cnt">
+              <h4>Diagnosi Differenziale Strutturata</h4>
+              <p>Per 6 condizioni principali (CAH-NC, Iperprolattinemia, Ipotiroidismo, Cushing, Tumore secernente, IAH) il sistema genera auto-flag basati sui dati inseriti. Per ogni condizione: impostare lo stato (<em>da escludere / esclusa / sospettata</em>). Una condizione "sospettata" influenza l'algoritmo diagnostico finale. Cliccare il bottone (i) per dettagli sulla DD e il work-up diagnostico.</p>
+            </div>
+          </div>
+          <div class="step-item" id="fase6">
+            <div class="step-num">6</div>
+            <div class="step-cnt">
+              <h4>Sintesi &amp; Terapia</h4>
+              <p>L'algoritmo Rotterdam calcola automaticamente i 3 criteri, assegna il fenotipo (A-D) e stratifica il rischio metabolico/CV. Il piano terapeutico è adattato al fenotipo e ai dati clinici. Il piano di follow-up propone scadenze personalizzate. Cliccare <em>Genera Documenti AI</em> per produrre i 4 documenti clinici. Salvare la sessione JSON per i controlli successivi.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ibox" style="margin-top:18px">
+          <span class="ibox-ico">💾</span>
+          <div class="ibox-txt"><strong>Sessione JSON — Continuità del follow-up</strong>
+          Al termine della prima visita, salvare la sessione come file JSON (💾 Sessione in header o Fase 6). Al controllo successivo, caricare il file JSON: il modulo si ripopola automaticamente con tutti i dati precedenti. I nuovi risultati degli esami possono essere aggiornati e l'algoritmo ricalcolato.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALGORITMO ROTTERDAM -->
+    <div class="card" id="algoritmo">
+      <div class="card-hdr"><span class="ico">🔬</span>
+        <div><h2>Algoritmo Diagnostico PCOS — Criteri di Rotterdam</h2><div class="desc">Logica dell'algoritmo implementata nel CDSS</div></div>
+      </div>
+      <div class="card-body">
+        <p>La diagnosi di PCOS richiede la presenza di <strong>almeno 2 dei 3 criteri di Rotterdam</strong> in assenza di condizioni che escludono la diagnosi (CAH, Cushing, tumore secernente, iperprolattinemia, ipotiroidismo).</p>
+
+        <div class="algo-grid">
+          <div class="algo-crit active">
+            <div class="algo-num">1</div>
+            <div class="algo-lbl">Oligo/anovulazione</div>
+            <div class="algo-sub">Oligomenorrea (&gt;35 gg o &lt;9 cicli/anno) o amenorrea (&gt;90 gg). Ciclo regolare NON esclude PCOS (fenotipo C).</div>
+          </div>
+          <div class="algo-crit active">
+            <div class="algo-num">2</div>
+            <div class="algo-lbl">Iperandrogenismo</div>
+            <div class="algo-sub"><strong>Clinico:</strong> mFG ≥ soglia etnia-specifica e/o acne adultità/alopecia androgenetica. <strong>Biochimico:</strong> testosterone totale elevato o FAI &gt;5.</div>
+          </div>
+          <div class="algo-crit active">
+            <div class="algo-num">3</div>
+            <div class="algo-lbl">Morfologia ovarica PCO</div>
+            <div class="algo-sub">FNPO ≥20 follicoli 2-9 mm per ovaio E/O volume ≥10 ml. In assenza di follicolo dominante o cisti. Solo sonda TV ad alta frequenza.</div>
+          </div>
+        </div>
+
+        <h3 style="margin:20px 0 10px">Adattamento per adolescenti (&lt;18 anni)</h3>
+        <div class="ibox">
+          <span class="ibox-ico">🔵</span>
+          <div class="ibox-txt"><strong>Criteri più restrittivi — ESHRE/NHMRC 2023</strong>
+          Nei primi 2 anni dal menarca l'irregolarità mestruale è fisiologica. Il Criterio 1 è soddisfatto solo se l'oligo-amenorrea persiste dopo 2 anni dal menarca. La morfologia ovarica PCO (criterio 3) da sola non è sufficiente. La diagnosi in adolescenza è <strong>provvisoria</strong> e va rivalutata a 18 anni.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FENOTIPI -->
+    <div class="card" id="fenotipi">
+      <div class="card-hdr"><span class="ico">🧬</span>
+        <div><h2>Fenotipi PCOS e Rischio Metabolico</h2><div class="desc">Le 4 presentazioni fenotipiche e il loro significato clinico</div></div>
+      </div>
+      <div class="card-body">
+        <div class="phenotype-grid">
+          <div class="ph-card A">
+            <div class="ph-lbl A">A</div>
+            <div class="ph-crit">Oligo-anov. + Iperandr. + PCO morphology</div>
+            <div class="ph-risk" style="color:#e74c3c">⚠️ Rischio metabolico maggiore</div>
+          </div>
+          <div class="ph-card B">
+            <div class="ph-lbl B">B</div>
+            <div class="ph-crit">Oligo-anovulazione + Iperandrogenismo</div>
+            <div class="ph-risk" style="color:#f39c12">⚠️ Rischio metabolico elevato</div>
+          </div>
+          <div class="ph-card C">
+            <div class="ph-lbl C">C</div>
+            <div class="ph-crit">Iperandrogenismo + PCO morphology (ciclo ovulatorio)</div>
+            <div class="ph-risk" style="color:#27ae60">✓ Rischio metabolico minore</div>
+          </div>
+          <div class="ph-card D">
+            <div class="ph-lbl D">D</div>
+            <div class="ph-crit">Oligo-anovulazione + PCO morphology (normoandrogenico)</div>
+            <div class="ph-risk" style="color:#3498db">✓ Rischio metabolico minore</div>
+          </div>
+        </div>
+
+        <h3 style="margin:20px 0 10px">Stratificazione del Rischio Metabolico/CV</h3>
+        <table class="sc-tbl">
+          <thead><tr><th>Livello</th><th>Criteri</th><th>Azioni consigliate</th></tr></thead>
+          <tbody>
+            <tr><td><span style="color:#27ae60;font-weight:700">🟢 Basso</span></td><td>BMI &lt;25 + HOMA-IR &lt;2 + Fenotipo C/D</td><td>Screening annuale. Stile di vita. Mio-inositolo.</td></tr>
+            <tr><td><span style="color:#f39c12;font-weight:700">🟡 Moderato</span></td><td>BMI 25-30 OR HOMA-IR 2-2.5 OR Fenotipo A/B</td><td>Intervento stile di vita intensivo. Follow-up metabolico 6 mesi. OGTT.</td></tr>
+            <tr><td><span style="color:#e74c3c;font-weight:700">🔴 Elevato</span></td><td>BMI ≥30 + HOMA-IR ≥2.5 + Fenotipo A/B</td><td>Consulenza diabetologica. Metformina. OGTT. Follow-up cardiovascolare.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCORE CLINICI -->
+    <div class="card" id="scores">
+      <div class="card-hdr"><span class="ico">📊</span>
+        <div><h2>Score Clinici Implementati</h2><div class="desc">Riferimenti per i principali score calcolati dal CDSS</div></div>
+      </div>
+      <div class="card-body">
+
+        <h3 style="margin-bottom:10px">Score di Ferriman-Gallwey modificato (mFG)</h3>
+        <p>9 siti corporei androgeno-sensibili, grading 0-4 per sito, range totale 0-36. Soglie per iperandrogenismo clinico:</p>
+        <table class="sc-tbl">
+          <thead><tr><th>Etnia</th><th>Soglia diagnostica</th></tr></thead>
+          <tbody>
+            <tr><td>Europea / Caucasica</td><td>≥6 punti</td></tr>
+            <tr><td>Medio-orientale / Ispanica</td><td>≥4 punti</td></tr>
+            <tr><td>Asiatica</td><td>≥3 punti</td></tr>
+            <tr><td>Africana / Afro-americana</td><td>≥6 punti</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;font-size:.82rem;color:var(--text-m)"><em>Fonte: Ferriman D, Gallwey JD. J Clin Endocrinol Metab 1961; Hatch R et al. Am J Obstet Gynecol 1981; AE-PCOS Society 2022.</em></p>
+
+        <h3 style="margin:20px 0 10px">Scala di Ludwig — Alopecia Androgenetica Femminile</h3>
+        <table class="sc-tbl">
+          <thead><tr><th>Grado</th><th>Descrizione</th></tr></thead>
+          <tbody>
+            <tr><td>Assente</td><td>Capigliatura normale, nessun diradamento</td></tr>
+            <tr><td>Grado I</td><td>Lieve diradamento al vertex, linea frontale conservata</td></tr>
+            <tr><td>Grado II</td><td>Diradamento moderato fronto-parietale visibile a distanza</td></tr>
+            <tr><td>Grado III</td><td>Diradamento severo, chiazza frontale ampia, banda periferica residua</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;font-size:.82rem;color:var(--text-m)"><em>Fonte: Ludwig E. Br J Dermatol 1977;97(3):247-254.</em></p>
+
+        <h3 style="margin:20px 0 10px">Global Acne Grading System (GAGS)</h3>
+        <p>Punteggio per regione = fattore regionale × densità (0-3) × tipo lesione (0-4).</p>
+        <table class="sc-tbl">
+          <thead><tr><th>GAGS totale</th><th>Severità</th></tr></thead>
+          <tbody>
+            <tr><td>1–18</td><td>Acne lieve</td></tr>
+            <tr><td>19–30</td><td>Acne moderata</td></tr>
+            <tr><td>31–38</td><td>Acne severa</td></tr>
+            <tr><td>≥39</td><td>Acne molto severa</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;font-size:.82rem;color:var(--text-m)"><em>Fonte: Doshi A, Zaheer A, Stiller MJ. Int J Dermatol 1997;36(6):416-418.</em></p>
+
+        <h3 style="margin:20px 0 10px">Calcolatori biochimici</h3>
+        <table class="sc-tbl">
+          <thead><tr><th>Indice</th><th>Formula</th><th>Soglia</th></tr></thead>
+          <tbody>
+            <tr><td><strong>FAI</strong></td><td>(Testosterone [nmol/L] × 100) / SHBG [nmol/L]</td><td>&gt;5 = iperandrogenismo biochimico</td></tr>
+            <tr><td><strong>HOMA-IR</strong></td><td>(Glicemia [mg/dL] × Insulina [μUI/mL]) / 405</td><td>&gt;2.5 = insulino-resistenza significativa</td></tr>
+            <tr><td><strong>Ratio LH/FSH</strong></td><td>LH / FSH</td><td>&gt;2 = caratteristico di PCOS classica</td></tr>
+            <tr><td><strong>BMI</strong></td><td>Peso [kg] / Altezza [m]²</td><td>≥25 sovrappeso; ≥30 obesa</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LINEE GUIDA -->
+    <div class="card" id="lg">
+      <div class="card-hdr"><span class="ico">📚</span>
+        <div><h2>Linee Guida e Documenti di Riferimento</h2><div class="desc">Documenti scientifici alla base dell'algoritmo ANDRO·CONSULT</div></div>
+      </div>
+      <div class="card-body">
+
+        <div class="ibox">
+          <span class="ibox-ico">⭐</span>
+          <div class="ibox-txt"><strong>Documento primario di riferimento</strong> L'International PCOS Guideline 2023 rappresenta il documento principale su cui è basato l'algoritmo di ANDRO·CONSULT, in quanto sintesi delle evidenze aggiornate e raccomandazioni di 40 organizzazioni internazionali.</div>
+        </div>
+
+        <table class="lg-tbl">
+          <thead><tr><th style="width:28%">Documento</th><th style="width:20%">Ente/Anno</th><th>Contenuto rilevante</th><th>Link</th></tr></thead>
+          <tbody>
+
+            <tr>
+              <td><strong>International Evidence-Based Guideline for the Assessment and Management of PCOS 2023</strong> <span class="lg-badge gold">Gold Standard</span></td>
+              <td>ESHRE / NHMRC / AE-PCOS Society · 2023</td>
+              <td>Documento primario. Criteri diagnostici aggiornati (FNPO ≥20), screening metabolico, terapia, sezione adolescenti, follow-up. 40 organizzazioni internazionali.</td>
+              <td><a href="https://www.monash.edu/medicine/mchri/pcos/guideline" target="_blank">monash.edu →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Revised Rotterdam ESHRE/ASRM-Sponsored PCOS Consensus Workshop Group</strong> <span class="lg-badge ref">Criteri Rotterdam</span></td>
+              <td>ESHRE / ASRM · 2004 (rivisto 2023)</td>
+              <td>Definizione dei 3 criteri diagnostici Rotterdam e dei 4 fenotipi PCOS (A-D). Ancora standard di riferimento internazionale.</td>
+              <td><a href="https://doi.org/10.1093/humrep/deh098" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Position Statement: Criteria for Defining Polycystic Ovary Syndrome as a Predominantly Androgen Excess Disorder</strong> <span class="lg-badge supp">AE-PCOS</span></td>
+              <td>AE-PCOS Society · 2022</td>
+              <td>Revisione dei criteri di iperandrogenismo biochimico (FAI, testosterone), valutazione laboratoristica. Score mFG e soglie etnia-specifiche.</td>
+              <td><a href="https://doi.org/10.1210/jc.2005-2041" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Diagnosis and Treatment of Polycystic Ovary Syndrome: An Endocrine Society Clinical Practice Guideline</strong> <span class="lg-badge supp">Endocrine Society</span></td>
+              <td>Endocrine Society · 2013 (aggiornata 2018)</td>
+              <td>Linee guida endocrinologiche per diagnosi e trattamento PCOS. Gestione della resistenza insulinica, screening DM2, terapia farmacologica.</td>
+              <td><a href="https://doi.org/10.1210/jc.2018-01174" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Evaluation and Treatment of Hirsutism in Premenopausal Women</strong></td>
+              <td>Endocrine Society · 2018 CPG</td>
+              <td>Linee guida per la valutazione dell'irsutismo, utilizzo del mFG, diagnosi differenziale, trattamento farmacologico anti-androgenico.</td>
+              <td><a href="https://doi.org/10.1210/jc.2018-01066" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Ultrasound Assessment of Polycystic Ovaries: Update on the PCOS Guideline</strong></td>
+              <td>Dewailly D et al. · Hum Reprod Update · 2019</td>
+              <td>Revisione criteri ecografici PCOS. Proposta innalzamento soglia FNPO a ≥20 (poi recepita nella Guideline 2023). Standardizzazione metodologica.</td>
+              <td><a href="https://doi.org/10.1093/humupd/dmz018" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Infertility Workup for the Women's Health Specialist</strong> — PCOS and Infertility</td>
+              <td>ESHRE / ASRM · 2023</td>
+              <td>Gestione infertilità in PCOS. Letrozolo come farmaco di prima linea per induzione ovulazione (superiore a clomifene).</td>
+              <td><a href="https://www.eshre.eu/guidelines" target="_blank">eshre.eu →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>ESE/ESPE Guidelines on the Management of Adrenal Incidentalomas</strong> + statement su iperandrogenismo</td>
+              <td>ESE / ESPE · 2022</td>
+              <td>Diagnosi differenziale iperandrogenismo: tumori surrenalici secernenti, CAH non classica nell'adulto. Algoritmi diagnostici.</td>
+              <td><a href="https://doi.org/10.1530/EJE-21-1264" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Diagnosis and Treatment of Congenital Adrenal Hyperplasia</strong></td>
+              <td>Speiser PW et al. · Endocr Rev · 2010</td>
+              <td>Linee guida per CAH non classica. Interpretazione 17-OHP, test di stimolo ACTH, genetica CYP21A2.</td>
+              <td><a href="https://doi.org/10.1210/er.2010-0004" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>ADA Standards of Medical Care in Diabetes 2024</strong></td>
+              <td>American Diabetes Association · 2024</td>
+              <td>Criteri diagnostici pre-diabete e DM2, indicazioni OGTT, target metabolici. Applicati al modulo di rischio metabolico PCOS.</td>
+              <td><a href="https://diabetesjournals.org/care/issue/47/Supplement_1" target="_blank">diabetesjournals.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>WHO Medical Eligibility Criteria for Contraceptive Use (MEC) 2015</strong></td>
+              <td>World Health Organization · 2015 (5ª ed.)</td>
+              <td>Criteri di eleggibilità per la contraccezione nelle diverse condizioni mediche, incluse PCOS, obesità, ipertensione. Applicato al modulo contraccettivo.</td>
+              <td><a href="https://www.who.int/publications/i/item/9789241549158" target="_blank">who.int →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Global Acne Grading System (GAGS)</strong></td>
+              <td>Doshi A et al. · Int J Dermatol · 1997</td>
+              <td>Score validato per la quantificazione della severità dell'acne per regione anatomica. Implementato nella Fase 2 di ANDRO·CONSULT.</td>
+              <td><a href="https://doi.org/10.1046/j.1365-4362.1997.00337.x" target="_blank">doi.org →</a></td>
+            </tr>
+
+            <tr>
+              <td><strong>Ferriman-Gallwey Score for Hirsutism</strong></td>
+              <td>Ferriman D, Gallwey JD · JCEM · 1961 · Rev. Hatch 1981</td>
+              <td>Score originale a 11 siti (poi ridotto a 9 nel modificato). Standard internazionale per valutazione quantitativa dell'irsutismo.</td>
+              <td><a href="https://doi.org/10.1210/jcem-21-11-1440" target="_blank">doi.org →</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="card" id="disclaimer">
+      <div class="card-hdr"><span class="ico">⚠️</span>
+        <div><h2>Disclaimer e Note Legali</h2><div class="desc">Limitazioni, uso appropriato e responsabilità</div></div>
+      </div>
+      <div class="card-body">
+        <div class="disclaimer">
+          <strong>⚕️ Strumento di Supporto Decisionale — Non sostituisce il giudizio clinico</strong>
+          ANDRO·CONSULT è un sistema di supporto decisionale clinico (CDSS) sviluppato per assistere il medico specialista nella valutazione strutturata dell'iperandrogenismo e della PCOS. Le raccomandazioni generate dal sistema sono basate sulle linee guida internazionali vigenti ma devono sempre essere integrate con il giudizio clinico del medico, la storia individuale della paziente e le caratteristiche del contesto clinico.
+        </div>
+
+        <div style="margin-top:16px;font-size:.9rem;line-height:1.7">
+          <h4 style="margin-bottom:8px">Limitazioni specifiche</h4>
+          <ul style="margin-left:18px;line-height:1.7">
+            <li>I documenti generati con AI (lettera paziente, consulenza, richiesta esami, piano terapeutico) rappresentano proposte di testo che devono essere verificate, personalizzate e approvate dal medico prima dell'utilizzo.</li>
+            <li>L'algoritmo diagnostico implementa i criteri di Rotterdam 2023 nelle casistiche standard. Situazioni cliniche inusuali o complesse possono richiedere valutazioni che esulano dall'ambito del CDSS.</li>
+            <li>Il CDSS non è validato come dispositivo medico ai sensi del Regolamento EU 2017/745 (MDR) né come sistema AI ad alto rischio ai sensi del Regolamento EU 2024/1689 (AI Act). L'uso rimane sotto la piena responsabilità del professionista medico.</li>
+            <li>I valori di riferimento degli esami di laboratorio possono variare tra i diversi laboratori. Consultare sempre i range di riferimento specifici del proprio laboratorio.</li>
+          </ul>
+          <h4 style="margin:14px 0 8px">Privacy e dati</h4>
+          <p>ANDRO·CONSULT è progettato per <strong>non raccogliere né trasmettere dati sensibili della paziente</strong>. Le sessioni JSON salvate localmente contengono dati clinici e restano sotto la responsabilità dell'utente. La generazione AI dei documenti trasmette al proxy API un contesto clinico anonimizzato; non vengono trasmessi nome, cognome o dati identificativi della paziente.</p>
+          <h4 style="margin:14px 0 8px">Autore</h4>
+          <p><strong>Dr. Carlo Piscicelli</strong> — Specialista in Ostetricia e Ginecologia<br>
+          Suite <strong>GINOS</strong> (GINecologia e OSTetricia / Gynecology Informatics Network for Operative Support)<br>
+          <a href="https://ginos-cdss.it" target="_blank">ginos-cdss.it</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /wrap -->
+
+<footer class="site-footer">
+  <strong>ANDRO·CONSULT</strong> · Suite GINOS · 
+  <strong>Dr. Carlo Piscicelli</strong> — Specialista in Ostetricia e Ginecologia · 
+  <a href="andro-consult.html">← Torna all'app</a> · 
+  <a href="https://ginos-cdss.it" target="_blank">ginos-cdss.it</a>
+</footer>
+
+</body>
+</html>
