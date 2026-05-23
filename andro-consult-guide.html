@@ -176,7 +176,9 @@ a{color:var(--primary)}
           <li>Diagnosi differenziale strutturata con auto-flag basati sui dati inseriti</li>
           <li>Stratificazione del rischio metabolico e cardiovascolare</li>
           <li>Supporto alla scelta terapeutica (stile di vita, farmaci, contraccezione)</li>
-          <li>Generazione AI di 4 documenti clinici personalizzati (lettera paziente, consulenza, esami, terapia)</li>
+          <li>Generazione AI di 4 documenti clinici personalizzati (lettera paziente, consulenza, esami, terapia) — modificabili direttamente nel browser con copia e stampa/PDF</li>
+          <li>Calcolatore integrato del volume ovarico (formula ellissoide, con guida alle misure)</li>
+          <li>Profilo medico configurabile — intestazione personalizzata su tutti i documenti</li>
           <li>Salvataggio sessione JSON per follow-up e controllo esami</li>
         </ul>
         <p><strong>Destinatari:</strong> Specialisti in Ostetricia e Ginecologia, Ginecologi, Endocrinologi, Medici di Medicina Generale.</p>
@@ -191,9 +193,9 @@ a{color:var(--primary)}
       <div class="card-body">
 
         <div class="ibox">
-          <span class="ibox-ico">⚙️</span>
-          <div class="ibox-txt"><strong>Prima configurazione — Endpoint API</strong>
-          Per la generazione AI dei documenti clinici è necessario configurare l'URL del proxy Vercel (⚙️ Config API in header). Il proxy gestisce in sicurezza le chiamate all'API Claude senza esporre la chiave API nel frontend. Compatibile con il proxy serverless di rUTI·CONSULT.</div>
+          <span class="ibox-ico">👤</span>
+          <div class="ibox-txt"><strong>Prima configurazione — Profilo Medico</strong>
+          Clicca <strong>👤 Profilo Medico</strong> in alto a destra per inserire nome, specializzazione, struttura e contatti. I dati vengono salvati nel browser e appariranno automaticamente nell'intestazione di tutti i documenti generati. Se non configurato, i documenti riportano uno spazio per firma e timbro manuale. La generazione AI dei documenti funziona senza configurazioni aggiuntive.</div>
         </div>
 
         <div class="step-list">
@@ -208,7 +210,7 @@ a{color:var(--primary)}
             <div class="step-num">2</div>
             <div class="step-cnt">
               <h4>Esame Obiettivo — Score clinici</h4>
-              <p><strong>mFG Score:</strong> Spostare i cursori per i 9 siti corporei (0-4 ciascuno). Il totale si aggiorna in tempo reale con indicazione della soglia etnia-specifica per iperandrogenismo clinico. | <strong>Ludwig:</strong> Cliccare il grado corrispondente dall'immagine schematica. | <strong>GAGS:</strong> Selezionare densità (0-3) e tipo di lesione (0-4) per ogni regione. | Completare con acanthosis nigricans, PA e screening clinico per Cushing.</p>
+              <p><strong>mFG Score:</strong> Spostare i cursori per i 9 siti corporei (0-4 ciascuno). Il totale si aggiorna in tempo reale con indicazione della soglia etnia-specifica per iperandrogenismo clinico. | <strong>Ludwig:</strong> Cliccare il grado corrispondente dall'immagine schematica. | <strong>GAGS:</strong> Per ogni regione anatomica, cliccare il bottone corrispondente al <em>tipo di lesione prevalente</em> (Assente / Comedoni / Papule / Pustole / Noduli-Cisti) e alla <em>densità</em> (0–3). Il bottone selezionato si evidenzia con il colore del tipo di lesione. Il totale si aggiorna in tempo reale. Clicca ⓘ per la guida completa allo score. | Completare con acanthosis nigricans, PA e screening clinico per Cushing.</p>
             </div>
           </div>
           <div class="step-item" id="fase3">
@@ -223,6 +225,7 @@ a{color:var(--primary)}
             <div class="step-cnt">
               <h4>Ecografia Pelvica</h4>
               <p>Inserire FNPO (≥20 = criterio PCO morphology) e volume ovarico (≥10 ml = criterio PCO morphology) per entrambi gli ovaie, specificando la presenza o assenza di follicolo dominante (se presente, il criterio PCO non è applicabile). Il sistema genera automaticamente il flag per il Criterio Rotterdam 3.</p>
+              <p>Per il volume ovarico: clicca il bottone <strong>📐</strong> accanto al campo volume per aprire il <strong>calcolatore integrato</strong>. Inserisci le tre misure ortogonali (L × W × AP in mm) e il volume viene calcolato automaticamente con la formula ellissoide (V = 0.523 × L × W × AP), con flag immediato ≥10 ml. Clicca <em>Usa questo volume</em> per inserirlo nel campo.</p>
             </div>
           </div>
           <div class="step-item" id="fase5">
@@ -236,7 +239,8 @@ a{color:var(--primary)}
             <div class="step-num">6</div>
             <div class="step-cnt">
               <h4>Sintesi &amp; Terapia</h4>
-              <p>L'algoritmo Rotterdam calcola automaticamente i 3 criteri, assegna il fenotipo (A-D) e stratifica il rischio metabolico/CV. Il piano terapeutico è adattato al fenotipo e ai dati clinici. Il piano di follow-up propone scadenze personalizzate. Cliccare <em>Genera Documenti AI</em> per produrre i 4 documenti clinici. Salvare la sessione JSON per i controlli successivi.</p>
+              <p>L'algoritmo Rotterdam calcola automaticamente i 3 criteri, assegna il fenotipo (A-D) e stratifica il rischio metabolico/CV. Il piano terapeutico è adattato al fenotipo e ai dati clinici. Il piano di follow-up propone scadenze personalizzate.</p>
+              <p><strong>Documenti AI:</strong> ogni documento può essere generato singolarmente cliccando <em>🤖 Genera</em> nel tab corrispondente, oppure tutti in sequenza con <em>🤖 Genera tutti</em>. Una volta generato, il testo è <strong>direttamente modificabile</strong> nel browser (clicca e scrivi). Il pulsante <strong>📋 Copia</strong> copia il testo negli appunti; <strong>🖨️ Stampa/PDF</strong> apre la finestra di stampa. Salvare la sessione JSON per i controlli successivi.</p>
             </div>
           </div>
         </div>
@@ -377,7 +381,7 @@ a{color:var(--primary)}
             <tr><td><strong>FAI</strong></td><td>(Testosterone [nmol/L] × 100) / SHBG [nmol/L]</td><td>&gt;5 = iperandrogenismo biochimico</td></tr>
             <tr><td><strong>HOMA-IR</strong></td><td>(Glicemia [mg/dL] × Insulina [μUI/mL]) / 405</td><td>&gt;2.5 = insulino-resistenza significativa</td></tr>
             <tr><td><strong>Ratio LH/FSH</strong></td><td>LH / FSH</td><td>&gt;2 = caratteristico di PCOS classica</td></tr>
-            <tr><td><strong>BMI</strong></td><td>Peso [kg] / Altezza [m]²</td><td>≥25 sovrappeso; ≥30 obesa</td></tr>
+            <tr><td><strong>BMI</strong></td><td>Peso [kg] / Altezza [m]²</td><td>&lt;18.5 sottopeso; 18.5–24.9 normopeso; 25–29.9 sovrappeso; 30–34.9 obesa Grado I; 35–39.9 Grado II; ≥40 Grado III</td></tr>
           </tbody>
         </table>
       </div>

@@ -336,8 +336,6 @@ textarea{resize:vertical;min-height:82px}
 /* ============================================================
    CONFIG BANNER
    ============================================================ */
-.cfg-banner{background:linear-gradient(135deg,#fff8e1,#fff0b3);border:2px solid var(--warning);border-radius:var(--r-sm);padding:13px 18px;display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-.cfg-banner input{flex:1;min-width:220px;border:1.5px solid var(--border);border-radius:var(--r-xs);padding:7px 12px;font-size:.86rem;font-family:monospace}
 
 /* ============================================================
    FOOTER
@@ -374,7 +372,6 @@ textarea{resize:vertical;min-height:82px}
     <div class="hdr-actions">
       <button class="btn-hdr" onclick="openM('m-json')">💾 Sessione</button>
       <button class="btn-hdr" onclick="openM('m-medico')">👤 Profilo Medico</button>
-      <button class="btn-hdr" onclick="openM('m-cfg')">⚙️ Config API</button>
       <a href="andro-consult-guide.html" target="_blank" class="btn-hdr">📖 Guida &amp; LG</a>
       <button class="btn-hdr warn" onclick="doReset()">🔄 Reset</button>
     </div>
@@ -383,15 +380,6 @@ textarea{resize:vertical;min-height:82px}
 
 <!-- ========== MAIN ========== -->
 <main class="main">
-
-  <!-- Config banner -->
-  <div class="cfg-banner" id="cfg-banner" style="display:none">
-    <span>⚙️</span>
-    <div style="flex:1"><strong style="font-size:.86rem">Configura endpoint API</strong><br>
-    <span style="font-size:.78rem;color:var(--text-m)">Inserisci il tuo proxy Vercel per abilitare la generazione AI dei documenti</span></div>
-    <input type="text" id="api-banner" placeholder="https://tuo-proxy.vercel.app/api/claude">
-    <button class="btn btn-pri btn-sm" onclick="saveEP()">Salva</button>
-  </div>
 
   <!-- STEPPER -->
   <div class="stepper" id="stepper">
@@ -1156,23 +1144,6 @@ textarea{resize:vertical;min-height:82px}
   </div>
 </div>
 
-<!-- Modal Config -->
-<div class="moverlay" id="m-cfg">
-  <div class="modal" style="max-width:500px">
-    <div class="mhdr"><h3>⚙️ Configurazione Endpoint API</h3><button class="mclose" onclick="closeM('m-cfg')">✕</button></div>
-    <div class="mbody">
-      <h4>Proxy Vercel (API Anthropic)</h4>
-      <p>Inserisci l'URL del proxy serverless che gestisce le chiamate all'API Claude. Compatibile con il proxy di rUTI·CONSULT.</p>
-      <input type="text" id="api-ep" placeholder="https://tuo-proxy.vercel.app/api/claude" style="width:100%;margin:10px 0;font-family:monospace;font-size:.85rem">
-      <p style="font-size:.81rem;color:var(--text-m)">L'endpoint è salvato nel browser (localStorage) e non viene mai incluso nel codice sorgente.</p>
-      <div style="display:flex;gap:9px;margin-top:14px">
-        <button class="btn btn-pri" onclick="saveEP()">Salva</button>
-        <button class="btn btn-sec" onclick="closeM('m-cfg')">Annulla</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Modal Sessione JSON -->
 <div class="moverlay" id="m-json">
   <div class="modal" style="max-width:480px">
@@ -1274,8 +1245,6 @@ let diag = {};
    ====================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   buildMFG(); buildGAGS(); buildDD(); loadMedico();
-  if (apiEP) document.getElementById('api-ep').value = apiEP;
-  // banner nascosto: endpoint hardcodato nel codice
 });
 
 /* ======================================================
@@ -1825,7 +1794,7 @@ const DOC_DEFS = {
 };
 
 async function generateOne(key) {
-  if (!apiEP) { alert('Configura prima l\'endpoint API (⚙️ Config API)'); openM('m-cfg'); return; }
+  if (!apiEP) { alert('Endpoint API non configurato.'); return; }
   const d = DOC_DEFS[key];
   const btn = document.querySelector(`button[onclick="generateOne('${key}')"]`);
   // Passa al tab corrispondente
@@ -1849,7 +1818,7 @@ async function generateOne(key) {
 }
 
 async function generateDocs() {
-  if (!apiEP) { alert('Configura prima l\'endpoint API (⚙️ Config API)'); openM('m-cfg'); return; }
+  if (!apiEP) { alert('Endpoint API non configurato.'); return; }
   const btn = document.getElementById('btn-genera-tutti');
   btn.disabled=true; btn.textContent='⏳ Generazione in corso…';
   const ctx = buildCtx();
@@ -2378,10 +2347,7 @@ function loadMedico() {
 /* ======================================================
    CONFIG / ENDPOINT
    ====================================================== */
-function saveEP() {
-  const val=(document.getElementById('api-ep')?.value||document.getElementById('api-banner')?.value||'').trim();
-  if(val){apiEP=val;localStorage.setItem('andro_api_ep',val);document.getElementById('cfg-banner').style.display='none';closeM('m-cfg');toast('Endpoint API salvato ✓');}
-}
+function saveEP() { /* rimosso — endpoint hardcodato */ }
 
 /* ======================================================
    RESET
