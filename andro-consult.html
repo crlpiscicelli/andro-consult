@@ -1145,7 +1145,7 @@ textarea{resize:vertical;min-height:82px}
    STATO GLOBALE
    ====================================================== */
 let curPhase = 1;
-let apiEP = localStorage.getItem('andro_api_ep') || '';
+let apiEP = localStorage.getItem('andro_api_ep') || 'https://andro-consult.vercel.app/api/claude';
 let mfgSc = [0,0,0,0,0,0,0,0,0];
 let lwSc = null;
 let gagsSc = {};
@@ -1158,7 +1158,7 @@ let diag = {};
 document.addEventListener('DOMContentLoaded', () => {
   buildMFG(); buildGAGS(); buildDD();
   if (apiEP) document.getElementById('api-ep').value = apiEP;
-  else document.getElementById('cfg-banner').style.display = 'flex';
+  // banner nascosto: endpoint hardcodato nel codice
 });
 
 /* ======================================================
