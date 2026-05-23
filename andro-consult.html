@@ -156,6 +156,7 @@ textarea{resize:vertical;min-height:82px}
    ============================================================ */
 .ib{width:17px;height:17px;border-radius:50%;background:var(--secondary);color:#fff;font-size:.67rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:var(--tr);flex-shrink:0;text-decoration:none;vertical-align:middle}
 .ib:hover{background:var(--primary);transform:scale(1.15)}
+.rott-tip[data-tip]::after{max-width:320px;white-space:normal;font-size:.78rem;line-height:1.45;text-align:left;padding:8px 13px;}
 [data-tip]{position:relative;cursor:help}
 [data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:#1a2940;color:#fff;padding:5px 11px;border-radius:5px;font-size:.76rem;white-space:normal;max-width:260px;text-align:center;opacity:0;pointer-events:none;transition:opacity .18s;z-index:200;line-height:1.4;width:max-content;max-width:260px}
 [data-tip]:hover::after{opacity:1}
@@ -415,22 +416,22 @@ textarea{resize:vertical;min-height:82px}
         <div class="fg fg-auto">
           <div class="fld">
             <label>Età (anni)</label>
-            <input type="number" id="eta" min="10" max="60" placeholder="es. 28" oninput="onEta()">
+            <input type="number" id="eta" min="10" max="60" min="10" max="60" placeholder="es. 28" oninput="onEta()">
           </div>
           <div class="fld">
-            <label>Peso <button class="ib" onclick="openInfo('bmi')">i</button></label>
-            <div class="iu"><input type="number" id="peso" placeholder="es. 65" oninput="calcBMI()"><span class="iu-lbl">kg</span></div>
+            <label>Peso <button class="ib" tabindex="-1" onclick="openInfo('bmi')">i</button></label>
+            <div class="iu"><input type="number" id="peso" min="30" max="200" placeholder="es. 65" oninput="calcBMI()"><span class="iu-lbl">kg</span></div>
           </div>
           <div class="fld">
             <label>Altezza</label>
-            <div class="iu"><input type="number" id="altezza" placeholder="es. 165" oninput="calcBMI()"><span class="iu-lbl">cm</span></div>
+            <div class="iu"><input type="number" id="altezza" min="100" max="220" placeholder="es. 165" oninput="calcBMI()"><span class="iu-lbl">cm</span></div>
           </div>
           <div class="fld">
-            <label>Circonferenza vita <button class="ib" onclick="openInfo('wc')">i</button></label>
-            <div class="iu"><input type="number" id="wc" placeholder="es. 82" oninput="calcWC()"><span class="iu-lbl">cm</span></div>
+            <label>Circonferenza vita <button class="ib" tabindex="-1" onclick="openInfo('wc')">i</button></label>
+            <div class="iu"><input type="number" id="wc" min="40" max="200" placeholder="es. 82" oninput="calcWC()"><span class="iu-lbl">cm</span></div>
           </div>
           <div class="fld">
-            <label>Etnia <button class="ib" onclick="openInfo('etnia')">i</button></label>
+            <label>Etnia <button class="ib" tabindex="-1" onclick="openInfo('etnia')">i</button></label>
             <select id="etnia" onchange="updMFGThr()">
               <option value="">Seleziona…</option>
               <option value="europea">Europea / Caucasica</option>
@@ -462,10 +463,10 @@ textarea{resize:vertical;min-height:82px}
           Criteri diagnostici più restrittivi per PCOS: oligo-amenorrea deve persistere ≥2 anni dal menarca; morfologia ovarica PCO da sola non è sufficiente. L'algoritmo si adatterà automaticamente.</div>
         </div>
 
-        <div class="st"><h3>Ciclo mestruale <span class="badge">Criterio Rotterdam 1</span></h3></div>
+        <div class="st"><h3>Ciclo mestruale <span class="badge rott-tip" data-tip="Criterio 1: oligo-anovulazione — oligomenorrea (&gt;35 gg o &lt;9 cicli/anno) o amenorrea (&gt;90 gg). Presente in fenotipi A, B, D." style="cursor:help">Criterio Rotterdam 1 ℹ</span></h3></div>
         <div class="fg fg-auto">
           <div class="fld">
-            <label>Carattere del ciclo <button class="ib" onclick="openInfo('ciclo')">i</button></label>
+            <label>Carattere del ciclo <button class="ib" tabindex="-1" onclick="openInfo('ciclo')">i</button></label>
             <select id="ciclo" onchange="onCiclo()">
               <option value="">Seleziona…</option>
               <option value="regolare">Regolare (25–35 gg)</option>
@@ -477,11 +478,11 @@ textarea{resize:vertical;min-height:82px}
           </div>
           <div class="fld">
             <label>Durata media (gg)</label>
-            <input type="number" id="ciclo-gg" placeholder="es. 45">
+            <input type="number" id="ciclo-gg" min="1" max="365" placeholder="es. 45">
           </div>
           <div class="fld">
             <label>Età menarca</label>
-            <div class="iu"><input type="number" id="menarca" placeholder="es. 12" oninput="calcAnniMenarca()"><span class="iu-lbl">anni</span></div>
+            <div class="iu"><input type="number" id="menarca" min="8" max="20" placeholder="es. 12" oninput="calcAnniMenarca()"><span class="iu-lbl">anni</span></div>
           </div>
           <div class="fld" id="f-anni-menarca" style="display:none">
             <label>Anni dal menarca</label>
@@ -493,10 +494,10 @@ textarea{resize:vertical;min-height:82px}
           <div class="flag-txt"><strong id="ciclo-flag-t"></strong><span id="ciclo-flag-s"></span></div>
         </div>
 
-        <div class="st"><h3>Sintomi androgenici <span class="badge">Criterio Rotterdam 2</span></h3></div>
+        <div class="st"><h3>Sintomi androgenici <span class="badge rott-tip" data-tip="Criterio 2: iperandrogenismo clinico (mFG ≥ soglia etnia) e/o biochimico (testosterone elevato, FAI &gt;5). Presente in fenotipi A, B, C." style="cursor:help">Criterio Rotterdam 2 ℹ</span></h3></div>
         <div class="fg fg-2">
           <div class="fld">
-            <label>Irsutismo soggettivo <button class="ib" onclick="openInfo('irsutismo')">i</button></label>
+            <label>Irsutismo soggettivo <button class="ib" tabindex="-1" onclick="openInfo('irsutismo')">i</button></label>
             <select id="irsutismo">
               <option value="">Seleziona…</option>
               <option value="assente">Assente</option>
@@ -506,7 +507,7 @@ textarea{resize:vertical;min-height:82px}
             </select>
           </div>
           <div class="fld">
-            <label>Acne <button class="ib" onclick="openInfo('acne')">i</button></label>
+            <label>Acne <button class="ib" tabindex="-1" onclick="openInfo('acne')">i</button></label>
             <select id="acne">
               <option value="">Seleziona…</option>
               <option value="assente">Assente</option>
@@ -516,7 +517,7 @@ textarea{resize:vertical;min-height:82px}
             </select>
           </div>
           <div class="fld">
-            <label>Alopecia androgenetica <button class="ib" onclick="openInfo('alopecia')">i</button></label>
+            <label>Alopecia androgenetica <button class="ib" tabindex="-1" onclick="openInfo('alopecia')">i</button></label>
             <select id="alopecia">
               <option value="">Seleziona…</option>
               <option value="assente">Assente</option>
@@ -584,7 +585,7 @@ textarea{resize:vertical;min-height:82px}
       <div class="pbody">
 
         <!-- mFG -->
-        <div class="st"><h3>Score di Ferriman-Gallwey modificato (mFG) <button class="ib" onclick="openInfo('mfg')">i</button> <span class="badge">Criterio Rotterdam 2</span></h3></div>
+        <div class="st"><h3>Score di Ferriman-Gallwey modificato (mFG) <button class="ib" tabindex="-1" onclick="openInfo('mfg')">i</button> <span class="badge rott-tip" data-tip="Criterio 2: iperandrogenismo clinico (mFG ≥ soglia etnia) e/o biochimico (testosterone elevato, FAI &gt;5). Presente in fenotipi A, B, C." style="cursor:help">Criterio Rotterdam 2 ℹ</span></h3></div>
         <div id="mfg-etnia-note" class="flag info" style="display:none;margin-bottom:14px">
           <span class="flag-ico">ℹ️</span><div class="flag-txt" id="mfg-etnia-txt"></div>
         </div>
@@ -595,7 +596,7 @@ textarea{resize:vertical;min-height:82px}
         </div>
 
         <!-- Ludwig -->
-        <div class="st" style="margin-top:28px"><h3>Alopecia androgenetica — Scala di Ludwig <button class="ib" onclick="openInfo('ludwig')">i</button></h3></div>
+        <div class="st" style="margin-top:28px"><h3>Alopecia androgenetica — Scala di Ludwig <button class="ib" tabindex="-1" onclick="openInfo('ludwig')">i</button></h3></div>
         <div class="lw-grid">
           <div class="lw-card" id="lw-0" onclick="selLw(0)">
             <svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
@@ -638,7 +639,7 @@ textarea{resize:vertical;min-height:82px}
         <input type="hidden" id="lw-val" value="">
 
         <!-- GAGS -->
-        <div class="st" style="margin-top:28px"><h3>Score GAGS — Acne <button class="ib" onclick="openInfo('gags')">i</button></h3></div>
+        <div class="st" style="margin-top:28px"><h3>Score GAGS — Acne <button class="ib" tabindex="-1" onclick="openInfo('gags')">i</button></h3></div>
         <table class="gags-tbl">
           <thead><tr><th>Regione</th><th>Fattore</th><th>Densità (0–3)</th><th>Tipo lesione (0–4)</th><th>Punti</th></tr></thead>
           <tbody id="gags-tbody"></tbody>
@@ -653,7 +654,7 @@ textarea{resize:vertical;min-height:82px}
         <div class="st" style="margin-top:28px"><h3>Altri segni all'esame obiettivo</h3></div>
         <div class="fg fg-2">
           <div class="fld">
-            <label>Acanthosis nigricans <button class="ib" onclick="openInfo('acanthosis')">i</button></label>
+            <label>Acanthosis nigricans <button class="ib" tabindex="-1" onclick="openInfo('acanthosis')">i</button></label>
             <select id="acanthosis">
               <option value="">Seleziona…</option>
               <option value="assente">Assente</option>
@@ -664,7 +665,7 @@ textarea{resize:vertical;min-height:82px}
             </select>
           </div>
           <div class="fld">
-            <label>Virilismo <button class="ib" onclick="openInfo('virilismo')">i</button></label>
+            <label>Virilismo <button class="ib" tabindex="-1" onclick="openInfo('virilismo')">i</button></label>
             <div class="rg">
               <label class="rpill" onclick="selR(this,'virilismo','assente')"><input type="radio" name="virilismo" value="assente">Assente</label>
               <label class="rpill" onclick="selR(this,'virilismo','presente');showVirilismo()"><input type="radio" name="virilismo" value="presente">Presente</label>
@@ -672,11 +673,11 @@ textarea{resize:vertical;min-height:82px}
           </div>
           <div class="fld">
             <label>Pressione arteriosa sistolica</label>
-            <div class="iu"><input type="number" id="pa-s" placeholder="es. 120" style="padding-right:52px"><span class="iu-lbl">mmHg</span></div>
+            <div class="iu"><input type="number" id="pa-s" min="60" max="250" placeholder="es. 120" style="padding-right:52px"><span class="iu-lbl">mmHg</span></div>
           </div>
           <div class="fld">
             <label>Pressione arteriosa diastolica</label>
-            <div class="iu"><input type="number" id="pa-d" placeholder="es. 80" style="padding-right:52px"><span class="iu-lbl">mmHg</span></div>
+            <div class="iu"><input type="number" id="pa-d" min="40" max="150" placeholder="es. 80" style="padding-right:52px"><span class="iu-lbl">mmHg</span></div>
           </div>
         </div>
 
@@ -687,7 +688,7 @@ textarea{resize:vertical;min-height:82px}
         </div>
 
         <!-- Cushing screening -->
-        <div class="st" style="margin-top:20px"><h3>Screening clinico ipercortisolismo (Cushing) <button class="ib" onclick="openInfo('cushing')">i</button></h3></div>
+        <div class="st" style="margin-top:20px"><h3>Screening clinico ipercortisolismo (Cushing) <button class="ib" tabindex="-1" onclick="openInfo('cushing')">i</button></h3></div>
         <div class="fg fg-3">
           <div class="fld"><label>Strie rubre addominali</label>
             <div class="rg"><label class="rpill" onclick="selR(this,'strie','si');chkCushing()"><input type="radio" name="strie" value="si">Sì</label><label class="rpill" onclick="selR(this,'strie','no');chkCushing()"><input type="radio" name="strie" value="no">No</label></div>
@@ -733,9 +734,9 @@ textarea{resize:vertical;min-height:82px}
           <div style="padding:0 4px">
 
             <div class="er">
-              <div class="en"><span data-tip="Principale androgeno circolante. Metodica di riferimento: LC-MS/MS">Testosterone totale</span> <button class="ib" onclick="openInfo('testosterone')">i</button></div>
+              <div class="en"><span data-tip="Principale androgeno circolante. Metodica di riferimento: LC-MS/MS">Testosterone totale</span> <button class="ib" tabindex="-1" onclick="openInfo('testosterone')">i</button></div>
               <div class="ev">
-                <input type="number" id="l-testo" placeholder="valore" step="0.1" oninput="onTesto()">
+                <input type="number" id="l-testo" min="0" max="500" placeholder="valore" step="0.1" oninput="onTesto()">
                 <select id="l-testo-u" onchange="calcFAI()" style="width:85px;padding:8px 6px">
                   <option value="ngdL">ng/dL</option><option value="nmolL">nmol/L</option>
                 </select>
@@ -744,27 +745,27 @@ textarea{resize:vertical;min-height:82px}
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="SHBG — Sex Hormone Binding Globulin. Ridotta in insulino-resistenza e iperandrogenismo">SHBG</span> <button class="ib" onclick="openInfo('shbg')">i</button></div>
+              <div class="en"><span data-tip="SHBG — Sex Hormone Binding Globulin. Ridotta in insulino-resistenza e iperandrogenismo">SHBG</span> <button class="ib" tabindex="-1" onclick="openInfo('shbg')">i</button></div>
               <div class="ev">
-                <input type="number" id="l-shbg" placeholder="nmol/L" step="0.1" oninput="calcFAI()">
+                <input type="number" id="l-shbg" min="0" max="500" placeholder="nmol/L" step="0.1" oninput="calcFAI()">
                 <span style="font-size:.8rem;color:var(--text-m)">nmol/L</span>
                 <span class="ef E" id="f-shbg">?</span>
               </div>
             </div>
 
             <div class="er hi">
-              <div class="en"><span data-tip="Free Androgen Index = (T nmol/L × 100) / SHBG. Stima del testosterone biodisponibile"><strong>FAI</strong> (calcolato)</span> <button class="ib" onclick="openInfo('fai')">i</button></div>
+              <div class="en"><span data-tip="Free Androgen Index = (T nmol/L × 100) / SHBG. Stima del testosterone biodisponibile"><strong>FAI</strong> (calcolato)</span> <button class="ib" tabindex="-1" onclick="openInfo('fai')">i</button></div>
               <div class="ev"><span class="calc-inline" id="fai-v">—</span><span class="ef E" id="f-fai">?</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="LH elevato e ratio LH/FSH >2 sono caratteristici della PCOS classica">LH</span> <button class="ib" onclick="openInfo('lhfsh')">i</button></div>
-              <div class="ev"><input type="number" id="l-lh" placeholder="UI/L" step="0.1" oninput="calcLHFSH()"><span style="font-size:.8rem;color:var(--text-m)">UI/L</span><span class="ef E" id="f-lh">?</span></div>
+              <div class="en"><span data-tip="LH elevato e ratio LH/FSH >2 sono caratteristici della PCOS classica">LH</span> <button class="ib" tabindex="-1" onclick="openInfo('lhfsh')">i</button></div>
+              <div class="ev"><input type="number" id="l-lh" min="0" max="150" placeholder="UI/L" step="0.1" oninput="calcLHFSH()"><span style="font-size:.8rem;color:var(--text-m)">UI/L</span><span class="ef E" id="f-lh">?</span></div>
             </div>
 
             <div class="er">
               <div class="en">FSH</div>
-              <div class="ev"><input type="number" id="l-fsh" placeholder="UI/L" step="0.1" oninput="calcLHFSH()"><span style="font-size:.8rem;color:var(--text-m)">UI/L</span></div>
+              <div class="ev"><input type="number" id="l-fsh" min="0" max="150" placeholder="UI/L" step="0.1" oninput="calcLHFSH()"><span style="font-size:.8rem;color:var(--text-m)">UI/L</span></div>
             </div>
 
             <div class="er hi">
@@ -773,49 +774,49 @@ textarea{resize:vertical;min-height:82px}
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="Esclude iperprolattinemia. Valori >25 ng/mL richiedono approfondimento">Prolattina</span> <button class="ib" onclick="openInfo('prolattina')">i</button></div>
-              <div class="ev"><input type="number" id="l-prl" placeholder="ng/mL" step="0.1" oninput="onPRL()"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span><span class="ef E" id="f-prl">?</span></div>
+              <div class="en"><span data-tip="Esclude iperprolattinemia. Valori >25 ng/mL richiedono approfondimento">Prolattina</span> <button class="ib" tabindex="-1" onclick="openInfo('prolattina')">i</button></div>
+              <div class="ev"><input type="number" id="l-prl" min="0" max="5000" placeholder="ng/mL" step="0.1" oninput="onPRL()"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span><span class="ef E" id="f-prl">?</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="Esclude ipotiroidismo. Causa comune di oligo-amenorrea e iperandrogenismo relativo">TSH</span> <button class="ib" onclick="openInfo('tsh')">i</button></div>
-              <div class="ev"><input type="number" id="l-tsh" placeholder="μUI/mL" step="0.01" oninput="onTSH()"><span style="font-size:.8rem;color:var(--text-m)">μUI/mL</span><span class="ef E" id="f-tsh">?</span></div>
+              <div class="en"><span data-tip="Esclude ipotiroidismo. Causa comune di oligo-amenorrea e iperandrogenismo relativo">TSH</span> <button class="ib" tabindex="-1" onclick="openInfo('tsh')">i</button></div>
+              <div class="ev"><input type="number" id="l-tsh" min="0" max="100" placeholder="μUI/mL" step="0.01" oninput="onTSH()"><span style="font-size:.8rem;color:var(--text-m)">μUI/mL</span><span class="ef E" id="f-tsh">?</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="Glicemia a digiuno. ≥100 mg/dL = pre-diabete; ≥126 = diabete">Glicemia a digiuno</span> <button class="ib" onclick="openInfo('glicemia')">i</button></div>
-              <div class="ev"><input type="number" id="l-glic" placeholder="mg/dL" step="1" oninput="calcHOMA()"><span style="font-size:.8rem;color:var(--text-m)">mg/dL</span><span class="ef E" id="f-glic">?</span></div>
+              <div class="en"><span data-tip="Glicemia a digiuno. ≥100 mg/dL = pre-diabete; ≥126 = diabete">Glicemia a digiuno</span> <button class="ib" tabindex="-1" onclick="openInfo('glicemia')">i</button></div>
+              <div class="ev"><input type="number" id="l-glic" min="0" max="600" placeholder="mg/dL" step="1" oninput="calcHOMA()"><span style="font-size:.8rem;color:var(--text-m)">mg/dL</span><span class="ef E" id="f-glic">?</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="Insulinemia basale a digiuno per calcolo HOMA-IR">Insulinemia basale</span> <button class="ib" onclick="openInfo('insulina')">i</button></div>
-              <div class="ev"><input type="number" id="l-ins" placeholder="μUI/mL" step="0.1" oninput="calcHOMA()"><span style="font-size:.8rem;color:var(--text-m)">μUI/mL</span></div>
+              <div class="en"><span data-tip="Insulinemia basale a digiuno per calcolo HOMA-IR">Insulinemia basale</span> <button class="ib" tabindex="-1" onclick="openInfo('insulina')">i</button></div>
+              <div class="ev"><input type="number" id="l-ins" min="0" max="500" placeholder="μUI/mL" step="0.1" oninput="calcHOMA()"><span style="font-size:.8rem;color:var(--text-m)">μUI/mL</span></div>
             </div>
 
             <div class="er hi">
-              <div class="en"><span data-tip="HOMA-IR = (glicemia mg/dL × insulina μUI/mL) / 405"><strong>HOMA-IR</strong> (calcolato)</span> <button class="ib" onclick="openInfo('homa')">i</button></div>
+              <div class="en"><span data-tip="HOMA-IR = (glicemia mg/dL × insulina μUI/mL) / 405"><strong>HOMA-IR</strong> (calcolato)</span> <button class="ib" tabindex="-1" onclick="openInfo('homa')">i</button></div>
               <div class="ev"><span class="calc-inline" id="homa-v">—</span><span class="ef E" id="f-homa">?</span></div>
             </div>
 
             <div class="er">
               <div class="en">Profilo lipidico (Colest. tot / HDL / LDL / TG)</div>
               <div class="ev" style="gap:6px;flex-wrap:wrap">
-                <input type="number" id="l-chol" placeholder="Tot" style="width:72px">
-                <input type="number" id="l-hdl" placeholder="HDL" style="width:66px">
-                <input type="number" id="l-ldl" placeholder="LDL" style="width:66px">
-                <input type="number" id="l-tg" placeholder="TG" style="width:66px">
+                <input type="number" id="l-chol" min="0" max="600" placeholder="Tot" style="width:72px">
+                <input type="number" id="l-hdl" min="0" max="200" placeholder="HDL" style="width:66px">
+                <input type="number" id="l-ldl" min="0" max="400" placeholder="LDL" style="width:66px">
+                <input type="number" id="l-tg" min="0" max="1000" placeholder="TG" style="width:66px">
                 <span style="font-size:.79rem;color:var(--text-m)">mg/dL</span>
               </div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="DHEA solfato, androgeno surrenalico. Utile per differenziare origine surrenalica vs ovarica">DHEA-S (opzionale)</span> <button class="ib" onclick="openInfo('dheas')">i</button></div>
-              <div class="ev"><input type="number" id="l-dheas" placeholder="μg/dL" step="1"><span style="font-size:.8rem;color:var(--text-m)">μg/dL</span><span class="ef E" id="f-dheas">?</span></div>
+              <div class="en"><span data-tip="DHEA solfato, androgeno surrenalico. Utile per differenziare origine surrenalica vs ovarica">DHEA-S (opzionale)</span> <button class="ib" tabindex="-1" onclick="openInfo('dheas')">i</button></div>
+              <div class="ev"><input type="number" id="l-dheas" min="0" max="2000" placeholder="μg/dL" step="1"><span style="font-size:.8rem;color:var(--text-m)">μg/dL</span><span class="ef E" id="f-dheas">?</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="AMH elevato (>5 ng/mL) è marker di PCOS. Possibile surrogato della morfologia ovarica">AMH (opzionale)</span> <button class="ib" onclick="openInfo('amh')">i</button></div>
-              <div class="ev"><input type="number" id="l-amh" placeholder="ng/mL" step="0.1"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span></div>
+              <div class="en"><span data-tip="AMH elevato (>5 ng/mL) è marker di PCOS. Possibile surrogato della morfologia ovarica">AMH (opzionale)</span> <button class="ib" tabindex="-1" onclick="openInfo('amh')">i</button></div>
+              <div class="ev"><input type="number" id="l-amh" min="0" max="50" placeholder="ng/mL" step="0.1"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span></div>
             </div>
 
           </div>
@@ -833,25 +834,25 @@ textarea{resize:vertical;min-height:82px}
           <div style="padding:0 4px">
 
             <div class="er">
-              <div class="en"><span data-tip="Screening CAH non classica. Dosare in fase follicolare gg 2-5. Se >2 ng/mL: test ACTH">17-OHP (fase follicolare)</span> <button class="ib" onclick="openInfo('17ohp')">i</button></div>
-              <div class="ev"><input type="number" id="l-17ohp" placeholder="ng/mL" step="0.01" oninput="on17OHP()"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span><span class="ef E" id="f-17ohp">?</span></div>
+              <div class="en"><span data-tip="Screening CAH non classica. Dosare in fase follicolare gg 2-5. Se >2 ng/mL: test ACTH">17-OHP (fase follicolare)</span> <button class="ib" tabindex="-1" onclick="openInfo('17ohp')">i</button></div>
+              <div class="ev"><input type="number" id="l-17ohp" min="0" max="100" placeholder="ng/mL" step="0.01" oninput="on17OHP()"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span><span class="ef E" id="f-17ohp">?</span></div>
             </div>
 
             <div class="er">
               <div class="en"><span data-tip="Androgeno intermedio, elevato in CAH e PCOS">Androstenedione</span></div>
-              <div class="ev"><input type="number" id="l-androst" placeholder="ng/mL" step="0.1"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span></div>
+              <div class="ev"><input type="number" id="l-androst" min="0" max="20" placeholder="ng/mL" step="0.1"><span style="font-size:.8rem;color:var(--text-m)">ng/mL</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="Cortisolo libero urinario 24h: screening Cushing. Normale <100-150 μg/24h (dipende dal lab)">Cortisolo libero urinario 24h</span> <button class="ib" onclick="openInfo('cortisolo')">i</button></div>
-              <div class="ev"><input type="number" id="l-cort" placeholder="μg/24h" step="1"><span style="font-size:.8rem;color:var(--text-m)">μg/24h</span></div>
+              <div class="en"><span data-tip="Cortisolo libero urinario 24h: screening Cushing. Normale <100-150 μg/24h (dipende dal lab)">Cortisolo libero urinario 24h</span> <button class="ib" tabindex="-1" onclick="openInfo('cortisolo')">i</button></div>
+              <div class="ev"><input type="number" id="l-cort" min="0" max="2000" placeholder="μg/24h" step="1"><span style="font-size:.8rem;color:var(--text-m)">μg/24h</span></div>
             </div>
 
             <div class="er">
-              <div class="en"><span data-tip="OGTT 75g: diagnosi IGT/DM2. Indicato se HOMA-IR >2.5 o fattori di rischio aggiuntivi">OGTT 75g (T0 / T120)</span> <button class="ib" onclick="openInfo('ogtt')">i</button></div>
+              <div class="en"><span data-tip="OGTT 75g: diagnosi IGT/DM2. Indicato se HOMA-IR >2.5 o fattori di rischio aggiuntivi">OGTT 75g (T0 / T120)</span> <button class="ib" tabindex="-1" onclick="openInfo('ogtt')">i</button></div>
               <div class="ev">
-                <input type="number" id="l-ogtt0" placeholder="T0 mg/dL" style="width:105px">
-                <input type="number" id="l-ogtt120" placeholder="T120 mg/dL" style="width:115px">
+                <input type="number" id="l-ogtt0" min="0" max="600" placeholder="T0 mg/dL" style="width:105px">
+                <input type="number" id="l-ogtt120" min="0" max="600" placeholder="T120 mg/dL" style="width:115px">
               </div>
             </div>
 
@@ -872,7 +873,7 @@ textarea{resize:vertical;min-height:82px}
   <section class="phase" id="phase-4">
     <div class="pcard">
       <div class="phdr"><span class="ico">🔊</span>
-        <div><h2>Ecografia Pelvica</h2><div class="desc">Morfologia ovarica PCO · Criteri ESHRE/NHMRC 2023 (FNPO ≥20 o Vol ≥10 ml)</div></div>
+        <div><h2>Ecografia Pelvica <span class="badge rott-tip" data-tip="Criterio 3: morfologia ovarica PCO — FNPO ≥20 follicoli 2-9 mm per ovaio e/o volume ≥10 ml. Valido solo con sonda TV ad alta frequenza. Presente in fenotipi A, C, D." style="cursor:help;background:rgba(255,255,255,.25);color:#fff;border:1px solid rgba(255,255,255,.4)">Criterio Rotterdam 3 ℹ</span></h2><div class="desc">Morfologia ovarica PCO · Criteri ESHRE/NHMRC 2023 (FNPO ≥20 o Vol ≥10 ml)</div></div>
       </div>
       <div class="pbody">
 
@@ -891,7 +892,7 @@ textarea{resize:vertical;min-height:82px}
             </div>
           </div>
           <div class="fld">
-            <label>Via di esame <button class="ib" onclick="openInfo('ecografia')">i</button></label>
+            <label>Via di esame <button class="ib" tabindex="-1" onclick="openInfo('ecografia')">i</button></label>
             <div class="rg">
               <label class="rpill" onclick="selR(this,'eco-via','tv')"><input type="radio" name="eco-via" value="tv">Transvaginale</label>
               <label class="rpill" onclick="selR(this,'eco-via','ta')"><input type="radio" name="eco-via" value="ta">Transaddominale</label>
@@ -902,9 +903,9 @@ textarea{resize:vertical;min-height:82px}
         <div id="eco-form" style="display:none">
           <div class="st" style="margin-top:20px"><h3>Ovaio Destro</h3></div>
           <div class="fg fg-4">
-            <div class="fld"><label>FNPO <button class="ib" onclick="openInfo('fnpo')">i</button></label><input type="number" id="eco-dx-f" placeholder="n° follicoli" min="0" oninput="chkPCO()"></div>
-            <div class="fld"><label>Volume</label><div class="iu"><input type="number" id="eco-dx-v" placeholder="ml" step="0.1" oninput="chkPCO()" style="padding-right:36px"><span class="iu-lbl">ml</span></div></div>
-            <div class="fld"><label>Diam. max</label><div class="iu"><input type="number" id="eco-dx-d" placeholder="mm" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
+            <div class="fld"><label>FNPO <button class="ib" tabindex="-1" onclick="openInfo('fnpo')">i</button></label><input type="number" id="eco-dx-f" min="0" max="60" placeholder="n° follicoli" min="0" oninput="chkPCO()"></div>
+            <div class="fld"><label>Volume</label><div class="iu"><input type="number" id="eco-dx-v" min="0" max="100" placeholder="ml" step="0.1" oninput="chkPCO()" style="padding-right:36px"><span class="iu-lbl">ml</span></div></div>
+            <div class="fld"><label>Diam. max</label><div class="iu"><input type="number" id="eco-dx-d" min="0" max="200" placeholder="mm" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
             <div class="fld"><label>Follicolo dominante</label>
               <div class="rg"><label class="rpill" onclick="selR(this,'fo-dx','si');chkPCO()"><input type="radio" name="fo-dx" value="si">Sì</label><label class="rpill" onclick="selR(this,'fo-dx','no');chkPCO()"><input type="radio" name="fo-dx" value="no">No</label></div>
             </div>
@@ -912,16 +913,16 @@ textarea{resize:vertical;min-height:82px}
 
           <div class="st" style="margin-top:16px"><h3>Ovaio Sinistro</h3></div>
           <div class="fg fg-4">
-            <div class="fld"><label>FNPO</label><input type="number" id="eco-sx-f" placeholder="n° follicoli" min="0" oninput="chkPCO()"></div>
-            <div class="fld"><label>Volume</label><div class="iu"><input type="number" id="eco-sx-v" placeholder="ml" step="0.1" oninput="chkPCO()" style="padding-right:36px"><span class="iu-lbl">ml</span></div></div>
-            <div class="fld"><label>Diam. max</label><div class="iu"><input type="number" id="eco-sx-d" placeholder="mm" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
+            <div class="fld"><label>FNPO</label><input type="number" id="eco-sx-f" min="0" max="60" placeholder="n° follicoli" min="0" oninput="chkPCO()"></div>
+            <div class="fld"><label>Volume</label><div class="iu"><input type="number" id="eco-sx-v" min="0" max="100" placeholder="ml" step="0.1" oninput="chkPCO()" style="padding-right:36px"><span class="iu-lbl">ml</span></div></div>
+            <div class="fld"><label>Diam. max</label><div class="iu"><input type="number" id="eco-sx-d" min="0" max="200" placeholder="mm" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
             <div class="fld"><label>Follicolo dominante</label>
               <div class="rg"><label class="rpill" onclick="selR(this,'fo-sx','si');chkPCO()"><input type="radio" name="fo-sx" value="si">Sì</label><label class="rpill" onclick="selR(this,'fo-sx','no');chkPCO()"><input type="radio" name="fo-sx" value="no">No</label></div>
             </div>
           </div>
 
           <div class="fg fg-3" style="margin-top:14px">
-            <div class="fld"><label>Endometrio</label><div class="iu"><input type="number" id="eco-endo" placeholder="mm" step="0.1" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
+            <div class="fld"><label>Endometrio</label><div class="iu"><input type="number" id="eco-endo" min="0" max="50" placeholder="mm" step="0.1" style="padding-right:38px"><span class="iu-lbl">mm</span></div></div>
             <div class="fld"><label>Utero</label>
               <select id="eco-utero"><option value="">Seleziona…</option><option value="normale">Normale</option><option value="miomi">Miomatosi</option><option value="adenomiosi">Adenomiosi</option></select>
             </div>
@@ -981,7 +982,7 @@ textarea{resize:vertical;min-height:82px}
         <div class="diag-card" id="diag-card"></div>
 
         <!-- RISCHIO METABOLICO -->
-        <div class="st"><h3>Stratificazione Rischio Metabolico e Cardiovascolare <button class="ib" onclick="openInfo('rischio')">i</button></h3></div>
+        <div class="st"><h3>Stratificazione Rischio Metabolico e Cardiovascolare <button class="ib" tabindex="-1" onclick="openInfo('rischio')">i</button></h3></div>
         <div id="risk-panel" style="margin-bottom:18px"></div>
 
         <!-- TERAPIA -->
@@ -989,7 +990,7 @@ textarea{resize:vertical;min-height:82px}
         <div id="therapy-container"></div>
 
         <!-- CONTRACCEZIONE -->
-        <div class="st" style="margin-top:22px"><h3>Orientamento Contraccettivo <button class="ib" onclick="openInfo('contraccezione')">i</button></h3></div>
+        <div class="st" style="margin-top:22px"><h3>Orientamento Contraccettivo <button class="ib" tabindex="-1" onclick="openInfo('contraccezione')">i</button></h3></div>
         <div id="contra-panel"></div>
 
         <!-- FOLLOW-UP -->
@@ -1451,7 +1452,7 @@ function buildDD() {
     return `<div class="dd-item toexclude" id="ddi-${dd.id}">
       <span class="dd-ico" id="ddico-${dd.id}">⚠️</span>
       <div class="dd-inf">
-        <div class="dd-nm">${dd.n} <button class="ib" onclick="openInfo('dd_${dd.id}')">i</button></div>
+        <div class="dd-nm">${dd.n} <button class="ib" tabindex="-1" onclick="openInfo('dd_${dd.id}')">i</button></div>
         <div class="dd-dt">${dd.d}</div>
         <div class="dd-ex" id="dde-${dd.id}">📋 ${dd.e}</div>
         <div class="dd-act">
