@@ -1802,7 +1802,7 @@ const DOC_DEFS = {
     cnt:'cnt-paz', tab:'tab-paz', st:'st-paz',
     lbl:'Lettera Paziente',
     tipo:'lettera per la paziente',
-    stile:'tono professionale, rispettoso e diretto — NON usare frasi come "spero che si trovi bene" o similari. La paziente è in visita, non ha bisogno di empatia generica. Linguaggio semplice ma preciso. Struttura: breve presentazione della consulenza, diagnosi spiegata in termini comprensibili, significato clinico per la salute, terapia proposta con indicazioni pratiche, prossimi passi concreti. Firma in fondo. NON usare markdown (niente ## o **), usa solo testo semplice con righe vuote tra le sezioni.'
+    stile:'tono professionale, rispettoso e diretto — NON usare frasi come "spero che si trovi bene" o similari. La paziente è in visita, non ha bisogno di empatia generica. Linguaggio semplice ma preciso. Se menzioni la diagnosi di PCOS o i criteri di Rotterdam, spiega brevemente in termini comprensibili cosa sono i criteri di Rotterdam (es: "i criteri internazionali di Rotterdam sono i parametri scientifici che i medici usano per diagnosticare la PCOS, basati su tre elementi: irregolarità del ciclo, eccesso di ormoni maschili e aspetto delle ovaie all\'ecografia"). Struttura: breve presentazione della consulenza, diagnosi spiegata in termini comprensibili, significato clinico per la salute, terapia proposta con indicazioni pratiche, prossimi passi concreti. Firma in fondo. NON usare markdown (niente ## o **), usa solo testo semplice con righe vuote tra le sezioni.'
   },
   coll: {
     cnt:'cnt-coll', tab:'tab-coll', st:'st-coll',
@@ -1923,7 +1923,15 @@ function copiaDoc(cntId) {
 
 function getFirma() {
   const m = getMedico();
-  let f = m.nome + ' — ' + m.spec;
+  if (!m.nome) {
+    // Nessun profilo configurato: lascia spazio per firma manuale
+    let f = 'Data: ' + new Date().toLocaleDateString('it-IT') + '\n\n';
+    f += '_______________________________\n';
+    f += 'Firma e timbro del medico';
+    return f;
+  }
+  let f = m.nome;
+  if (m.spec) f += '\n' + m.spec;
   if (m.strutt) f += '\n' + m.strutt;
   if (m.contatti) f += '\n' + m.contatti;
   f += '\nData: ' + new Date().toLocaleDateString('it-IT');
@@ -2033,7 +2041,7 @@ function stampDoc(cntId, titolo) {
     @media print{body{margin:16px}}</style></head><body>
     <div class="hdr">
       <div><div class="logo">GINOS · ANDRO·CONSULT</div><h1>${titolo}</h1></div>
-      <div style="text-align:right;font-size:10pt;color:#555">${(()=>{const m=getMedico();let s=m.nome+'<br>'+m.spec;if(m.strutt)s+='<br>'+m.strutt;if(m.contatti)s+='<br>'+m.contatti;return s+' <br>'+new Date().toLocaleDateString('it-IT');})()}</div>
+      <div style="text-align:right;font-size:10pt;color:#555">${(()=>{const m=getMedico();let s='';if(m.nome){s=m.nome;if(m.spec)s+='<br>'+m.spec;if(m.strutt)s+='<br>'+m.strutt;if(m.contatti)s+='<br>'+m.contatti;}else{s='<br><br>_______________________________<br>Firma e timbro del medico';}return s+'<br>'+new Date().toLocaleDateString('it-IT');})()}</div>
     </div>
     ${html}
     <div class="ftr"><span>ANDRO·CONSULT · Suite GINOS · ginos-cdss.it</span><span>Generato con supporto AI · Uso clinico</span></div>
@@ -2228,7 +2236,41 @@ const INFO = {
   alopecia:{t:'Alopecia Androgenetica Femminile',c:`<h4>Pattern femminile (Ludwig)</h4><p>Rarefazione capillare con distribuzione fronto-parietale mantenendo la linea frontale. Diverso dal pattern maschile. Si valuta con la scala di Ludwig (Fase 2). Contribuisce alla diagnosi di iperandrogenismo clinico quando presente con altri segni.</p><p><em>Fonte: Ludwig E. Br J Dermatol 1977; AE-PCOS Society 2022.</em></p>`},
   mfg:{t:'Score di Ferriman-Gallwey modificato (mFG)',c:`<h4>9 siti valutati, grading 0-4 per sito (range totale 0-36)</h4><ul><li>Labbro superiore</li><li>Mento</li><li>Torace</li><li>Addome superiore</li><li>Addome inferiore/pubico</li><li>Coscia interna superiore</li><li>Coscia esterna</li><li>Braccio superiore (interno)</li><li>Braccio inferiore (avambraccio)</li></ul><h4>Soglie diagnostiche</h4><p>Europee/Caucasiche: ≥6; Asiatiche: ≥3; Medio-orientali: ≥4. Una singola soglia universale non è applicabile.</p><p><em>Fonte: Ferriman D, Gallwey JD. JCEM 1961; Hatch R et al. AJOG 1981; AE-PCOS Society 2022.</em></p>`},
   ludwig:{t:'Scala di Ludwig — Alopecia Androgenetica Femminile',c:`<ul><li><strong>Assente:</strong> Capigliatura normale, nessun diradamento evidente</li><li><strong>Grado I:</strong> Lieve diradamento al vertex, con linea frontale conservata</li><li><strong>Grado II:</strong> Diradamento moderato fronto-parietale, visibile a distanza</li><li><strong>Grado III:</strong> Diradamento severo, chiazza frontale ampia con banda periferica residua</li></ul><p><em>Fonte: Ludwig E. Br J Dermatol 1977.</em></p>`},
-  gags:{t:'Global Acne Grading System (GAGS)',c:`<h4>Formula per regione</h4><p>Punteggio = fattore regionale × densità (0-3) × tipo lesione (0-4)</p><h4>Fattori regionali</h4><ul><li>Fronte: 2 · Guance: 2 · Naso: 1 · Mento: 1 · Tronco anteriore: 3</li></ul><h4>Interpretazione totale</h4><ul><li>1-18: Lieve · 19-30: Moderata · 31-38: Severa · >38: Molto severa</li></ul><p><em>Fonte: Doshi A, Zaheer A, Stiller MJ. Int J Dermatol 1997.</em></p>`},
+  gags:{t:'Global Acne Grading System (GAGS)',c:`
+    <div style="background:var(--primary-lt);border-radius:8px;padding:12px 16px;margin-bottom:14px">
+      <h4 style="margin-bottom:5px">Cos'è il GAGS?</h4>
+      <p>Il GAGS (Global Acne Grading System) è uno score validato per quantificare la severità dell'acne suddividendo il viso e il tronco in regioni anatomiche, ciascuna con un fattore di peso diverso in base alla densità delle ghiandole sebacee.</p>
+    </div>
+    <h4>Formula di calcolo</h4>
+    <p style="font-family:monospace;background:#f0f4f8;padding:8px 12px;border-radius:5px;font-size:.9rem">Punteggio regione = Fattore × Densità (0–3) × Tipo lesione (0–4)</p>
+    <h4 style="margin-top:12px">Fattori regionali</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem;margin-top:6px">
+      <tr style="background:var(--primary-lt)"><th style="padding:6px 10px;text-align:left">Regione</th><th style="padding:6px 10px">Fattore</th><th style="padding:6px 10px">Perché</th></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">Fronte</td><td style="padding:6px 10px;text-align:center">×2</td><td style="padding:6px 10px">Alta densità sebacea</td></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">Guance (dx+sx)</td><td style="padding:6px 10px;text-align:center">×2</td><td style="padding:6px 10px">Zona spesso più colpita</td></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">Naso</td><td style="padding:6px 10px;text-align:center">×1</td><td style="padding:6px 10px">Zona T, densità media</td></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">Mento</td><td style="padding:6px 10px;text-align:center">×1</td><td style="padding:6px 10px">Zona tipica da iperandrogenismo</td></tr>
+      <tr><td style="padding:6px 10px">Tronco anteriore</td><td style="padding:6px 10px;text-align:center">×3</td><td style="padding:6px 10px">Area ampia, peso maggiore</td></tr>
+    </table>
+    <h4 style="margin-top:14px">Tipi di lesione (0–4)</h4>
+    <ul style="font-size:.88rem;line-height:1.7">
+      <li><strong>0</strong> — Assente</li>
+      <li><strong>1</strong> — Comedoni (punti neri o bianchi, lesioni non infiammatorie)</li>
+      <li><strong>2</strong> — Papule (rilievi solidi rossi, ≤5 mm, infiammatorie)</li>
+      <li><strong>3</strong> — Pustole (lesioni con contenuto purulento visibile)</li>
+      <li><strong>4</strong> — Noduli/Cisti (≥5 mm, profonde, rischio cicatrice)</li>
+    </ul>
+    <h4 style="margin-top:14px">Interpretazione score totale</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem;margin-top:6px">
+      <tr style="background:var(--primary-lt)"><th style="padding:6px 10px;text-align:left">GAGS</th><th style="padding:6px 10px;text-align:left">Severità</th><th style="padding:6px 10px;text-align:left">Indicazione terapeutica</th></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">1–18</td><td style="padding:6px 10px"><span style="color:#27ae60;font-weight:700">Lieve</span></td><td style="padding:6px 10px">Retinoidi topici, benzoilperossido</td></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">19–30</td><td style="padding:6px 10px"><span style="color:#f39c12;font-weight:700">Moderata</span></td><td style="padding:6px 10px">Antibiotici topici + COC anti-androgenico</td></tr>
+      <tr style="border-bottom:1px solid var(--border-lt)"><td style="padding:6px 10px">31–38</td><td style="padding:6px 10px"><span style="color:#e74c3c;font-weight:700">Severa</span></td><td style="padding:6px 10px">Antibiotici sistemici + topici + COC</td></tr>
+      <tr><td style="padding:6px 10px">≥39</td><td style="padding:6px 10px"><span style="color:#7e22ce;font-weight:700">Molto severa</span></td><td style="padding:6px 10px">Isotretinoina orale da considerare</td></tr>
+    </table>
+    <h4 style="margin-top:14px">Rilevanza nella PCOS</h4>
+    <p style="font-size:.88rem">L'acne adultità (post-adolescenziale), specie con distribuzione mandibolare e mentale, è una manifestazione di iperandrogenismo. Il GAGS la quantifica oggettivamente per monitorare la risposta alla terapia anti-androgenica (COC, spironolattone) nel tempo.</p>
+    <p style="margin-top:10px;font-size:.82rem;color:var(--text-m)"><em>Fonte: Doshi A, Zaheer A, Stiller MJ. Int J Dermatol 1997;36(6):416-418.</em></p>`},
   acanthosis:{t:'Acanthosis Nigricans',c:`<p>Iperpigmentazione cutanea a placche con vellutamento nella nuca, ascelle, inguine e pliche cutanee. È il <strong>segno clinico di insulino-resistenza</strong> più specifico. La sua presenza rende molto probabile l'IR significativa e suggerisce il dosaggio di HOMA-IR e/o OGTT.</p><p><em>Fonte: Stuart CA et al. Arch Dermatol 1989; ESHRE 2023.</em></p>`},
   virilismo:{t:'Virilismo — Red Flag',c:`<p>Il virilismo comprende: clitoromegalia, voce più grave, aumento massa muscolare, ipotrofia mammaria, calvizie frontale tipo maschile. Differente dall'irsutismo (solo presenza di pelo).</p><h4>Significato clinico</h4><p>La comparsa rapida o progressiva di virilismo richiede esclusione urgente di tumore ovarico o surrenalico secernente androgeni. Testosterone &gt;150 ng/dL + virilismo = emergenza diagnostica.</p><p><em>Fonte: Azziz R et al. JCEM 2004; ESE/ESPE 2022.</em></p>`},
   cushing:{t:'Sindrome di Cushing — Screening',c:`<p>L'ipercortisolismo può causare iperandrogenismo secondario, oligo-amenorrea, IR, obesità centrale clinicamente indistinguibili dalla PCOS. Frequenza: ~0.5-1% degli iperandrogenismi.</p><h4>Screening clinico</h4><p>Tre o più segni tra: strie rubre >1 cm, ecchimosi facili, miopatia prossimale, facies lunare, gibbo del dorso. Test di screening: cortisolo libero urinario 24h o test di soppressione con desametasone 1 mg overnight.</p><p><em>Fonte: Nieman LK et al. JCEM 2008 CPG.</em></p>`},
@@ -2306,8 +2348,8 @@ function usaVolume() {
    ====================================================== */
 function getMedico() {
   return {
-    nome:     localStorage.getItem('med_nome')     || 'Dr. Carlo Piscicelli',
-    spec:     localStorage.getItem('med_spec')     || 'Specialista in Ostetricia e Ginecologia',
+    nome:     localStorage.getItem('med_nome')     || '',
+    spec:     localStorage.getItem('med_spec')     || '',
     strutt:   localStorage.getItem('med_strutt')   || '',
     contatti: localStorage.getItem('med_contatti') || ''
   };
