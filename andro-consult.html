@@ -1033,7 +1033,7 @@ textarea{resize:vertical;min-height:82px}
         <div class="st" style="margin-top:28px"><h3>📄 Generazione Documenti AI</h3></div>
         <div class="flag info" style="margin-bottom:14px">
           <span class="flag-ico">🤖</span>
-          <div class="flag-txt"><strong>Genera ogni documento singolarmente</strong> oppure usa <em>Genera tutti</em>. Ogni documento può essere rigenerato in qualsiasi momento senza influenzare gli altri. Assicurati di aver configurato l'endpoint API (⚙️).</div>
+          <div class="flag-txt"><strong>Genera ogni documento singolarmente</strong> cliccando <em>🤖 Genera</em> nel tab corrispondente, oppure usa <em>🤖 Genera tutti</em> per produrli in sequenza. Ogni documento può essere rigenerato senza influenzare gli altri. Il testo generato è modificabile direttamente nel browser.</div>
         </div>
 
         <!-- Bottone Genera tutti -->
@@ -1771,25 +1771,25 @@ const DOC_DEFS = {
     cnt:'cnt-paz', tab:'tab-paz', st:'st-paz',
     lbl:'Lettera Paziente',
     tipo:'lettera per la paziente',
-    stile:'tono professionale, rispettoso e diretto — NON usare frasi come "spero che si trovi bene" o similari. La paziente è in visita, non ha bisogno di empatia generica. Linguaggio semplice ma preciso. Se menzioni la diagnosi di PCOS o i criteri di Rotterdam, spiega brevemente in termini comprensibili cosa sono i criteri di Rotterdam (es: "i criteri internazionali di Rotterdam sono i parametri scientifici che i medici usano per diagnosticare la PCOS, basati su tre elementi: irregolarità del ciclo, eccesso di ormoni maschili e aspetto delle ovaie all\'ecografia"). Struttura: breve presentazione della consulenza, diagnosi spiegata in termini comprensibili, significato clinico per la salute, terapia proposta con indicazioni pratiche, prossimi passi concreti. Firma in fondo. NON usare markdown (niente ## o **), usa solo testo semplice con righe vuote tra le sezioni.'
+    stile:'Tono professionale, rispettoso e diretto. NON usare: frasi di circostanza come \"spero che si trovi bene\", riferimenti a \"la nostra equipe\" o \"il nostro centro\" (il medico potrebbe lavorare da solo), promesse di fornire impegnative o ricette (non sempre possibile), la parola ANDRO·CONSULT nella firma. Scrivi sempre in prima persona singolare (\"ho valutato\", \"le propongo\"). Linguaggio semplice ma preciso. Se menzioni i criteri di Rotterdam, spiega brevemente in termini comprensibili di cosa si tratta (i parametri scientifici internazionali usati per diagnosticare la PCOS, basati su tre elementi: irregolarità del ciclo, eccesso di ormoni maschili e aspetto delle ovaie all ecografia). Struttura: presentazione della valutazione, diagnosi in termini comprensibili, significato clinico, terapia proposta con indicazioni pratiche, prossimi passi. NON usare markdown (niente ## o **). Testo semplice con righe vuote tra le sezioni. NON aggiungere la firma — verrà apposta separatamente.\''
   },
   coll: {
     cnt:'cnt-coll', tab:'tab-coll', st:'st-coll',
     lbl:'Lettera Collega',
     tipo:'lettera di consulenza per il medico curante o collega specialista',
-    stile:'tecnico e strutturato. NON usare markdown (niente ## o **). Usa solo testo con righe vuote tra le sezioni e titoli in MAIUSCOLO seguiti da due punti. Sezioni: MOTIVO DELLA CONSULENZA, ANAMNESI E ESAME OBIETTIVO, DATI LABORATORIO, ECOGRAFIA PELVICA, DIAGNOSI DIFFERENZIALE, DIAGNOSI, PIANO TERAPEUTICO, FOLLOW-UP. Cita linee guida. Firma in fondo., Anamnesi ed EO rilevante, Dati laboratorio, Ecografia pelvica, Diagnosi differenziale, Diagnosi (fenotipo PCOS secondo Rotterdam 2003/2023), Piano terapeutico, Follow-up proposto. Cita linee guida pertinenti.'
+    stile:'Tecnico e strutturato. NON usare markdown (niente ## o **). NON scrivere ANDRO·CONSULT nella firma. NON aggiungere la firma — verrà apposta separatamente. Usa solo testo con righe vuote tra le sezioni e titoli in MAIUSCOLO seguiti da due punti. Sezioni obbligatorie: MOTIVO DELLA CONSULENZA, ANAMNESI ED ESAME OBIETTIVO, DATI DI LABORATORIO, ECOGRAFIA PELVICA, DIAGNOSI DIFFERENZIALE, DIAGNOSI (con fenotipo PCOS secondo Rotterdam 2003/2023), PIANO TERAPEUTICO, FOLLOW-UP PROPOSTO. Cita le linee guida pertinenti.'
   },
   esami: {
     cnt:'cnt-esami', tab:'tab-esami', st:'st-esami',
     lbl:'Richiesta Esami',
     tipo:'richiesta di esami diagnostici',
-    stile:'formato lista chiara separata in I LIVELLO e II LIVELLO (condizionale). NON usare markdown (niente ## o **). Per ogni esame: nome, motivazione clinica sintetica, eventuali istruzioni. Elenco numerato con trattino. Firma in fondo.'
+    stile:'Formato lista chiara separata in I LIVELLO e II LIVELLO (condizionale). NON usare markdown (niente ## o **). NON aggiungere la firma — verrà apposta separatamente. NON scrivere ANDRO·CONSULT. Per ogni esame: nome, motivazione clinica sintetica, eventuali istruzioni pre-esame per il paziente o il laboratorio. Elenco con trattino.'
   },
   terp: {
     cnt:'cnt-terp', tab:'tab-terp', st:'st-terp',
     lbl:'Piano Terapeutico',
     tipo:'piano terapeutico dettagliato',
-    stile:'strutturato in sezioni con titoli in MAIUSCOLO seguiti da due punti, NON usare markdown (niente ## o **). 1) MODIFICA DELLO STILE DI VITA (esercizio fisico, dieta, integratori con dosi), 2) TERAPIA FARMACOLOGICA (nomi, dosi, posologia, durata, monitoraggio), 3) PIANO DI FOLLOW-UP con scadenze, 4) INDICAZIONI PRATICHE PER LA PAZIENTE. Firma in fondo.'
+    stile:'Strutturato in sezioni con titoli in MAIUSCOLO seguiti da due punti. NON usare markdown (niente ## o **). NON aggiungere la firma — verrà apposta separatamente. NON scrivere ANDRO·CONSULT. Sezioni: 1) MODIFICA DELLO STILE DI VITA (esercizio fisico con tipo e frequenza, dieta con indicazioni pratiche, integratori con dosi), 2) TERAPIA FARMACOLOGICA (nome farmaco, dose, posologia, durata, cosa monitorare), 3) PIANO DI FOLLOW-UP (scadenze specifiche), 4) INDICAZIONI PRATICHE PER LA PAZIENTE (cosa fare concretamente).'
   }
 };
 
@@ -1807,8 +1807,9 @@ async function generateOne(key) {
   const ctx = buildCtx();
   try {
     const txt = await callClaude(ctx, d.tipo, d.stile);
-    document.getElementById(d.cnt).innerHTML = renderDocHTML(txt);
+    document.getElementById(d.cnt).innerHTML = renderDocHTML(txt) + renderFirmaHTML();
     setStatus(d.st, 'ok', '✓ Generato');
+    const tabEl = document.getElementById(d.tab);
     if (tabEl) tabEl.classList.add('done');
   } catch(e) {
     document.getElementById(d.cnt).innerHTML = `<div class="flag danger"><span class="flag-ico">❌</span><div class="flag-txt"><strong>Errore</strong> ${e.message}</div></div>`;
@@ -1828,7 +1829,7 @@ async function generateDocs() {
     setLoading(d.cnt);
     try {
       const txt = await callClaude(ctx, d.tipo, d.stile);
-      document.getElementById(d.cnt).innerHTML = renderDocHTML(txt);
+      document.getElementById(d.cnt).innerHTML = renderDocHTML(txt) + renderFirmaHTML();
       setStatus(d.st, 'ok', '✓ Generato');
       const tabEl = document.getElementById(d.tab);
       if (tabEl) tabEl.classList.add('done');
@@ -1866,6 +1867,23 @@ function showTabById(tabId) {
 /* ======================================================
    RENDER DOCUMENTO — converte testo AI in HTML editabile
    ====================================================== */
+function renderFirmaHTML() {
+  const m = getMedico();
+  const data = new Date().toLocaleDateString('it-IT');
+  if (!m.nome) {
+    return `<div style="margin-top:28px;padding-top:18px;border-top:1px solid var(--border-lt);font-family:var(--font-body);font-size:.9rem;color:var(--text-2)">
+      <div style="margin-bottom:4px">Data: ${data}</div>
+      <div style="margin-top:20px;border-top:1.5px dashed var(--border);padding-top:6px;color:var(--text-m);font-size:.85rem">Firma e timbro del medico</div>
+    </div>`;
+  }
+  let righe = `<strong>${m.nome}</strong>`;
+  if (m.spec)     righe += `<br><span style="color:var(--text-2)">${m.spec}</span>`;
+  if (m.strutt)   righe += `<br><span style="color:var(--text-m)">${m.strutt}</span>`;
+  if (m.contatti) righe += `<br><span style="color:var(--text-m)">${m.contatti}</span>`;
+  righe += `<br><span style="color:var(--text-m)">Data: ${data}</span>`;
+  return `<div style="margin-top:28px;padding-top:18px;border-top:1px solid var(--border-lt);font-family:var(--font-body);font-size:.9rem;line-height:1.7">${righe}</div>`;
+}
+
 function renderDocHTML(txt) {
   // Converti markdown residuo in HTML pulito
   let html = txt
@@ -1908,15 +1926,19 @@ function getFirma() {
 }
 
 async function callClaude(ctx,tipo,stile) {
-  const prompt=`Sei ANDRO·CONSULT, consulente esperto in iperandrogenismo e PCOS.
+  const firma = getFirma();
+  const prompt=`Sei un assistente medico specializzato in iperandrogenismo e PCOS.
 Sulla base dei dati clinici forniti, genera: ${tipo}.
 STILE RICHIESTO: ${stile}
 
+REGOLE ASSOLUTE:
+- NON scrivere mai "ANDRO·CONSULT" nel testo o nella firma
+- NON aggiungere alcuna firma al documento — la firma verrà apposta separatamente
+- NON usare "la nostra equipe" o "il nostro centro" — usa sempre la prima persona singolare
+- NON promettere di fornire impegnative o ricette
+
 DATI CLINICI:
 ${ctx}
-
-Firma il documento con:
-\${getFirma()}
 
 Rispondi SOLO con il documento richiesto, senza premesse né commenti aggiuntivi.`;
 
