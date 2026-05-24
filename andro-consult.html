@@ -1894,7 +1894,14 @@ function renderDocHTML(txt) {
     .split(/\n\n+/)
     .map(p => p.trim())
     .filter(p => p)
-    .map(p => `<p style="margin:0 0 .9rem">${p.replace(/\n/g,'<br>')}</p>`)
+    .map(p => {
+      // Riga in MAIUSCOLO = titolo sezione → grassetto colorato
+      const isTitolo = p === p.toUpperCase() && p.replace(/[\s\-:.0-9]/g,'').length > 3 && !p.startsWith('<');
+      if (isTitolo) {
+        return `<p style="margin:1.3rem 0 .3rem;font-weight:700;font-size:1rem;color:var(--primary);letter-spacing:.15px">${p}</p>`;
+      }
+      return `<p style="margin:0 0 .9rem">${p.replace(/\n/g,'<br>')}</p>`;
+    })
     .join('');
   return `<div contenteditable="true" spellcheck="false"
     style="font-family:var(--font-body);line-height:1.72;outline:none;min-height:180px"
@@ -2029,6 +2036,7 @@ function stampDoc(cntId, titolo) {
     .hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
     .logo{font-weight:700;font-size:10pt;color:#2c5f8d;letter-spacing:2px}
     .ftr{margin-top:36px;padding-top:11px;border-top:1px solid #ccc;font-size:9pt;color:#888;display:flex;justify-content:space-between}
+    p[style*="font-weight:700"]{font-weight:700!important;color:#2c5f8d!important;margin-top:1.1rem!important;margin-bottom:.2rem!important}
     @media print{body{margin:16px}}</style></head><body>
     <div class="hdr">
       <div><div class="logo">GINOS · ANDRO·CONSULT</div><h1>${titolo}</h1></div>
